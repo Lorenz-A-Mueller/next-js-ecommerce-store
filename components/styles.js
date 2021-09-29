@@ -22,6 +22,7 @@ export const globalStyles = css`
     position: absolute;
     left: 0;
     top: 0;
+    font-family: lora;
   }
 `;
 export const layoutStyles = css`
@@ -129,6 +130,14 @@ export const productsContainerStyles = css`
       box-shadow: 4px 4px black;
     }
 
+    .product-name-container {
+      margin-left: 3px;
+      margin-top: 5px;
+      color: black;
+      font-weight: bold;
+      text-align: center;
+    }
+
     img {
       width: 100%;
       background-color: transparent;
@@ -153,6 +162,25 @@ export const currentProductContainerStyles = css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    .amount-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 250px;
+
+      .select-amount-container {
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 60px;
+          height: 30px;
+          font-size: 1em;
+          margin-right: 5px;
+        }
+      }
+    }
 
     button {
       width: 40%;

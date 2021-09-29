@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Head from 'next/head';
 // import Image from 'next/image';  ?? how to use dynamic sizing with that
 import Link from 'next/link';
 import Layout from '../components/Layout';
@@ -9,18 +10,29 @@ import { productsContainerStyles } from '../components/styles';
 
 export default function Home(props) {
   return (
-    <Layout>
-      <div css={productsContainerStyles}>
-        {props.products.map((product) => (
-          <div className="product-tile" key={`product-id${product.id}`}>
-            <Link href={`/products/${product.id}`}>
-              <a>{product.name}</a>
+    <>
+      <Head>
+        <title>Sprouts Farmer Market Homepage</title>
+      </Head>
+      <Layout>
+        <div css={productsContainerStyles}>
+          {props.products.map((product) => (
+            <Link
+              href={`/products/${product.id}`}
+              key={`product-id${product.id}`}
+            >
+              <a>
+                <div className="product-tile" key={`product-id${product.id}`}>
+                  <div className="product-name-container">{product.name}</div>
+
+                  <img src={`/${product.image}`} alt={product.name} />
+                </div>
+              </a>
             </Link>
-            <img src={`/${product.image}`} alt={product.name} />
-          </div>
-        ))}
-      </div>
-    </Layout>
+          ))}
+        </div>
+      </Layout>
+    </>
   );
 }
 

@@ -115,7 +115,6 @@ export const productsContainerStyles = css`
   padding-left: 80px;
 
   .product-tile {
-    display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;

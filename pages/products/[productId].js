@@ -39,7 +39,7 @@ export default function Product(props) {
   }, []);
 
   useEffect(() => {
-    console.log('clicked on products in useeffect ', clickedOnProducts); // update the Cookies based on the state var
+    console.log('clicked on products in useEffect ', clickedOnProducts); // update the Cookies based on the state var
     Cookies.set('cart', JSON.stringify(clickedOnProducts));
   }, [clickedOnProducts]);
 

@@ -28,7 +28,11 @@ export default function Header() {
       </div>
       <div className="cart-container">
         <div className="image-container">
-          <Image src={cart} />
+          <Link href="/cart">
+            <a>
+              <Image src={cart} />
+            </a>
+          </Link>
         </div>
         <p>Your Cart</p>
       </div>

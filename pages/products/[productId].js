@@ -3,9 +3,9 @@ import Cookies from 'js-cookie';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Layout from '../../components/Layout';
 import { currentProductContainerStyles } from '../../components/styles';
 import plus_one from '../../public/plus_one.png';
+import { getCookies, setCookies } from '../../utils/cookies';
 
 export default function Product(props) {
   const startValue = 1;
@@ -34,13 +34,13 @@ export default function Product(props) {
 
   useEffect(() => {
     if (typeof Cookies.get('cart') !== 'undefined') {
-      setClickedOnProducts(JSON.parse(Cookies.get('cart'))); // when loading new product site, build the state var from the cookies
+      setClickedOnProducts(getCookies('cart')); // when loading new product site, build the state var from the cookies
     }
   }, []);
 
   useEffect(() => {
     console.log('clicked on products in useEffect ', clickedOnProducts); // update the Cookies based on the state var
-    Cookies.set('cart', JSON.stringify(clickedOnProducts));
+    setCookies('cart', clickedOnProducts);
   }, [clickedOnProducts]);
 
   function handleOnClick(currentProductId, currentProductAmount) {
@@ -57,54 +57,52 @@ export default function Product(props) {
     setTimeout(() => {
       setHasClicked(false);
     }, 2000);
+    props.setNumberOfClickedOnProducts((previous) => previous + 1);
   }
-  //   Cookies.set(`order-no-amount${Cookies.get('count')}`, amount);
-  // }
+
   return (
     <>
       <Head>
         <title>Sprouts Product - {props.currentProduct.name}</title>
       </Head>
-      <Layout>
-        <div css={currentProductContainerStyles}>
-          <div className="current-product-image-container">
-            <img
-              src={`/${props.currentProduct.image}`}
-              alt={props.currentProduct.name}
-            />
-          </div>
-          <div className="current-product-text-container">
-            <h1>{props.currentProduct.name}</h1>
-            <p>{props.currentProduct.desc ? props.currentProduct.desc : ''}</p>
-            <h2>
-              €{props.currentProduct.price}/{props.currentProduct.size}
-            </h2>
-            <div className="amount-container">
-              <p>Enter Amount:</p>
-              <div className="select-amount-container">
-                <input
-                  type="number"
-                  onChange={(e) => handleChange(e)}
-                  value={amount}
-                  max="9"
-                  min="0"
-                  step={props.currentProduct.size === 'kg' ? '0.01' : '1'}
-                />
-                <p>
-                  {props.currentProduct.size}
-                  {props.currentProduct.size !== 'kg' && amount > 1 ? 's' : ''}
-                </p>
-              </div>
-            </div>
-            <p>€{(amount * props.currentProduct.price).toFixed(2)}</p>
-            <button
-              onClick={() => handleOnClick(props.currentProduct.id, amount)}
-            >
-              Add to Cart!
-            </button>
-          </div>
+      <div css={currentProductContainerStyles}>
+        <div className="current-product-image-container">
+          <img
+            src={`/${props.currentProduct.image}`}
+            alt={props.currentProduct.name}
+          />
         </div>
-      </Layout>
+        <div className="current-product-text-container">
+          <h1>{props.currentProduct.name}</h1>
+          <p>{props.currentProduct.desc ? props.currentProduct.desc : ''}</p>
+          <h2>
+            €{props.currentProduct.price}/{props.currentProduct.size}
+          </h2>
+          <div className="amount-container">
+            <p>Enter Amount:</p>
+            <div className="select-amount-container">
+              <input
+                type="number"
+                onChange={(e) => handleChange(e)}
+                value={amount}
+                max="9"
+                min="0"
+                step={props.currentProduct.size === 'kg' ? '0.01' : '1'}
+              />
+              <p>
+                {props.currentProduct.size}
+                {props.currentProduct.size !== 'kg' && amount > 1 ? 's' : ''}
+              </p>
+            </div>
+          </div>
+          <p>€{(amount * props.currentProduct.price).toFixed(2)}</p>
+          <button
+            onClick={() => handleOnClick(props.currentProduct.id, amount)}
+          >
+            Add to Cart!
+          </button>
+        </div>
+      </div>
       <div
         className="plus-one-container"
         css={css`

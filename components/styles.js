@@ -81,20 +81,22 @@ export const headerContainerStyles = css`
       }
     }
   }
-  .cart-container {
+  .cart-icon-container {
     /* background-color: blue; */
     width: 20vw;
     display: flex;
 
-    .image-container {
+    .cart-icon-image-container {
       width: 60%;
     }
 
-    p {
-      align-self: flex-end;
-      color: white;
-      font-size: 1.5em;
-      margin-left: -7%;
+    .cart-icon-text-container {
+      p {
+        align-self: flex-end;
+        color: white;
+        font-size: 1.5em;
+        margin-left: -7%;
+      }
     }
   }
 `;

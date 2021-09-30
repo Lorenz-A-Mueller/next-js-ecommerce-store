@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import cart from '../public/cart.png';
 import logo from '../public/logo.png';
-import { getCookies, setCookies } from '../utils/cookies';
 import { headerContainerStyles } from './styles.js';
 
 export default function Header(props) {
@@ -15,6 +14,14 @@ export default function Header(props) {
     const input = e.currentTarget.value;
     props.handleSearchInput(input);
   }
+
+  useEffect(() => {
+    alert('in header');
+    console.log(
+      'number of clicked on products in header',
+      props.numberOfClickedOnProducts,
+    );
+  }, [props.numberOfClickedOnProducts]);
 
   return (
     <div css={headerContainerStyles}>
@@ -37,15 +44,18 @@ export default function Header(props) {
           <button>Sign Up</button>
         </div>
       </div>
-      <div className="cart-container">
-        <div className="image-container">
+      <div className="cart-icon-container">
+        <div className="cart-icon-image-container">
           <Link href="/cart">
             <a>
               <Image src={cart} />
             </a>
           </Link>
         </div>
-        <p>Your Cart</p>
+        <div className="cart-icon-text-container">
+          <p>Your Cart</p>
+          <p>Number:{props.numberOfClickedOnProducts}</p>
+        </div>
       </div>
     </div>
   );

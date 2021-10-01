@@ -2,21 +2,12 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 // import Image from 'next/image';  ?? how to use dynamic sizing with that
 import Link from 'next/link';
-import { useEffect } from 'react';
 import { productsContainerStyles } from '../components/styles';
 
 // import Head from 'next/head';
 // import Image from 'next/image';
 
 export default function Home(props) {
-  useEffect(() => {
-    alert('hello');
-    console.log(
-      'numberOfClickedOnProducts in index',
-      props.numberOfClickedOnProducts,
-    );
-  }, [props.numberOfClickedOnProducts]);
-
   return (
     <>
       <Head>

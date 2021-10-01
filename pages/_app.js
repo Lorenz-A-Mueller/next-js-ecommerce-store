@@ -7,22 +7,21 @@ import { getCookies, setCookies } from '../utils/cookies';
 
 function MyApp({ Component, pageProps }) {
   const [search, setSearch] = useState('');
-  const [numberOfClickedOnProducts, setNumberOfClickedOnProducts] = useState(0);
-  console.log('get cookies', getCookies('cart'));
+  const [cart, setCart] = useState([]);
 
-  console.log('number of clicked on products: ', numberOfClickedOnProducts);
+  // cookies won't exist when node reads the file (reads it first), so don't setCart then. Only when the file is read for the client-side.
 
   useEffect(() => {
-    if (typeof getCookies('cart') !== 'undefined') {
-      // why necessary????
-      setNumberOfClickedOnProducts(getCookies('cart').length);
+    if (getCookies('cart')) {
+      setCart(getCookies('cart'));
     }
-  }, [numberOfClickedOnProducts]);
+  }, []);
 
-  console.log(
-    'number of clicked on products in app: ',
-    numberOfClickedOnProducts,
-  );
+  // update cookies to reflect the state of cart when it is altered
+
+  useEffect(() => {
+    setCookies('cart', cart);
+  }, [cart]);
 
   function handleSearchInput(input) {
     setSearch(input);
@@ -36,13 +35,15 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Layout
         handleSearchInput={handleSearchInput}
-        numberOfClickedOnProducts={numberOfClickedOnProducts}
+        cart={cart}
+        setCart={setCart}
       >
         <Component // to all the pages
           {...pageProps}
-          setNumberOfClickedOnProducts={setNumberOfClickedOnProducts}
           handleSearchInput={handleSearchInput}
           search={search}
+          cart={cart}
+          setCart={setCart}
         />
       </Layout>
     </>

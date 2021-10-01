@@ -1,17 +1,20 @@
 import { useState } from 'react';
 
 export default function CartSingleImage(props) {
+  console.log('in single: ', props.chosenProduct.id);
+
   const [changedAmount, setChangedAmount] = useState(0);
 
   function handleChange(event, initialAmount) {
+    const enteredValue = event.currentTarget.value;
     // when first changed, set to the initial amount, then to the user input
     if (changedAmount === 0) {
       setChangedAmount(initialAmount);
     }
-    if (event.currentTarget.value > 9) {
+    if (enteredValue > 9) {
       setChangedAmount(9);
       props.updateAmountInCart(props.chosenProduct.id, 9);
-    } else if (event.currentTarget.value < 0) {
+    } else if (enteredValue < 0) {
       if (props.products[props.chosenProduct.id - 1].size === 'kg') {
         setChangedAmount(0.1);
         props.updateAmountInCart(props.chosenProduct.id, 0.1);
@@ -22,16 +25,26 @@ export default function CartSingleImage(props) {
 
       // if dec. point is entered (if size not 'kg'), round the number down immediately
     } else if (
-      props.products[props.chosenProduct.id - 1].size !== 'kg' &&
-      event.currentTarget.value.length > 2
+      props.products[props.chosenProduct.id - 1].size === 'kg' &&
+      enteredValue.length > 3
     ) {
-      setChangedAmount(Math.floor(event.currentTarget.value));
-    } else {
-      setChangedAmount(event.currentTarget.value);
+      setChangedAmount(parseFloat(enteredValue).toFixed(2));
       props.updateAmountInCart(
         props.chosenProduct.id,
-        event.currentTarget.value,
+        parseFloat(enteredValue).toFixed(2),
       );
+    } else if (
+      props.products[props.chosenProduct.id - 1].size !== 'kg' &&
+      enteredValue.length > 1
+    ) {
+      setChangedAmount(Math.floor(enteredValue));
+      props.updateAmountInCart(
+        props.chosenProduct.id,
+        Math.floor(enteredValue),
+      );
+    } else {
+      setChangedAmount(enteredValue);
+      props.updateAmountInCart(props.chosenProduct.id, enteredValue);
     }
   }
 
@@ -75,6 +88,7 @@ export default function CartSingleImage(props) {
                 : '1'
             }
             onBlur={(e) => handleLostFocus(e)}
+            // maxLength="3"
           />
           <p>
             {props.products[props.chosenProduct.id - 1].size}

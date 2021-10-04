@@ -16,7 +16,7 @@ export default function Layout(props) {
         handleSearchInput={props.handleSearchInput}
         numberOfClickedOnProducts={props.numberOfClickedOnProducts}
         cart={props.cart}
-        setCart={props.setCart}
+        loggedInUser={props.loggedInUser}
       />
       {props.children}
       <Footer />

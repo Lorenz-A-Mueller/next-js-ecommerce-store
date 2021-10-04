@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
 export default function CartSingleImage(props) {
-  console.log('in single: ', props.chosenProduct.id);
-
   const [changedAmount, setChangedAmount] = useState(0);
 
   function handleChange(event, initialAmount) {
+    console.log('changedAmount in sinlge cart', changedAmount);
     const enteredValue = event.currentTarget.value;
+    console.log('entered value', enteredValue);
+    console.log('CHOSENPRODUCT.id', props.chosenProduct.id);
+
     // when first changed, set to the initial amount, then to the user input
     if (changedAmount === 0) {
       setChangedAmount(initialAmount);
@@ -15,7 +17,7 @@ export default function CartSingleImage(props) {
       setChangedAmount(9);
       props.updateAmountInCart(props.chosenProduct.id, 9);
     } else if (enteredValue < 0) {
-      if (props.products[props.chosenProduct.id - 1].size === 'kg') {
+      if (props.products[props.chosenProduct.id - 1].productSize === 'kg') {
         setChangedAmount(0.1);
         props.updateAmountInCart(props.chosenProduct.id, 0.1);
       } else {
@@ -25,7 +27,7 @@ export default function CartSingleImage(props) {
 
       // if dec. point is entered (if size not 'kg'), round the number down immediately
     } else if (
-      props.products[props.chosenProduct.id - 1].size === 'kg' &&
+      props.products[props.chosenProduct.id - 1].productSize === 'kg' &&
       enteredValue.length > 3
     ) {
       setChangedAmount(parseFloat(enteredValue).toFixed(2));
@@ -34,7 +36,7 @@ export default function CartSingleImage(props) {
         parseFloat(enteredValue).toFixed(2),
       );
     } else if (
-      props.products[props.chosenProduct.id - 1].size !== 'kg' &&
+      props.products[props.chosenProduct.id - 1].productSize !== 'kg' &&
       enteredValue.length > 1
     ) {
       setChangedAmount(Math.floor(enteredValue));
@@ -58,17 +60,19 @@ export default function CartSingleImage(props) {
   return (
     <div
       className="cart-single-image-container"
-      key={`cart-single-image-container-${props.products[props.chosenProduct]}`}
+      key={`cart-single-image-container-${props.chosenProduct.id}`}
     >
       <div className="cart-single-image-image-container">
         <img
-          src={props.products[props.chosenProduct.id - 1].image}
-          alt={props.products[props.chosenProduct.id - 1].name}
-          key={`cart-image-${props.products[props.chosenProduct.id - 1]}`}
+          src={`/product_images/${
+            props.products[props.chosenProduct.id - 1].productId
+          }.jpeg`}
+          alt={props.products[props.chosenProduct.id - 1].productName}
+          key={`cart-image-${props.chosenProduct.id}`}
         />
       </div>
       <div className="cart-single-image-text-container">
-        <h2>{props.products[props.chosenProduct.id - 1].name}</h2>
+        <h2>{props.products[props.chosenProduct.id - 1].productName}</h2>
         <div className="cart-single-image-text-amount-container">
           <input
             type="number"
@@ -77,13 +81,13 @@ export default function CartSingleImage(props) {
             }
             onChange={(e) => handleChange(e, props.chosenProduct.amount)}
             min={
-              props.products[props.chosenProduct.id - 1].size === 'kg'
+              props.products[props.chosenProduct.id - 1].productSize === 'kg'
                 ? '0.10'
                 : '1'
             }
             max="9"
             step={
-              props.products[props.chosenProduct.id - 1].size === 'kg'
+              props.products[props.chosenProduct.id - 1].productSize === 'kg'
                 ? '0.01'
                 : '1'
             }
@@ -91,8 +95,8 @@ export default function CartSingleImage(props) {
             // maxLength="3"
           />
           <p>
-            {props.products[props.chosenProduct.id - 1].size}
-            {props.products[props.chosenProduct.id - 1].size !== 'kg' &&
+            {props.products[props.chosenProduct.id - 1].productSize}
+            {props.products[props.chosenProduct.id - 1].productSize !== 'kg' &&
             ((props.chosenProduct.amount > 1 && !changedAmount) ||
               changedAmount > 1)
               ? 's'
@@ -103,8 +107,9 @@ export default function CartSingleImage(props) {
       <div className="cart-single-image-price-container">
         <p>
           {(
-            props.chosenProduct.amount *
-            props.products[props.chosenProduct.id - 1].price
+            (props.chosenProduct.amount *
+              props.products[props.chosenProduct.id - 1].productPrice) /
+            100
           ).toFixed(2)}
           €
         </p>

@@ -5,7 +5,9 @@ import { currentProductContainerStyles } from '../../components/styles';
 export default function Product(props) {
   const startValue = 1;
   const [amount, setAmount] = useState(
-    props.currentProduct.size === 'kg' ? startValue.toPrecision(3) : startValue,
+    props.currentProduct.productSize === 'kg'
+      ? startValue.toPrecision(3)
+      : startValue,
   );
   // const [clickedOnProducts, setClickedOnProducts] = useState(
   //   getCookies('cart'),
@@ -18,7 +20,7 @@ export default function Product(props) {
       setAmount(1);
     } else {
       if (
-        props.currentProduct.size !== 'kg' && // if dec. point is entered (if size not 'kg'), round the number down immediately
+        props.currentProduct.productSize !== 'kg' && // if dec. point is entered (if size not 'kg'), round the number down immediately
         e.currentTarget.value.length > 2
       ) {
         setAmount(Math.floor(e.currentTarget.value));
@@ -65,21 +67,26 @@ export default function Product(props) {
   return (
     <>
       <Head>
-        <title>Sprouts Product - {props.currentProduct.name}</title>
+        <title>Sprouts Product - {props.currentProduct.productName}</title>
       </Head>
       <div css={currentProductContainerStyles}>
         <div className="current-product-image-container">
           <img
-            src={`/${props.currentProduct.image}`}
-            alt={props.currentProduct.name}
+            src={`/product_images/${props.currentProduct.productId}.jpeg`}
+            alt={props.currentProduct.productName}
           />
         </div>
         <div className="current-product-text-container">
-          <h1>{props.currentProduct.name}</h1>
-          <p>{props.currentProduct.desc ? props.currentProduct.desc : ''}</p>
+          <h1>{props.currentProduct.productName}</h1>
+          <p>
+            {props.currentProduct.productDesc
+              ? props.currentProduct.productDesc
+              : ''}
+          </p>
           <div className="current-product-text-priceinfo-container">
             <h2>
-              €{props.currentProduct.price}/{props.currentProduct.size}
+              €{props.currentProduct.productPrice / 100}/
+              {props.currentProduct.productSize}
             </h2>
             <div className="amount-container">
               <p>Select Amount:</p>
@@ -90,22 +97,33 @@ export default function Product(props) {
                   value={amount}
                   max="9"
                   min="0"
-                  step={props.currentProduct.size === 'kg' ? '0.01' : '1'}
+                  step={
+                    props.currentProduct.productSize === 'kg' ? '0.01' : '1'
+                  }
                   onBlur={(e) => handleLostFocus(e)}
                 />
                 <p>
-                  {props.currentProduct.size}
-                  {props.currentProduct.size !== 'kg' && amount > 1 ? 's' : ''}
+                  {props.currentProduct.productSize}
+                  {props.currentProduct.productSize !== 'kg' && amount > 1
+                    ? 's'
+                    : ''}
                 </p>
               </div>
             </div>
             <p>
               Amounts to:{' '}
-              <span>€{(amount * props.currentProduct.price).toFixed(2)}</span>
+              <span>
+                €
+                {((amount * props.currentProduct.productPrice) / 100).toFixed(
+                  2,
+                )}
+              </span>
             </p>
           </div>
           <button
-            onClick={() => handleOnClick(props.currentProduct.id, amount)}
+            onClick={() =>
+              handleOnClick(props.currentProduct.productId, amount)
+            }
           >
             Add to Cart!
           </button>
@@ -116,11 +134,12 @@ export default function Product(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { products } = await import('../../utils/products');
+  const { getProduct } = await import('../../utils/database');
 
-  const idFromUrl = context.query.productId;
+  // const idFromUrl = context.query.productId;
+  // const currentProduct = products.find((product) => idFromUrl === product.id);
 
-  const currentProduct = products.find((product) => idFromUrl === product.id);
+  const currentProduct = await getProduct(context.query.productId);
 
   return {
     props: {

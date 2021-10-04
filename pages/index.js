@@ -16,24 +16,29 @@ export default function Home(props) {
       <div css={productsContainerStyles}>
         {props.products.map((product) => (
           <Link
-            href={`/products/${product.id}`}
-            key={`product-id${product.id}`}
+            href={`/products/${product.productId}`}
+            key={`product-id${product.productId}`}
           >
             <a>
               <div
                 className="product-tile"
-                key={`product-id${product.id}`}
+                key={`product-id${product.productId}`}
                 css={css`
-                  display: ${product.name
+                  display: ${product.productName
                     .toLowerCase()
                     .startsWith(props.search.toLowerCase()) || !props.search
                     ? 'flex'
                     : 'none'};
                 `}
               >
-                <div className="product-name-container">{product.name}</div>
+                <div className="product-name-container">
+                  {product.productName}
+                </div>
 
-                <img src={`/${product.image}`} alt={product.name} />
+                <img
+                  src={`/product_images/${product.productId}.jpeg`}
+                  alt={product.productName}
+                />
               </div>
             </a>
           </Link>
@@ -44,7 +49,8 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const { products } = await import('../utils/products');
+  const { getProducts } = await import('../utils/database');
+  const products = await getProducts();
   return {
     props: {
       products, // short for products: products

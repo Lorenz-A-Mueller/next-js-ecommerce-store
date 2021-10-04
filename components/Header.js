@@ -3,11 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import cart from '../public/cart.png';
+import login from '../public/login.png';
 import logo from '../public/logo.png';
 import { headerContainerStyles } from './styles.js';
 
 export default function Header(props) {
   const [startAnimation, setStartAnimation] = useState(false);
+  console.log('props.loggedInUser', props.loggedInUser);
+  console.log('props.loggedInUser.firstName', props.loggedInUser.firstName);
 
   function handleChange(e) {
     const input = e.currentTarget.value;
@@ -54,12 +57,16 @@ export default function Header(props) {
         <input placeholder="Search..." onChange={(e) => handleChange(e)} />
       </div>
       <div className="login-container">
-        <input placeholder="user_name" />
-        <input placeholder="password" />
-        <div className="button-container">
-          <button>Log In</button>
-          <button>Sign Up</button>
-        </div>
+        <Link href={props.loggedInUser.id ? '/account' : '/login'}>
+          <a>
+            <Image src={login} />
+          </a>
+        </Link>
+        {props.loggedInUser.id && (
+          <p style={{ color: 'white' }}>
+            Hello, {props.loggedInUser.firstName}
+          </p>
+        )}
       </div>
       <div className="cart-icon-container">
         <div

@@ -1,4 +1,4 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 
 export const globalStyles = css`
   *,
@@ -71,7 +71,7 @@ export const headerContainerStyles = css`
     }
   }
   .login-container {
-    width: 15vw;
+    width: 10vw;
     /* background-color: pink; */
     display: flex;
     flex-direction: column;
@@ -79,14 +79,8 @@ export const headerContainerStyles = css`
     grid-gap: 10%;
     margin-left: auto;
 
-    .button-container {
-      display: flex;
-      justify-content: space-between;
-
-      button {
-        width: 40%;
-        font-family: lora;
-      }
+    img {
+      width: 4vw;
     }
   }
   .cart-icon-container {
@@ -112,6 +106,135 @@ export const headerContainerStyles = css`
         height: 40px;
         text-align: center;
       }
+    }
+  }
+`;
+
+export const loginContainerStyles = css`
+  width: 20vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  border: solid black 3px;
+  margin-right: auto;
+  margin-left: auto;
+
+  input {
+    height: 30px;
+    font-size: 1em;
+    width: 70%;
+  }
+
+  .sign-up-container {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      width: 35%;
+
+      button {
+        background-color: rgba(255, 0, 0, 0.7);
+        width: 100%;
+        &:hover {
+          background-color: rgba(255, 0, 0, 1);
+        }
+      }
+    }
+  }
+  .invalid-input-text {
+    font-size: 14px;
+    color: red;
+    max-width: 70%;
+    font-weight: bold;
+  }
+
+  button {
+    width: 70%;
+    font-family: lora;
+    height: 30px;
+    font-size: 1em;
+    border: 0;
+    background-color: rgba(0, 0, 255, 0.7);
+    border-radius: 10px;
+    font-family: lora;
+    /* margin-top: 5%; */
+
+    &:hover {
+      background-color: blue;
+    }
+  }
+
+  a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button {
+      width: 70%;
+      font-family: lora;
+      height: 30px;
+      font-size: 1em;
+      border: 0;
+      background-color: rgba(0, 0, 255, 0.7);
+      border-radius: 10px;
+      font-family: lora;
+      /* margin-top: 5%; */
+
+      &:hover {
+        background-color: blue;
+      }
+    }
+  }
+`;
+
+export const signUpContainerStyles = css`
+  width: 20vw;
+  height: 40vh;
+  border: solid black 3px;
+  margin-right: auto;
+  margin-left: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .form-group {
+      .validation-error-container {
+        color: red;
+      }
+    }
+  }
+
+  input {
+    height: 30px;
+    font-size: 1em;
+    width: 70%;
+  }
+
+  button {
+    width: 70%;
+    font-family: lora;
+    height: 30px;
+    font-size: 1em;
+    border: 0;
+    background-color: rgba(0, 0, 255, 0.7);
+    border-radius: 10px;
+    font-family: lora;
+    /* margin-top: 5%; */
+
+    &:hover {
+      background-color: blue;
     }
   }
 `;

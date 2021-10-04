@@ -8,6 +8,7 @@ import { getCookies, setCookies } from '../utils/cookies';
 function MyApp({ Component, pageProps }) {
   const [search, setSearch] = useState('');
   const [cart, setCart] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState({});
 
   // cookies won't exist when node reads the file (reads it first), so don't setCart then. Only when the file is read for the client-side.
 
@@ -15,13 +16,21 @@ function MyApp({ Component, pageProps }) {
     if (getCookies('cart')) {
       setCart(getCookies('cart'));
     }
+    if (getCookies('loggedInUser')) {
+      setLoggedInUser(getCookies('loggedInUser'));
+    }
   }, []);
 
-  // update cookies to reflect the state of cart when it is altered
+  // update cookies to reflect the state of cart/loggedInUser when it is altered
+  useEffect(() => {
+    setCookies('loggedInUser', loggedInUser);
+  }, [loggedInUser]);
 
   useEffect(() => {
     setCookies('cart', cart);
   }, [cart]);
+
+  // *******
 
   function handleSearchInput(input) {
     setSearch(input);
@@ -37,6 +46,7 @@ function MyApp({ Component, pageProps }) {
         handleSearchInput={handleSearchInput}
         cart={cart}
         setCart={setCart}
+        loggedInUser={loggedInUser}
       >
         <Component // to all the pages
           {...pageProps}
@@ -44,10 +54,24 @@ function MyApp({ Component, pageProps }) {
           search={search}
           cart={cart}
           setCart={setCart}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         />
       </Layout>
     </>
   );
 }
 
+export async function getServerSideProps() {
+  const { users } = await import('../utils/database');
+
+  return {
+    props: {
+      users,
+    },
+  };
+}
+
 export default MyApp;
+
+// cannot use getServerSideProps in _app.js, nor in the components! Only in pages.

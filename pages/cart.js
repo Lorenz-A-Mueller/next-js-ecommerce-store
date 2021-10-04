@@ -30,6 +30,7 @@ export default function Cart(props) {
         }
       }),
     );
+    console.log('props.cart', props.cart);
   }
 
   return (
@@ -50,7 +51,7 @@ export default function Cart(props) {
           </div>
           {props.cart.map((chosenProduct, index) => (
             <CartSingleImage
-              key={`cart-single-image-container-${props.products[chosenProduct]}`}
+              key={`cart-single-image-container-${chosenProduct.id}`}
               products={props.products}
               chosenProduct={chosenProduct}
               handleDeleteItemClick={handleDeleteItemClick}
@@ -91,14 +92,14 @@ export default function Cart(props) {
           <div className="total-amount-text-container">
             <h2>Total Sum: </h2>
             <h2>
-              {props.cart
-                .reduce((accumulator, cookieProduct) => {
+              {(
+                props.cart.reduce((accumulator, cookieProduct) => {
                   return (accumulator =
                     accumulator +
                     cookieProduct.amount *
-                      props.products[cookieProduct.id - 1].price);
-                }, 0)
-                .toFixed(2)}
+                      props.products[cookieProduct.id - 1].productPrice);
+                }, 0) / 100
+              ).toFixed(2)}
               €
             </h2>
           </div>
@@ -110,7 +111,8 @@ export default function Cart(props) {
 }
 
 export async function getServerSideProps() {
-  const { products } = await import('../utils/products');
+  const { getProducts } = await import('../utils/database');
+  const products = await getProducts();
   return {
     props: {
       products, // short for products: products

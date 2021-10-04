@@ -23,6 +23,24 @@ export async function getProduct(id) {
   return camelcaseKeys(product[0]);
 }
 
+export async function getUsers() {
+  const users = await sql`
+  SELECT * FROM users;
+  `;
+
+  return users.map((user) => {
+    return camelcaseKeys(user);
+  });
+}
+
+export async function getUser(id) {
+  const user = await sql`
+  SELECT * FROM users
+  WHERE id = ${id};
+  `;
+  return camelcaseKeys(user[0]);
+}
+
 // export const products = [
 //   {
 //     id: '1',

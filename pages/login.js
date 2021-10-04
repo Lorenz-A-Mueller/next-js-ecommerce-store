@@ -135,7 +135,8 @@ export default function Login(props) {
 }
 
 export async function getServerSideProps() {
-  const { users } = await import('../utils/database');
+  const { getUsers } = await import('../utils/database');
+  const users = await getUsers();
 
   return {
     props: {

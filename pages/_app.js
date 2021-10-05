@@ -47,6 +47,7 @@ function MyApp({ Component, pageProps }) {
         cart={cart}
         setCart={setCart}
         loggedInUser={loggedInUser}
+        setLoggedInUser={setLoggedInUser}
       >
         <Component // to all the pages
           {...pageProps}

@@ -1,19 +1,16 @@
-import { css, keyframes } from '@emotion/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { signUpContainerStyles } from '../components/styles';
+import { signUpBoxStyles, signUpContainerStyles } from '../components/styles';
 
 // ******
 
 // ****
 
-export default function Signup(props) {
+export default function Signup() {
   const [newName, setNewName] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newsletter, setNewsletter] = useState(true);
-  // const [validInput, setValidInput] = useState(true);
-  // const [startAnimation, setStartAnimation] = useState(false);
 
   const {
     register,
@@ -48,10 +45,12 @@ export default function Signup(props) {
 
   return (
     <div css={signUpContainerStyles}>
-      <h1>Sign up</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group">
-          <label htmlFor="name">Name: </label>
+      <div css={signUpBoxStyles}>
+        <h1>Sign up</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="name" className="label-name">
+            Name:
+          </label>
           <input
             {...register('name', { required: true, maxLength: 20 })}
             name="name"
@@ -66,9 +65,10 @@ export default function Signup(props) {
               {errors.name.type === 'maxLength' && <p>Too long!</p>}
             </div>
           )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password: </label>
+
+          <label htmlFor="password" className="label-password">
+            Password:
+          </label>
           <input
             {...register('password', {
               required: true,
@@ -98,9 +98,10 @@ export default function Signup(props) {
               )}
             </div>
           )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">E-mail</label>
+
+          <label htmlFor="email" className="label-email">
+            E-mail:
+          </label>
           <input
             {...register('email', {
               required: true,
@@ -121,10 +122,10 @@ export default function Signup(props) {
               )}
             </div>
           )}
-        </div>
 
-        <div className="form-group">
-          <label htmlFor="newsletter">Subscribe to our newsletter?</label>
+          <label htmlFor="newsletter" className="label-newsletter">
+            Subscribe to our newsletter?
+          </label>
           <input
             {...register('newsletter')}
             name="newsletter"
@@ -133,21 +134,10 @@ export default function Signup(props) {
             checked={newsletter}
             type="checkbox"
           />
-        </div>
 
-        <button>Sign Up!</button>
-      </form>
+          <button className="sign-up-button">Sign Up!</button>
+        </form>
+      </div>
     </div>
-    // </div>
   );
-}
-
-export async function getServerSideProps() {
-  const { users } = await import('../utils/database');
-
-  return {
-    props: {
-      users,
-    },
-  };
 }

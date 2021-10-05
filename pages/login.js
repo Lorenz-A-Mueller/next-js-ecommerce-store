@@ -1,7 +1,7 @@
 import { css, keyframes } from '@emotion/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { loginContainerStyles } from '../components/styles';
+import { loginBoxStyles, loginContainerStyles } from '../components/styles';
 
 // ******
 
@@ -81,54 +81,56 @@ export default function Login(props) {
   }
 
   return (
-    <div
-      css={css`
-        animation-name: ${startAnimation ? shake : null};
-        animation-duration: 0.3s;
-        animation-timing-function: ease;
-        animation-iteration-count: 1;
-      `}
-    >
-      <div css={loginContainerStyles}>
-        <h1>Login</h1>
-        <input
-          placeholder="user_name"
-          onChange={(e) => handleNameChange(e)}
-          value={userName}
-        />
-        <input
-          placeholder="password"
-          onChange={(e) => handlePasswordChange(e)}
-          value={userPassword}
-        />
-        <p className="invalid-input-text">
-          {showErrorMessage ? 'Invalid username/password' : ''}
-        </p>
+    <div css={loginContainerStyles}>
+      <div
+        css={css`
+          animation-name: ${startAnimation ? shake : null};
+          animation-duration: 0.3s;
+          animation-timing-function: ease;
+          animation-iteration-count: 1;
+        `}
+      >
+        <div css={loginBoxStyles}>
+          <h1>Login</h1>
+          <input
+            placeholder="user_name"
+            onChange={(e) => handleNameChange(e)}
+            value={userName}
+          />
+          <input
+            placeholder="password"
+            onChange={(e) => handlePasswordChange(e)}
+            value={userPassword}
+          />
+          <p className="invalid-input-text">
+            {showErrorMessage ? 'Invalid username/password' : ''}
+          </p>
 
-        {/* if input not valid, display the button; if valid, display the button with a Link */}
-        {!validInput && (
-          <button className="login-button" onClick={handleClick}>
-            Log In
-          </button>
-        )}
-        {validInput && (
-          <Link href="/" style={{ textDecoration: 'none' }}>
-            <a>
-              <button className="login-button" onClick={handleClick}>
-                Log In
-              </button>
-            </a>
-          </Link>
-        )}
-        <div className="sign-up-container">
-          <p>No account yet? </p>
-          <Link href="/signup">
-            <a>
-              <button>Sign Up</button>
-            </a>
-          </Link>
+          {/* if input not valid, display the button; if valid, display the button with a Link */}
+          {!validInput && (
+            <button className="login-button" onClick={handleClick}>
+              Log In
+            </button>
+          )}
+          {validInput && (
+            <Link href="/" style={{ textDecoration: 'none' }}>
+              <a>
+                <button className="login-button" onClick={handleClick}>
+                  Log In
+                </button>
+              </a>
+            </Link>
+          )}
+          <div className="sign-up-container">
+            <p>No account yet? </p>
+            <Link href="/signup">
+              <a>
+                <button>Sign Up</button>
+              </a>
+            </Link>
+          </div>
+          <p>Forgot Password?</p>
         </div>
-        <p>Forgot Password?</p>
       </div>
     </div>
   );

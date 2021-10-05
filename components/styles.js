@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
 
+const buttonBlue = 'rgba(39, 136, 244, 0.7)';
+const buttonBlueHovered = 'rgba(39, 136, 244, 1)';
+const buttonRed = 'rgba(255, 22, 48, 0.6)';
+const buttonRedHovered = 'rgba(255, 22, 48, 1)';
+
 export const globalStyles = css`
   *,
   *::after,
@@ -76,50 +81,120 @@ export const headerContainerStyles = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     grid-gap: 10%;
     margin-left: auto;
+    padding: 10px;
+    font-size: 1.2em;
 
     img {
-      width: 4vw;
+      width: 5vw;
     }
   }
   .cart-icon-container {
     /* background-color: blue; */
-    width: 20vw;
+    width: 10vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
 
     .cart-icon-image-container {
-      width: 60%;
+      width: 65%;
     }
 
     .cart-icon-text-container {
       p {
-        align-self: flex-end;
         color: white;
         font-size: 1.5em;
         margin-left: -7%;
       }
       .cart-icon-text-cartamount-container {
+        position: relative;
+        left: -18px;
+        top: 20px;
         border-radius: 100%;
         border: solid white 3px;
         width: 40px;
         height: 40px;
         text-align: center;
+        margin-left: auto;
+      }
+    }
+  }
+`;
+
+export const dropDownMenuStyles = css`
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  /* position: absolute; */
+  top: 15vh;
+  width: 10vw;
+  padding: 5px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  .dropdown-link-button {
+    margin-top: 10px;
+    height: 20px;
+    width: 100%;
+    a {
+      height: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      button {
+        width: 80%;
+        border: 0;
+        border-radius: 10px;
+        background-color: ${buttonBlue};
+        color: white;
+
+        &:hover {
+          background-color: ${buttonBlueHovered};
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .dropdown-logout-button {
+    margin-top: 10px;
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    button {
+      background-color: ${buttonRed};
+      border-radius: 10px;
+      border: 0;
+      width: 80%;
+
+      &:hover {
+        background-color: ${buttonRedHovered};
+        cursor: pointer;
       }
     }
   }
 `;
 
 export const loginContainerStyles = css`
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
+
+export const loginBoxStyles = css`
   width: 20vw;
   height: 40vh;
+  margin-top: 20vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border: solid black 3px;
-  margin-right: auto;
-  margin-left: auto;
 
   input {
     height: 30px;
@@ -137,10 +212,10 @@ export const loginContainerStyles = css`
       width: 35%;
 
       button {
-        background-color: rgba(255, 0, 0, 0.7);
+        background-color: ${buttonRed};
         width: 100%;
         &:hover {
-          background-color: rgba(255, 0, 0, 1);
+          background-color: ${buttonRedHovered};
         }
       }
     }
@@ -158,13 +233,13 @@ export const loginContainerStyles = css`
     height: 30px;
     font-size: 1em;
     border: 0;
-    background-color: rgba(0, 0, 255, 0.7);
+    background-color: ${buttonBlue};
     border-radius: 10px;
     font-family: lora;
     /* margin-top: 5%; */
 
     &:hover {
-      background-color: blue;
+      background-color: ${buttonBlueHovered};
     }
   }
 
@@ -178,48 +253,97 @@ export const loginContainerStyles = css`
       height: 30px;
       font-size: 1em;
       border: 0;
-      background-color: rgba(0, 0, 255, 0.7);
+      background-color: ${buttonBlue};
       border-radius: 10px;
       font-family: lora;
       /* margin-top: 5%; */
 
       &:hover {
-        background-color: blue;
+        background-color: ${buttonBlueHovered};
       }
     }
   }
 `;
 
 export const signUpContainerStyles = css`
-  width: 20vw;
-  height: 40vh;
-  border: solid black 3px;
-  margin-right: auto;
-  margin-left: auto;
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+`;
 
-  h1 {
-    text-align: center;
-  }
+export const signUpBoxStyles = css`
+  width: 60vw;
+  height: 55vh;
+  border: solid black 3px;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   form {
-    width: 100%;
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    width: 80%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: 15% 30% 45%;
+    grid-template-rows: repeat(4, 1fr) 25%;
+    grid-gap: 5%;
+    margin-top: 30px;
 
-    .form-group {
-      .validation-error-container {
-        color: red;
-      }
+    .validation-error-container {
+      color: white;
+      background-color: red;
+      border-radius: 5px;
+    }
+
+    .label-name {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+    .label-password {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+    .label-email {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+    .label-newsletter {
+      grid-column: 1 / 2;
+      grid-row: 4 / 5;
+    }
+
+    #name {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+    #password {
+      grid-column: 2/ 3;
+      grid-row: 2 / 3;
+    }
+    #email {
+      grid-column: 2/ 3;
+      grid-row: 3 / 4;
+    }
+    #newsletter {
+      grid-column: 2 / 3;
+      grid-row: 4 / 5;
+      width: 40px;
+      align-self: center;
+    }
+
+    .sign-up-button {
+      grid-column: 1/3;
+      grid-row: 5/6;
+      justify-self: center;
+      align-self: center;
     }
   }
 
   input {
     height: 30px;
     font-size: 1em;
-    width: 70%;
+    width: 100%;
   }
 
   button {
@@ -228,23 +352,98 @@ export const signUpContainerStyles = css`
     height: 30px;
     font-size: 1em;
     border: 0;
-    background-color: rgba(0, 0, 255, 0.7);
+    background-color: ${buttonBlue};
     border-radius: 10px;
     font-family: lora;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
     /* margin-top: 5%; */
 
     &:hover {
-      background-color: blue;
+      background-color: ${buttonBlueHovered};
     }
   }
 `;
 
-export const footerContainerStyles = css`
+export const footerBaseStyles = css`
   background-color: black;
-  height: 10vh;
+  height: 5vh;
   width: 100vw;
-  color: white;
+  /* color: white; */
   max-width: 100%;
+`;
+
+export const footerLinkContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  margin-left: 5%;
+
+  a {
+    color: white;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+`;
+export const footerInfoContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  color: white;
+  h2 {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  a {
+    color: white;
+  }
+`;
+
+export const footerLogoStyles = css`
+  margin-right: -15%;
+`;
+export const footerAddressStyles = css`
+  display: flex;
+  flex-direction: column;
+  color: white;
+`;
+
+export const homeContainerStyles = css`
+  width: 100vw;
+  height: 80vh;
+  background-image: url('/home_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  overflow: hidden;
+
+  .hero {
+    margin-top: 33vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .hero-image-link-text-container a {
+      color: black;
+    }
+    p {
+      position: absolute;
+      top: 67vh;
+      left: 52vw;
+      font-size: 1.5em;
+      background-color: ${buttonBlue};
+      border-radius: 10px;
+      padding: 5px;
+
+      &:hover {
+        background-color: ${buttonBlueHovered};
+      }
+    }
+  }
 `;
 
 export const productsContainerStyles = css`
@@ -254,6 +453,7 @@ export const productsContainerStyles = css`
   overflow-y: scroll;
   padding: 20px;
   padding-left: 80px;
+  height: 80vh;
 
   .product-tile {
     flex-direction: column;
@@ -348,7 +548,7 @@ export const currentProductContainerStyles = css`
       height: 50px;
       font-size: 2em;
       border: 0;
-      background-color: rgba(0, 0, 255, 0.7);
+      background-color: ${buttonBlue};
       border-radius: 10px;
       font-family: lora;
       margin-top: 5%;
@@ -363,7 +563,7 @@ export const currentProductContainerStyles = css`
 export const cartContainerStyles = css`
   display: flex;
   width: 100vw;
-  height: 75vh;
+  height: 80vh;
   overflow-y: scroll;
   background-image: linear-gradient(
       to right,
@@ -515,13 +715,13 @@ export const cartContainerStyles = css`
       height: 50px;
       font-size: 2em;
       border: 0;
-      background-color: rgba(0, 0, 255, 0.7);
+      background-color: ${buttonBlue};
       margin-top: 10%;
       border-radius: 10px;
       font-family: lora;
 
       &:hover {
-        background-color: blue;
+        background-color: ${buttonBlueHovered};
       }
     }
   }

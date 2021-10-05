@@ -1,59 +1,53 @@
 import { css } from '@emotion/react';
-import Head from 'next/head';
-// import Image from 'next/image';  ?? how to use dynamic sizing with that
+import Image from 'next/image';
 import Link from 'next/link';
-import { productsContainerStyles } from '../components/styles';
+import { useEffect, useState } from 'react';
+import { homeContainerStyles } from '../components/styles';
+import logo from '../public/logo.png';
 
-// import Head from 'next/head';
-// import Image from 'next/image';
+const imageAnimationStyles = (width, marginLeft, marginBottom) => css`
+  width: ${width + 'px'};
+  transition: all 2s ease-out;
+  overflow: hidden;
+  margin-left: ${marginLeft + 'px'};
+  margin-bottom: ${marginBottom + 'px'};
+`;
 
-export default function Home(props) {
+export default function Home() {
+  const [width, setWidth] = useState(0);
+  const [marginLeft, setMarginLeft] = useState(0);
+  const [marginBottom, setMarginBottom] = useState(0);
+  const [showText, setShowText] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeout(() => {
+        setTimeout(() => {
+          setShowText(true);
+        }, 2500);
+        setMarginLeft(-300);
+        setWidth(300);
+        setMarginBottom(75); // 75% of the shrinking of the picture width (= picture height)
+      }, 4500);
+      setWidth(400);
+    }, 1000);
+  }, []);
+
   return (
-    <>
-      <Head>
-        <title>Sprouts Farmer Market Homepage</title>
-      </Head>
-      <div css={productsContainerStyles}>
-        {props.products.map((product) => (
-          <Link
-            href={`/products/${product.productId}`}
-            key={`product-id${product.productId}`}
-          >
+    <div css={homeContainerStyles}>
+      <div className="hero">
+        <h1>Welcome to Sprouts!</h1>
+        <div className="hero-image-link-text-container">
+          <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
+            <Image src={logo} width="400px" height="300px" />
+          </div>
+          <Link href="/products">
             <a>
-              <div
-                className="product-tile"
-                key={`product-id${product.productId}`}
-                css={css`
-                  display: ${product.productName
-                    .toLowerCase()
-                    .startsWith(props.search.toLowerCase()) || !props.search
-                    ? 'flex'
-                    : 'none'};
-                `}
-              >
-                <div className="product-name-container">
-                  {product.productName}
-                </div>
-
-                <img
-                  src={`/product_images/${product.productId}.jpeg`}
-                  alt={product.productName}
-                />
-              </div>
+              <p style={{ display: showText ? 'block' : 'none' }}>Enter Shop</p>
             </a>
           </Link>
-        ))}
+        </div>
       </div>
-    </>
+    </div>
   );
-}
-
-export async function getServerSideProps() {
-  const { getProducts } = await import('../utils/database');
-  const products = await getProducts();
-  return {
-    props: {
-      products, // short for products: products
-    },
-  };
 }

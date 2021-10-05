@@ -17,6 +17,9 @@ export default function Layout(props) {
         numberOfClickedOnProducts={props.numberOfClickedOnProducts}
         cart={props.cart}
         loggedInUser={props.loggedInUser}
+        setLoggedInUser={props.setLoggedInUser}
+        firstLetterOfSearch={props.firstLetterOfSearch}
+        setFirstLetterOfSearch={props.setFirstLetterOfSearch}
       />
       {props.children}
       <Footer />

@@ -1,12 +1,19 @@
 // import { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { signUpBoxStyles, signUpContainerStyles } from '../components/styles';
+import {
+  redirectionFromSignupContainerStyles,
+  signUpBoxStyles,
+  signUpContainerStyles,
+} from '../components/styles';
 
 // ******
 
 // ****
 
 export default function Signup() {
+  const [showSuccess, setShowSuccess] = useState(false);
+
   // const [newFirstName, setNewFirstName] = useState('');
   // const [newLastName, setNewLastName] = useState('');
   // const [newPassword, setNewPassword] = useState('');
@@ -37,7 +44,26 @@ export default function Signup() {
   // }
 
   const onSubmit = (formData) => {
-    alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData.email));
+
+    fetch('http://localhost:3000/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        newUser: [
+          formData.email,
+          formData.password,
+          formData.firstName,
+          formData.lastName,
+        ],
+      }),
+    }).then(() => {
+      setShowSuccess(true);
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 2000);
+    });
   };
 
   // custom validation rule for password: must contain one digit and one uppercase letter
@@ -128,6 +154,7 @@ export default function Signup() {
             name="password"
             id="password"
             placeholder="password"
+            type="password"
             // onChange={(e) => handlePasswordChange(e)}
             // value={newPassword}
           />
@@ -162,6 +189,14 @@ export default function Signup() {
 
           <button className="sign-up-button">Sign Up!</button>
         </form>
+      </div>
+      <div
+        css={redirectionFromSignupContainerStyles}
+        style={{ display: showSuccess ? 'flex' : 'none' }}
+      >
+        <div className="redirection-from-signup-text-container">
+          <h2>Your account has been created. Please log in!</h2>
+        </div>
       </div>
     </div>
   );

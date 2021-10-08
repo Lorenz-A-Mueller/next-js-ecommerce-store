@@ -1,6 +1,7 @@
 import { css, keyframes } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import cart from '../public/cart.png';
 import login from '../public/login.png';
@@ -21,6 +22,7 @@ const dropDownMenuTransitionStyles = (height) => css`
 export default function Header(props) {
   const [startAnimation, setStartAnimation] = useState(false);
   const [height, setHeight] = useState(0);
+  const router = useRouter;
 
   console.log('props.loggedInUser', props.loggedInUser);
   console.log('props.loggedInUser.firstName', props.loggedInUser.firstName);
@@ -39,7 +41,7 @@ export default function Header(props) {
 
   useEffect(() => {
     if (
-      window.location.href !== window.location.origin + '/products/' ||
+      window.location.href !== window.location.origin + '/products/' &&
       window.location.href !== window.location.origin + '/login/'
     ) {
       // don't start the animation when being on /products or /login (unnecessary bouncing)
@@ -80,6 +82,7 @@ export default function Header(props) {
   function handleLogOutClick() {
     props.setLoggedInUser({});
     setHeight(0);
+    router.push('/');
   }
   // *****
 
@@ -125,6 +128,7 @@ export default function Header(props) {
             handleMouseOut={handleMouseOut}
             handleMouseOver={handleMouseOver}
             handleLogOutClick={handleLogOutClick}
+            loggedInUser={props.loggedInUser}
             setLoggedInUser={props.setLoggedInUser}
           />
         </div>

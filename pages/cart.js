@@ -104,7 +104,7 @@ export default function Cart(props) {
           ))}
 
           <div className="delete-all-button-container">
-            <Link href={!props.cart.length ? '/' : '/cart'}>
+            <Link href={!props.cart.length ? '/products' : '/cart'}>
               <a>
                 <button
                   onClick={() => handleDeleteAllClick()}

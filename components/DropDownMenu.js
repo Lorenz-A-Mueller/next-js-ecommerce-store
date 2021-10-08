@@ -11,15 +11,17 @@ export default function DropDownMenu(props) {
       onBlur={props.handleMouseOut}
     >
       <div className="dropdown-link-button">
-        <Link href="/login">
+        <Link href={props.loggedInUser.id ? '/account' : '/login'}>
           <a>
-            <button onClick={props.handleMouseOut}>Log In</button>
+            <button onClick={props.handleMouseOut}>
+              {props.loggedInUser.id ? 'Account' : 'Log In'}
+            </button>
           </a>
         </Link>
       </div>
       <div className="dropdown-link-button">
         <Link href="/signup">
-          <a>
+          <a style={{ display: props.loggedInUser.id ? 'none' : 'flex' }}>
             <button onClick={props.handleMouseOut}>Sign Up</button>
           </a>
         </Link>

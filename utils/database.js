@@ -41,6 +41,64 @@ export async function getUser(id) {
   return camelcaseKeys(user[0]);
 }
 
+export async function createUser(newUser) {
+  const user = await sql`
+  INSERT INTO users
+  (user_name, password, first_name, last_name)
+  VALUES
+  (${newUser[0]}, ${newUser[1]}, ${newUser[2]}, ${newUser[3]});
+  `;
+  return camelcaseKeys(user[0]);
+}
+
+export async function deleteUser(userId) {
+  const user = await sql`
+  DELETE FROM users
+  WHERE
+  id = ${userId}
+  `;
+  return camelcaseKeys(user[0]);
+}
+
+export async function patchUser(
+  id,
+  newName,
+  newPassword,
+  newFirstName,
+  newLastName,
+) {
+  const user = await sql`
+  UPDATE users
+  SET
+   user_name = ${newName},
+   password = ${newPassword},
+   first_name = ${newFirstName},
+   last_name= ${newLastName}
+   WHERE
+   id = ${id}
+   RETURNING
+  id, user_name, password, first_name, last_name;
+  `;
+  return camelcaseKeys(user[0]);
+}
+
+// export const users = [
+//   {
+//     id: '1',
+//     userName: 'lorenz.a.mueller@gmail.com',
+//     password: '1234',
+//     firstName: 'Lorenz',
+//     lastName: 'Mueller',
+//   },
+//   {
+//     id: '2',
+//     userName: 'lorenzarthur91@gmail.com',
+//     password: '4321',
+//     firstName: 'Arthur',
+//     lastName: 'Mueller',
+//   },
+// ];
+
 // export const products = [
 //   {
 //     id: '1',
@@ -158,20 +216,3 @@ export async function getUser(id) {
 //   },
 //   { id: '24', name: 'Tomato', image: 'tomato.jpeg', price: 1.97, size: 'kg' },
 // ];
-
-export const users = [
-  {
-    id: '1',
-    userName: 'lorenz.a.mueller@gmail.com',
-    password: '1234',
-    firstName: 'Lorenz',
-    lastName: 'Mueller',
-  },
-  {
-    id: '2',
-    userName: 'lorenzarthur91@gmail.com',
-    password: '4321',
-    firstName: 'Arthur',
-    lastName: 'Mueller',
-  },
-];

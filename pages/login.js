@@ -1,5 +1,6 @@
 import { css, keyframes } from '@emotion/react';
 import Link from 'next/link';
+import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import {
   loginBoxStyles,
@@ -73,7 +74,7 @@ export default function Login(props) {
     }
 
     if (doesNameExist && doesPasswordMatch) {
-      alert('yes');
+      // alert('yes');
       setValidInput(true);
     } else {
       setValidInput(false);
@@ -88,6 +89,9 @@ export default function Login(props) {
         return userName === savedUser.userName;
       });
       props.setLoggedInUser(props.users[savedUserIndex]);
+      setTimeout(() => {
+        Router.push('/cart');
+      }, 1000);
     } else {
       setShowErrorMessage(true);
       setStartAnimation(true);
@@ -118,7 +122,9 @@ export default function Login(props) {
             placeholder="password"
             onChange={(e) => handlePasswordChange(e)}
             value={userPassword}
+            type="password"
           />
+
           <p className="invalid-input-text">
             {showErrorMessage ? 'Invalid username/password' : ''}
           </p>
@@ -130,13 +136,13 @@ export default function Login(props) {
             </button>
           )}
           {validInput && (
-            <Link href="/" style={{ textDecoration: 'none' }}>
-              <a>
-                <button className="login-button" onClick={handleClick}>
-                  Log In
-                </button>
-              </a>
-            </Link>
+            // <Link href="/" style={{ textDecoration: 'none' }}>
+            //   <a>
+            <button className="login-button" onClick={handleClick}>
+              Log In
+            </button>
+            //   </a>
+            // </Link>
           )}
           <div className="sign-up-container">
             <p>No account yet? </p>
@@ -153,7 +159,9 @@ export default function Login(props) {
         css={redirectionToLoginContainerStyles}
         style={{ display: showInfo ? 'flex' : 'none' }}
       >
-        <h2>Please Log In!</h2>
+        <div className="redirection-to-login-text-container">
+          <h2>Please Log In!</h2>
+        </div>
       </div>
     </div>
   );

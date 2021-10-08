@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.send({
-      error: 'Method need to be POST',
+      error: 'Method needs to be POST',
     });
   }
   const domainURL = 'http://localhost:3000';

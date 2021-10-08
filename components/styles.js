@@ -283,13 +283,14 @@ export const signUpBoxStyles = css`
   align-items: center;
 
   form {
-    width: 80%;
+    width: 50%;
     height: 70%;
     display: grid;
-    grid-template-columns: 15% 30% 45%;
-    grid-template-rows: repeat(4, 1fr) 25%;
-    grid-gap: 5%;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: repeat(4, 10% 3%) 24% 24%;
+    grid-gap: 3%;
     margin-top: 30px;
+    background-color: pink;
 
     .validation-error-container {
       color: white;
@@ -297,45 +298,83 @@ export const signUpBoxStyles = css`
       border-radius: 5px;
     }
 
-    .label-name {
-      grid-column: 1 / 2;
-      grid-row: 1 / 2;
-    }
-    .label-password {
-      grid-column: 1 / 2;
-      grid-row: 2 / 3;
-    }
     .label-email {
       grid-column: 1 / 2;
-      grid-row: 3 / 4;
-    }
-    .label-newsletter {
-      grid-column: 1 / 2;
-      grid-row: 4 / 5;
+      grid-row: 1 / 2;
     }
 
-    #name {
+    .validation-error-container-email {
+      grid-column: 2/3;
+      grid-row: 2/3;
+      color: red;
+    }
+
+    .label-firstName {
+      grid-column: 1 / 2;
+      grid-row: 3/ 4;
+    }
+
+    .validation-error-container-firstName {
+      grid-column: 2/3;
+      grid-row: 4/5;
+      color: red;
+    }
+
+    .label-lastName {
+      grid-column: 1 / 2;
+      grid-row: 5 / 6;
+    }
+    .validation-error-container-lastName {
+      grid-column: 2/3;
+      grid-row: 6/7;
+      color: red;
+    }
+
+    .label-password {
+      grid-column: 1 / 2;
+      grid-row: 7/ 8;
+    }
+
+    .validation-error-container-password {
+      grid-column: 2/3;
+      grid-row: 8/9;
+      color: red;
+    }
+
+    .label-newsletter {
+      grid-column: 1 / 2;
+      grid-row: 9/ 10;
+    }
+
+    #email {
+      grid-column: 2/ 3;
+      grid-row: 1/ 2;
+    }
+
+    #firstName {
       grid-column: 2 / 3;
-      grid-row: 1 / 2;
+      grid-row: 3/ 4;
+    }
+
+    #lastName {
+      grid-column: 2 / 3;
+      grid-row: 5 / 6;
     }
     #password {
       grid-column: 2/ 3;
-      grid-row: 2 / 3;
+      grid-row: 7/ 8;
     }
-    #email {
-      grid-column: 2/ 3;
-      grid-row: 3 / 4;
-    }
+
     #newsletter {
       grid-column: 2 / 3;
-      grid-row: 4 / 5;
+      grid-row: 9 / 10;
       width: 40px;
       align-self: center;
     }
 
     .sign-up-button {
       grid-column: 1/3;
-      grid-row: 5/6;
+      grid-row: 10/11;
       justify-self: center;
       align-self: center;
     }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { signUpBoxStyles, signUpContainerStyles } from '../components/styles';
 
@@ -7,10 +7,11 @@ import { signUpBoxStyles, signUpContainerStyles } from '../components/styles';
 // ****
 
 export default function Signup() {
-  const [newName, setNewName] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [newEmail, setNewEmail] = useState('');
-  const [newsletter, setNewsletter] = useState(true);
+  // const [newFirstName, setNewFirstName] = useState('');
+  // const [newLastName, setNewLastName] = useState('');
+  // const [newPassword, setNewPassword] = useState('');
+  // const [newEmail, setNewEmail] = useState('');
+  // const [newsletter, setNewsletter] = useState(true);
 
   const {
     register,
@@ -18,18 +19,22 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  function handleNameChange(e) {
-    setNewName(e.currentTarget.value);
-  }
-  function handlePasswordChange(e) {
-    setNewPassword(e.currentTarget.value);
-  }
-  function handleEmailChange(e) {
-    setNewEmail(e.currentTarget.value);
-  }
-  function handleNewsletterChange() {
-    setNewsletter((previous) => !previous);
-  }
+  // function handleEmailChange(e) {
+  //   setNewEmail(e.currentTarget.value);
+  // }
+
+  // function handleFirstNameChange(e) {
+  //   setNewFirstName(e.currentTarget.value);
+  // }
+  // function handleLastNameChange(e) {
+  //   setNewLastName(e.currentTarget.value);
+  // }
+  // function handlePasswordChange(e) {
+  //   setNewPassword(e.currentTarget.value);
+  // }
+  // function handleNewsletterChange() {
+  //   setNewsletter((previous) => !previous);
+  // }
 
   const onSubmit = (formData) => {
     alert(JSON.stringify(formData));
@@ -48,21 +53,65 @@ export default function Signup() {
       <div css={signUpBoxStyles}>
         <h1>Sign up</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="name" className="label-name">
-            Name:
+          <label htmlFor="email" className="label-email">
+            E-mail:
           </label>
           <input
-            {...register('name', { required: true, maxLength: 20 })}
-            name="name"
-            id="name"
-            placeholder="user_name"
-            onChange={(e) => handleNameChange(e)}
-            value={newName}
+            {...register('email', {
+              required: true,
+              pattern: /^\S+@\S+\.\S+$/i,
+            })}
+            name="email"
+            id="email"
+            placeholder="e-mail"
+            // onChange={(e) => handleEmailChange(e)}
+            // value={newEmail}
+            type="email"
           />
-          {errors.name && (
-            <div className="validation-error-container">
-              {errors.name.type === 'required' && <p>Name is required</p>}
-              {errors.name.type === 'maxLength' && <p>Too long!</p>}
+          {errors.email && (
+            <div className="validation-error-container-email">
+              {errors.email.type === 'required' && <p>E-mail is required</p>}
+              {errors.email.type === 'pattern' && (
+                <p>Not a valid e-mail format</p>
+              )}
+            </div>
+          )}
+          <label htmlFor="firstName" className="label-firstName">
+            First Name:
+          </label>
+          <input
+            {...register('firstName', { required: true, maxLength: 20 })}
+            name="firstName"
+            id="firstName"
+            placeholder="first name"
+            // onChange={(e) => handleFirstNameChange(e)}
+            // value={newFirstName}
+          />
+          {errors.firstName && (
+            <div className="validation-error-container-firstName">
+              {errors.firstName.type === 'required' && (
+                <p>First Name is required</p>
+              )}
+              {errors.firstName.type === 'maxLength' && <p>Too long!</p>}
+            </div>
+          )}
+          <label htmlFor="lastName" className="label-lastName">
+            Last Name:
+          </label>
+          <input
+            {...register('lastName', { required: true, maxLength: 20 })}
+            name="lastName"
+            id="lastName"
+            placeholder="last Name"
+            // onChange={(e) => handleLastNameChange(e)}
+            // value={newLastName}
+          />
+          {errors.lastName && (
+            <div className="validation-error-container-lastName">
+              {errors.lastName.type === 'required' && (
+                <p>Last Name is required</p>
+              )}
+              {errors.lastName.type === 'maxLength' && <p>Too long!</p>}
             </div>
           )}
 
@@ -79,11 +128,11 @@ export default function Signup() {
             name="password"
             id="password"
             placeholder="password"
-            onChange={(e) => handlePasswordChange(e)}
-            value={newPassword}
+            // onChange={(e) => handlePasswordChange(e)}
+            // value={newPassword}
           />
           {errors.password && (
-            <div className="validation-error-container">
+            <div className="validation-error-container-password">
               {errors.password.type === 'required' && (
                 <p>Password is required</p>
               )}
@@ -99,30 +148,6 @@ export default function Signup() {
             </div>
           )}
 
-          <label htmlFor="email" className="label-email">
-            E-mail:
-          </label>
-          <input
-            {...register('email', {
-              required: true,
-              pattern: /^\S+@\S+\.\S+$/i,
-            })}
-            name="email"
-            id="email"
-            placeholder="e-mail"
-            onChange={(e) => handleEmailChange(e)}
-            value={newEmail}
-            type="email"
-          />
-          {errors.email && (
-            <div className="validation-error-container">
-              {errors.email.type === 'required' && <p>E-mail is required</p>}
-              {errors.email.type === 'pattern' && (
-                <p>Not a valid e-mail format</p>
-              )}
-            </div>
-          )}
-
           <label htmlFor="newsletter" className="label-newsletter">
             Subscribe to our newsletter?
           </label>
@@ -130,8 +155,8 @@ export default function Signup() {
             {...register('newsletter')}
             name="newsletter"
             id="newsletter"
-            onChange={(e) => handleNewsletterChange(e)}
-            checked={newsletter}
+            // onChange={(e) => handleNewsletterChange(e)}
+            // checked
             type="checkbox"
           />
 

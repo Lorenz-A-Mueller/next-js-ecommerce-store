@@ -38,10 +38,16 @@ export default function Header(props) {
   }
 
   useEffect(() => {
-    setStartAnimation(true);
-    setTimeout(() => {
-      setStartAnimation(false);
-    }, 1000);
+    if (
+      window.location.href !== window.location.origin + '/products/' ||
+      window.location.href !== window.location.origin + '/login/'
+    ) {
+      // don't start the animation when being on /products or /login (unnecessary bouncing)
+      setStartAnimation(true);
+      setTimeout(() => {
+        setStartAnimation(false);
+      }, 1000);
+    }
   }, [props.cart]);
 
   function handleMouseOver() {
@@ -82,7 +88,7 @@ export default function Header(props) {
 
     <div css={headerContainerStyles}>
       <div className="logo-container">
-        <Link href="/">
+        <Link href="/products">
           <a>
             <Image src={logo} />
           </a>

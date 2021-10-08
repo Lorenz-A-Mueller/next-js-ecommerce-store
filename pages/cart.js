@@ -1,11 +1,24 @@
 import { css } from '@emotion/react';
+import { loadStripe } from '@stripe/stripe-js';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
-// import Image from 'next/image';  ?? how to use dynamic sizing with that
+import { useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
-import { cartContainerStyles } from '../components/styles';
+import {
+  cartContainerStyles,
+  redirectionToCheckoutContainerStyles,
+} from '../components/styles';
+import buffering from '../public/buffering.gif';
+import stripe_logo from '../public/stripe_logo.png';
+import { setCookies } from '../utils/cookies';
 
 export default function Cart(props) {
+  const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
+  const [redirectingToLogin, setRedirectingToLogin] = useState(false);
+  console.log('redirectingToLoginCART', redirectingToLogin);
+
+  console.log(props.cart);
   function handleDeleteItemClick(orderId) {
     props.setCart((previous) => {
       return previous.filter((element, index) => {
@@ -32,6 +45,36 @@ export default function Cart(props) {
     );
     console.log('props.cart', props.cart);
   }
+
+  const stripeLoader = loadStripe(props.pk);
+
+  const handleBuyClick = async () => {
+    if (!props.loggedInUser.id) {
+      setRedirectingToLogin(true);
+      setCookies('redirectingToLogin', true);
+      window.location.href = '/login';
+      return;
+    }
+
+    setRedirectingToCheckout(true);
+
+    const stripeClient = await stripeLoader;
+    const { sessionId } = await fetch('api/checkout_sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        lineItems: props.cart.map((singleItem) => {
+          return {
+            price: props.priceArray[singleItem.id - 1],
+            quantity: singleItem.amount,
+          };
+        }),
+      }),
+    }).then((res) => res.json());
+    stripeClient.redirectToCheckout({ sessionId });
+  };
 
   return (
     <>
@@ -103,7 +146,26 @@ export default function Cart(props) {
               €
             </h2>
           </div>
-          <button>Buy Now!</button>
+          <button
+            onClick={
+              () => handleBuyClick()
+              // redirectToCheckout(props.quantity, props.mode, props.productKeys)
+            }
+          >
+            Buy Now!
+          </button>
+        </div>
+      </div>
+      <div
+        css={redirectionToCheckoutContainerStyles}
+        style={{ display: redirectingToCheckout ? 'flex' : 'none' }}
+      >
+        <div className="redirection-to-checkout-text-container">
+          <h2>You are being redirected to our partner</h2>
+          <Image src={stripe_logo} width="150px" height="112px" />
+        </div>
+        <div className="redirection-to-checkout-buffer-container">
+          <Image src={buffering} />
         </div>
       </div>
     </>
@@ -113,9 +175,39 @@ export default function Cart(props) {
 export async function getServerSideProps() {
   const { getProducts } = await import('../utils/database');
   const products = await getProducts();
+
+  const priceArray = [
+    process.env.PRICE1,
+    process.env.PRICE2,
+    process.env.PRICE3,
+    process.env.PRICE4,
+    process.env.PRICE5,
+    process.env.PRICE6,
+    process.env.PRICE7,
+    process.env.PRICE8,
+    process.env.PRICE9,
+    process.env.PRICE10,
+    process.env.PRICE11,
+    process.env.PRICE12,
+    process.env.PRICE13,
+    process.env.PRICE14,
+    process.env.PRICE15,
+    process.env.PRICE16,
+    process.env.PRICE17,
+    process.env.PRICE18,
+    process.env.PRICE19,
+    process.env.PRICE20,
+    process.env.PRICE21,
+    process.env.PRICE22,
+    process.env.PRICE23,
+    process.env.PRICE24,
+  ];
+
   return {
     props: {
+      pk: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
       products, // short for products: products
+      priceArray,
     },
   };
 }

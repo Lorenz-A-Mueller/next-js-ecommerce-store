@@ -17,28 +17,11 @@ export default function CartSingleImage(props) {
       setChangedAmount(9);
       props.updateAmountInCart(props.chosenProduct.id, 9);
     } else if (enteredValue < 0) {
-      if (props.products[props.chosenProduct.id - 1].productSize === 'kg') {
-        setChangedAmount(0.1);
-        props.updateAmountInCart(props.chosenProduct.id, 0.1);
-      } else {
-        setChangedAmount(1);
-        props.updateAmountInCart(props.chosenProduct.id, 1);
-      }
+      setChangedAmount(1);
+      props.updateAmountInCart(props.chosenProduct.id, 1);
 
-      // if dec. point is entered (if size not 'kg'), round the number down immediately
-    } else if (
-      props.products[props.chosenProduct.id - 1].productSize === 'kg' &&
-      enteredValue.length > 3
-    ) {
-      setChangedAmount(parseFloat(enteredValue).toFixed(2));
-      props.updateAmountInCart(
-        props.chosenProduct.id,
-        parseFloat(enteredValue).toFixed(2),
-      );
-    } else if (
-      props.products[props.chosenProduct.id - 1].productSize !== 'kg' &&
-      enteredValue.length > 1
-    ) {
+      // if dec. point is entered, round the number down immediately
+    } else if (enteredValue.length > 1) {
       setChangedAmount(Math.floor(enteredValue));
       props.updateAmountInCart(
         props.chosenProduct.id,
@@ -80,25 +63,16 @@ export default function CartSingleImage(props) {
               changedAmount === 0 ? props.chosenProduct.amount : changedAmount // first take the amount from the cookie
             }
             onChange={(e) => handleChange(e, props.chosenProduct.amount)}
-            min={
-              props.products[props.chosenProduct.id - 1].productSize === 'kg'
-                ? '0.10'
-                : '1'
-            }
+            min="1"
             max="9"
-            step={
-              props.products[props.chosenProduct.id - 1].productSize === 'kg'
-                ? '0.01'
-                : '1'
-            }
+            step="1"
             onBlur={(e) => handleLostFocus(e)}
             // maxLength="3"
           />
           <p>
             {props.products[props.chosenProduct.id - 1].productSize}
-            {props.products[props.chosenProduct.id - 1].productSize !== 'kg' &&
-            ((props.chosenProduct.amount > 1 && !changedAmount) ||
-              changedAmount > 1)
+            {(props.chosenProduct.amount > 1 && !changedAmount) ||
+            changedAmount > 1
               ? 's'
               : ''}
           </p>

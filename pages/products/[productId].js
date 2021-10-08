@@ -3,12 +3,8 @@ import { useState } from 'react';
 import { currentProductContainerStyles } from '../../components/styles';
 
 export default function Product(props) {
-  const startValue = 1;
-  const [amount, setAmount] = useState(
-    props.currentProduct.productSize === 'kg'
-      ? startValue.toPrecision(3)
-      : startValue,
-  );
+  const [amount, setAmount] = useState(1);
+
   // const [clickedOnProducts, setClickedOnProducts] = useState(
   //   getCookies('cart'),
   // );
@@ -20,7 +16,7 @@ export default function Product(props) {
       setAmount(1);
     } else {
       if (
-        props.currentProduct.productSize !== 'kg' && // if dec. point is entered (if size not 'kg'), round the number down immediately
+        // if dec. point is entered, round the number down immediately
         e.currentTarget.value.length > 2
       ) {
         setAmount(Math.floor(e.currentTarget.value));
@@ -57,6 +53,9 @@ export default function Product(props) {
         });
       });
     }
+    setTimeout(() => {
+      window.location.href = '/products';
+    }, 700);
   }
   function handleLostFocus(e) {
     if (e.currentTarget.value === '0' || e.currentTarget.value === '') {
@@ -85,7 +84,7 @@ export default function Product(props) {
           </p>
           <div className="current-product-text-priceinfo-container">
             <h2>
-              €{props.currentProduct.productPrice / 100}/
+              €{(props.currentProduct.productPrice / 100).toFixed(2)}/
               {props.currentProduct.productSize}
             </h2>
             <div className="amount-container">
@@ -97,16 +96,12 @@ export default function Product(props) {
                   value={amount}
                   max="9"
                   min="0"
-                  step={
-                    props.currentProduct.productSize === 'kg' ? '0.01' : '1'
-                  }
+                  step="1"
                   onBlur={(e) => handleLostFocus(e)}
                 />
                 <p>
                   {props.currentProduct.productSize}
-                  {props.currentProduct.productSize !== 'kg' && amount > 1
-                    ? 's'
-                    : ''}
+                  {amount > 1 ? 's' : ''}
                 </p>
               </div>
             </div>

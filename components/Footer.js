@@ -19,13 +19,14 @@ const footerExpandedStyles = (height) => css`
   justify-content: space-around;
   align-items: center;
   overflow: hidden;
+  z-index: 1;
 `;
 
 export default function Footer() {
   const [height, setHeight] = useState(0);
 
   function handleMouseOver() {
-    setHeight(170);
+    setHeight(250);
   }
 
   function handleMouseOut() {

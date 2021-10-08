@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 
 const buttonBlue = 'rgba(39, 136, 244, 0.7)';
 const buttonBlueHovered = 'rgba(39, 136, 244, 1)';
+const buttonBlueOpaque = 'rgba(39, 136, 244, 0.9)';
 const buttonRed = 'rgba(255, 22, 48, 0.6)';
 const buttonRedHovered = 'rgba(255, 22, 48, 1)';
 
@@ -490,6 +491,8 @@ export const productsContainerStyles = css`
 export const currentProductContainerStyles = css`
   display: flex;
   justify-content: flex-start;
+  height: 80vh;
+  overflow-y: scroll;
 
   .current-product-image-container {
     img {
@@ -498,6 +501,7 @@ export const currentProductContainerStyles = css`
     }
   }
   .current-product-text-container {
+    margin-top: 5vh;
     width: 25vw;
     height: 70vh;
     display: flex;
@@ -555,6 +559,7 @@ export const currentProductContainerStyles = css`
 
       &:hover {
         background-color: blue;
+        cursor: pointer;
       }
     }
   }
@@ -722,6 +727,102 @@ export const cartContainerStyles = css`
 
       &:hover {
         background-color: ${buttonBlueHovered};
+        cursor: pointer;
+      }
+    }
+  }
+`;
+
+export const redirectionToCheckoutContainerStyles = css`
+  position: absolute;
+  width: 100vw;
+  height: 80vh;
+  top: 15vh;
+  left: 0;
+  background-color: ${buttonBlueOpaque};
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .redirection-to-checkout-text-container {
+    width: 80%;
+    display: flex;
+    h2 {
+      font-size: 3em;
+      margin-right: 30px;
+    }
+  }
+  .redirection-to-checkout-buffer-container {
+    /* margin-top: auto; */
+    margin-top: -200px;
+    height: 100px;
+  }
+`;
+export const redirectionToLoginContainerStyles = css`
+  position: absolute;
+  width: 40vw;
+  height: 40vh;
+  top: 30vh;
+  left: 30;
+  background-color: ${buttonBlueOpaque};
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+`;
+
+export const successContainerStyles = css`
+  height: 80vh;
+  width: 100vw;
+  background-image: url('/success_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .success-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30vh;
+    margin-right: 10vw;
+    color: white;
+    text-align: center;
+    background-color: ${buttonBlue};
+    height: 200px;
+    width: 30%;
+    border-radius: 10px;
+
+    h2 {
+      margin-bottom: auto;
+    }
+
+    p {
+      margin-bottom: auto;
+    }
+  }
+
+  a {
+    margin-top: 1%;
+    margin-right: 10vw;
+    width: 30%;
+    button {
+      width: 100%;
+
+      border-radius: 10px;
+      border: 0;
+      background-color: ${buttonRed};
+      color: white;
+      height: 40px;
+      font-size: 1.5em;
+      font-family: lora;
+
+      &:hover {
+        background-color: ${buttonRedHovered};
+        cursor: pointer;
       }
     }
   }

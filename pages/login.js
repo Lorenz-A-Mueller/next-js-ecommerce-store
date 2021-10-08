@@ -1,7 +1,12 @@
 import { css, keyframes } from '@emotion/react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { loginBoxStyles, loginContainerStyles } from '../components/styles';
+import {
+  loginBoxStyles,
+  loginContainerStyles,
+  redirectionToLoginContainerStyles,
+} from '../components/styles';
+import { getCookies, setCookies } from '../utils/cookies';
 
 // ******
 
@@ -28,6 +33,18 @@ export default function Login(props) {
   const [validInput, setValidInput] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+
+  useEffect(() => {
+    console.log('getCookies in LOGIN', getCookies('redirectToLogin'));
+    if (getCookies('redirectingToLogin') === true) {
+      setShowInfo(true);
+      setTimeout(() => {
+        setShowInfo(false);
+        setCookies('redirectingToLogin', false);
+      }, 2000);
+    }
+  }, [props]);
 
   function handleNameChange(e) {
     setUserName(e.currentTarget.value);
@@ -131,6 +148,12 @@ export default function Login(props) {
           </div>
           <p>Forgot Password?</p>
         </div>
+      </div>
+      <div
+        css={redirectionToLoginContainerStyles}
+        style={{ display: showInfo ? 'flex' : 'none' }}
+      >
+        <h2>Please Log In!</h2>
       </div>
     </div>
   );

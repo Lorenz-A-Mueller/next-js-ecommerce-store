@@ -7,7 +7,7 @@ import cart from '../public/cart.png';
 import login from '../public/login.png';
 import logo from '../public/logo.png';
 import DropDownMenu from './DropDownMenu';
-import { headerContainerStyles } from './styles.js';
+import { headerStyles } from './styles.js';
 
 const dropDownMenuTransitionStyles = (height) => css`
   height: ${height + 'px'};
@@ -89,7 +89,7 @@ export default function Header(props) {
   return (
     // <>
 
-    <div css={headerContainerStyles}>
+    <div css={headerStyles}>
       <div className="logo-container">
         <Link href="/products">
           <a>
@@ -98,7 +98,7 @@ export default function Header(props) {
         </Link>
       </div>
 
-      <div className="searchbar-container">
+      <div className="searchbar-container flex-container-center-content">
         <input
           placeholder="Search..."
           onChange={(e) => handleChange(e)}
@@ -106,7 +106,7 @@ export default function Header(props) {
         />
       </div>
       <div
-        className="login-container"
+        className="login-container flex-container-center-content"
         onMouseOver={handleMouseOver}
         onFocus={handleMouseOver}
         onMouseOut={handleMouseOut}
@@ -133,7 +133,7 @@ export default function Header(props) {
           />
         </div>
       </div>
-      <div className="cart-icon-container">
+      <div className="cart-icon-container flex-container-center-content">
         <div
           className="cart-icon-image-container"
           css={css`

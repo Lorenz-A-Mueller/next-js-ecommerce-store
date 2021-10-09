@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 // import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { accountBoxStyles, accountContainerStyles } from '../components/styles';
+import { accountStyles } from '../components/styles';
 
 // ******
 
@@ -58,8 +58,11 @@ export default function Account(props) {
   };
 
   return (
-    <div css={accountContainerStyles}>
-      <div css={accountBoxStyles}>
+    <div
+      css={accountStyles}
+      className="fill-middle-area flex-container-center-content"
+    >
+      <div className="account-box flex-container-center-content">
         <h1>Your Account</h1>
         <h2>Change account details: </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +82,7 @@ export default function Account(props) {
             type="email"
           />
           {errors.email && (
-            <div className="validation-error-container-email">
+            <div className="validation-error-container validation-error-container-email">
               {errors.email.type === 'required' && <p>E-mail is required</p>}
               {errors.email.type === 'pattern' && (
                 <p>Not a valid e-mail format</p>
@@ -98,7 +101,7 @@ export default function Account(props) {
             // value={newFirstName}
           />
           {errors.firstName && (
-            <div className="validation-error-container-firstName">
+            <div className="validation-error-container validation-error-container-firstName">
               {errors.firstName.type === 'required' && (
                 <p>First Name is required</p>
               )}
@@ -117,7 +120,7 @@ export default function Account(props) {
             // value={newLastName}
           />
           {errors.lastName && (
-            <div className="validation-error-container-lastName">
+            <div className="validation-error-container validation-error-container-lastName">
               {errors.lastName.type === 'required' && (
                 <p>Last Name is required</p>
               )}
@@ -143,7 +146,7 @@ export default function Account(props) {
             // value={newPassword}
           />
           {errors.password && (
-            <div className="validation-error-container-password">
+            <div className="validation-error-container validation-error-container-password">
               {errors.password.type === 'required' && (
                 <p>Password is required</p>
               )}
@@ -171,10 +174,10 @@ export default function Account(props) {
             type="checkbox"
           />
 
-          <button className="save-button">Save</button>
+          <button className="save-button button-blue">Save</button>
         </form>
         <button
-          className="delete-account-button"
+          className="delete-account-button button-red"
           onClick={() => handleDeleteAccountClick(props.loggedInUser.id)}
         >
           Delete your account

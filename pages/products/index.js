@@ -1,11 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-// import Image from 'next/image';  ?? how to use dynamic sizing with that
 import Link from 'next/link';
-import { productsContainerStyles } from '../../components/styles';
-
-// import Head from 'next/head';
-// import Image from 'next/image';
+import { productsIndexStyles } from '../../components/styles';
 
 export default function Home(props) {
   return (
@@ -13,13 +9,13 @@ export default function Home(props) {
       <Head>
         <title>Sprouts Farmer Market Homepage</title>
       </Head>
-      <div css={productsContainerStyles}>
+      <div css={productsIndexStyles} className="fill-middle-area">
         {props.products.map((product) => (
           <Link
             href={`/products/${product.productId}`}
             key={`product-id${product.productId}`}
           >
-            <a>
+            <a className="link-no-decoration">
               <div
                 className="product-tile"
                 key={`product-id${product.productId}`}

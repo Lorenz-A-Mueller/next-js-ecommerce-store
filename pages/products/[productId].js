@@ -1,13 +1,9 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { currentProductContainerStyles } from '../../components/styles';
+import { productIdStyles } from '../../components/styles';
 
 export default function Product(props) {
   const [amount, setAmount] = useState(1);
-
-  // const [clickedOnProducts, setClickedOnProducts] = useState(
-  //   getCookies('cart'),
-  // );
 
   function handleChange(e) {
     if (e.currentTarget.value > 9) {
@@ -68,28 +64,28 @@ export default function Product(props) {
       <Head>
         <title>Sprouts Product - {props.currentProduct.productName}</title>
       </Head>
-      <div css={currentProductContainerStyles}>
-        <div className="current-product-image-container">
+      <div css={productIdStyles} className="fill-middle-area">
+        <div className="productId-image-container">
           <img
             src={`/product_images/${props.currentProduct.productId}.jpeg`}
             alt={props.currentProduct.productName}
           />
         </div>
-        <div className="current-product-text-container">
+        <div className="productId-text-container">
           <h1>{props.currentProduct.productName}</h1>
           <p>
             {props.currentProduct.productDesc
               ? props.currentProduct.productDesc
               : ''}
           </p>
-          <div className="current-product-text-priceinfo-container">
+          <div className="productId-text-priceinfo-container flex-container-center-content">
             <h2>
               €{(props.currentProduct.productPrice / 100).toFixed(2)}/
               {props.currentProduct.productSize}
             </h2>
-            <div className="amount-container">
+            <div className="amount-container flex-container-center-content">
               <p>Select Amount:</p>
-              <div className="select-amount-container">
+              <div className="select-amount-container flex-container-center-content">
                 <input
                   type="number"
                   onChange={(e) => handleChange(e)}
@@ -106,7 +102,7 @@ export default function Product(props) {
               </div>
             </div>
             <p>
-              Amounts to:{' '}
+              Amounts to:
               <span>
                 €
                 {((amount * props.currentProduct.productPrice) / 100).toFixed(
@@ -119,6 +115,7 @@ export default function Product(props) {
             onClick={() =>
               handleOnClick(props.currentProduct.productId, amount)
             }
+            className="button-blue"
           >
             Add to Cart!
           </button>

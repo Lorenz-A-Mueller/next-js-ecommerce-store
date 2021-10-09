@@ -42,7 +42,7 @@ export default function CartSingleImage(props) {
 
   return (
     <div
-      className="cart-single-image-container"
+      className="cart-single-image-container flex-container-center-content"
       key={`cart-single-image-container-${props.chosenProduct.id}`}
     >
       <div className="cart-single-image-image-container">
@@ -54,9 +54,9 @@ export default function CartSingleImage(props) {
           key={`cart-image-${props.chosenProduct.id}`}
         />
       </div>
-      <div className="cart-single-image-text-container">
+      <div className="cart-single-image-text-container flex-container-center-content">
         <h2>{props.products[props.chosenProduct.id - 1].productName}</h2>
-        <div className="cart-single-image-text-amount-container">
+        <div className="cart-single-image-text-amount-container flex-container-center-content">
           <input
             type="number"
             value={
@@ -67,7 +67,6 @@ export default function CartSingleImage(props) {
             max="9"
             step="1"
             onBlur={(e) => handleLostFocus(e)}
-            // maxLength="3"
           />
           <p>
             {props.products[props.chosenProduct.id - 1].productSize}
@@ -88,10 +87,11 @@ export default function CartSingleImage(props) {
           €
         </p>
       </div>
-      <div className="cart-single-image-delete-button-container">
+      <div className="cart-single-image-delete-button-container background-image-cover">
         <button
           title="Delete this product from your cart"
           onClick={() => props.handleDeleteItemClick(props.index)}
+          className="button-red"
         />
       </div>
     </div>

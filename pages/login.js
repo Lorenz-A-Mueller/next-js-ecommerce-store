@@ -2,11 +2,7 @@ import { css, keyframes } from '@emotion/react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
-import {
-  loginBoxStyles,
-  loginContainerStyles,
-  redirectionToLoginContainerStyles,
-} from '../components/styles';
+import { loginStyles, redirectionFromCartStyles } from '../components/styles';
 import { getCookies, setCookies } from '../utils/cookies';
 
 // ******
@@ -102,7 +98,10 @@ export default function Login(props) {
   }
 
   return (
-    <div css={loginContainerStyles}>
+    <div
+      css={loginStyles}
+      className="fill-middle-area flex-container-center-content"
+    >
       <div
         css={css`
           animation-name: ${startAnimation ? shake : null};
@@ -111,7 +110,7 @@ export default function Login(props) {
           animation-iteration-count: 1;
         `}
       >
-        <div css={loginBoxStyles}>
+        <div className="login-box flex-container-center-content">
           <h1>Login</h1>
           <input
             placeholder="user_name"
@@ -128,27 +127,14 @@ export default function Login(props) {
           <p className="invalid-input-text">
             {showErrorMessage ? 'Invalid username/password' : ''}
           </p>
-
-          {/* if input not valid, display the button; if valid, display the button with a Link */}
-          {!validInput && (
-            <button className="login-button" onClick={handleClick}>
-              Log In
-            </button>
-          )}
-          {validInput && (
-            // <Link href="/" style={{ textDecoration: 'none' }}>
-            //   <a>
-            <button className="login-button" onClick={handleClick}>
-              Log In
-            </button>
-            //   </a>
-            // </Link>
-          )}
-          <div className="sign-up-container">
+          <button className="login-button button-blue" onClick={handleClick}>
+            Log In
+          </button>
+          <div className="sign-up-container flex-container-center-content">
             <p>No account yet? </p>
             <Link href="/signup">
               <a>
-                <button>Sign Up</button>
+                <button className="button-red">Sign Up</button>
               </a>
             </Link>
           </div>
@@ -156,10 +142,11 @@ export default function Login(props) {
         </div>
       </div>
       <div
-        css={redirectionToLoginContainerStyles}
+        css={redirectionFromCartStyles}
         style={{ display: showInfo ? 'flex' : 'none' }}
+        className="fill-middle-area redirection-fill-screen"
       >
-        <div className="redirection-to-login-text-container">
+        <div className="redirection-from-cart-text-container flex-container-center-content">
           <h2>Please Log In!</h2>
         </div>
       </div>

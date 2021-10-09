@@ -5,10 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
-import {
-  cartContainerStyles,
-  redirectionToCheckoutContainerStyles,
-} from '../components/styles';
+import { cartStyles, redirectionToCheckoutStyles } from '../components/styles';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
 import { setCookies } from '../utils/cookies';
@@ -81,7 +78,7 @@ export default function Cart(props) {
       <Head>
         <title>Sprouts Cart</title>
       </Head>
-      <div css={cartContainerStyles}>
+      <div css={cartStyles} className="fill-middle-area">
         <div className="cart-images-container">
           <h1>Your Cart</h1>
           <div
@@ -103,7 +100,7 @@ export default function Cart(props) {
             />
           ))}
 
-          <div className="delete-all-button-container">
+          <div className="delete-all-button-container flex-container-center-content">
             <Link href={!props.cart.length ? '/products' : '/cart'}>
               <a>
                 <button
@@ -132,7 +129,7 @@ export default function Cart(props) {
             display: ${props.cart.length ? 'flex' : 'none'};
           `}
         >
-          <div className="total-amount-text-container">
+          <div className="total-amount-text-container flex-container-center-content">
             <h2>Total Sum: </h2>
             <h2>
               {(
@@ -151,13 +148,15 @@ export default function Cart(props) {
               () => handleBuyClick()
               // redirectToCheckout(props.quantity, props.mode, props.productKeys)
             }
+            className="button-blue"
           >
             Buy Now!
           </button>
         </div>
       </div>
       <div
-        css={redirectionToCheckoutContainerStyles}
+        css={redirectionToCheckoutStyles}
+        className="fill-middle-area redirection-fill-screen"
         style={{ display: redirectingToCheckout ? 'flex' : 'none' }}
       >
         <div className="redirection-to-checkout-text-container">

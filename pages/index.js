@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { homeContainerStyles } from '../components/styles';
+import { indexStyles } from '../components/styles';
 import logo from '../public/logo.png';
 
 const imageAnimationStyles = (width, marginLeft, marginBottom) => css`
@@ -34,8 +34,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div css={homeContainerStyles}>
-      <div className="hero">
+    <div
+      css={indexStyles}
+      className="flex-container-center-content fill-middle-area background-image-cover"
+    >
+      <div className="hero flex-container-center-content">
         <h1>Welcome to Sprouts!</h1>
         <div className="hero-image-link-text-container">
           <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
@@ -43,7 +46,12 @@ export default function Home() {
           </div>
           <Link href="/products">
             <a>
-              <p style={{ display: showText ? 'block' : 'none' }}>Enter Shop</p>
+              <button
+                className="button-blue"
+                style={{ display: showText ? 'block' : 'none' }}
+              >
+                Enter Shop
+              </button>
             </a>
           </Link>
         </div>

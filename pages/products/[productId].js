@@ -115,7 +115,6 @@ export default function Product(props) {
             onClick={() =>
               handleOnClick(props.currentProduct.productId, amount)
             }
-            className="button-blue"
           >
             Add to Cart!
           </button>

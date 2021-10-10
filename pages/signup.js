@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 // import { useState } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -12,6 +13,7 @@ import {
 
 export default function Signup() {
   const [showSuccess, setShowSuccess] = useState(false);
+  const router = useRouter();
 
   // const [newFirstName, setNewFirstName] = useState('');
   // const [newLastName, setNewLastName] = useState('');
@@ -60,7 +62,7 @@ export default function Signup() {
     }).then(() => {
       setShowSuccess(true);
       setTimeout(() => {
-        window.location.href = '/login';
+        router.push('/login');
       }, 2000);
     });
   };
@@ -189,7 +191,7 @@ export default function Signup() {
             type="checkbox"
           />
 
-          <button className="sign-up-button button-blue">Sign Up!</button>
+          <button className="sign-up-button">Sign Up!</button>
         </form>
       </div>
       <div

@@ -13,7 +13,7 @@ export default function DropDownMenu(props) {
       <div className="dropdown-link-button">
         <Link href={props.loggedInUser.id ? '/account' : '/login'}>
           <a className="flex-container-center-content">
-            <button onClick={props.handleMouseOut} className="button-blue">
+            <button onClick={props.handleMouseOut}>
               {props.loggedInUser.id ? 'Account' : 'Log In'}
             </button>
           </a>
@@ -25,18 +25,14 @@ export default function DropDownMenu(props) {
             style={{ display: props.loggedInUser.id ? 'none' : 'flex' }}
             className="flex-container-center-content"
           >
-            <button onClick={props.handleMouseOut} className="button-blue">
-              Sign Up
-            </button>
+            <button onClick={props.handleMouseOut}>Sign Up</button>
           </a>
         </Link>
       </div>
       <div className="dropdown-link-button">
         <Link href="/cart">
           <a className="flex-container-center-content">
-            <button onClick={props.handleMouseOut} className="button-blue">
-              Your Cart
-            </button>
+            <button onClick={props.handleMouseOut}>Your Cart</button>
           </a>
         </Link>
       </div>

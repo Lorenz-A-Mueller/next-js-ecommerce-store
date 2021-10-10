@@ -46,10 +46,7 @@ export default function Home() {
           </div>
           <Link href="/products">
             <a>
-              <button
-                className="button-blue"
-                style={{ display: showText ? 'block' : 'none' }}
-              >
+              <button style={{ display: showText ? 'block' : 'none' }}>
                 Enter Shop
               </button>
             </a>

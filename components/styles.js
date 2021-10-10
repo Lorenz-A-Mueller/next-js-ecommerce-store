@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 const buttonBlue = 'rgba(39, 136, 244, 0.7)';
 const buttonBlueHovered = 'rgba(39, 136, 244, 1)';
-const buttonBlueOpaque = 'rgba(39, 136, 244, 0.9)';
+const blueOpaque = 'rgba(39, 136, 244, 0.9)';
 const buttonRed = 'rgba(255, 22, 48, 0.6)';
 const buttonRedHovered = 'rgba(255, 22, 48, 1)';
 const backgroundGray = 'rgba(218, 223, 225, 0.8)';
@@ -15,45 +15,37 @@ export const globalStyles = css`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: lora;
   }
 
   html,
   body {
     width: 100vw;
     height: 100vh;
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    position: absolute;
     left: 0;
     top: 0;
-    font-family: lora;
   }
 
   button {
     border: 0;
     border-radius: 10px;
-    font-family: lora;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-
-  .button-blue {
+    font-size: 1em;
+    width: 100%;
     background-color: ${buttonBlue};
     &:hover {
+      cursor: pointer;
       background-color: ${buttonBlueHovered};
     }
   }
-
   .button-red {
     background-color: ${buttonRed};
     &:hover {
       background-color: ${buttonRedHovered};
     }
+  }
+
+  input {
+    font-size: 1em;
   }
 
   .flex-container-center-content {
@@ -87,8 +79,11 @@ export const globalStyles = css`
     justify-content: center;
     color: white;
     text-align: center;
+    background-color: ${blueOpaque};
   }
 `;
+
+/* Layout component */
 
 export const layoutStyles = css`
   display: flex;
@@ -97,6 +92,8 @@ export const layoutStyles = css`
   height: 100vh;
   width: 100vw;
 `;
+
+/* Header component */
 
 export const headerStyles = css`
   background-color: black;
@@ -149,101 +146,69 @@ export const headerStyles = css`
       }
       .cart-icon-text-cartamount-container {
         position: relative;
-        left: -18px;
-        top: 20px;
+        inset: 20px 0 0 -18px;
         border-radius: 100%;
         border: solid white 3px;
         width: 40px;
         height: 40px;
         text-align: center;
-        margin-left: auto;
       }
     }
   }
 `;
-
 export const dropDownMenuStyles = css`
   display: flex;
   flex-direction: column;
   background-color: black;
-  top: 15vh;
   width: 10vw;
   padding: 5px;
   border-radius: 0 0 10px 10px;
 
-  .dropdown-link-button {
+  div {
     margin-top: 10px;
-    height: 20px;
-    width: 100%;
-    a {
-      height: 20px;
-      width: 100%;
-      align-items: flex-start;
-      color: white;
-      text-decoration: none;
-      button {
-        width: 80%;
-        color: white;
-      }
-    }
   }
-  .dropdown-logout-button {
-    margin-top: 10px;
-    height: 20px;
-    width: 100%;
-    align-items: flex-start;
-    button {
-      width: 80%;
-    }
+  button {
+    width: 80%;
+    color: white;
+  }
+  a {
+    text-decoration: none;
   }
 `;
 
-/*!!!!!!!!
+/* Footer component */
 
 export const footerBaseStyles = css`
   background-color: black;
   height: 5vh;
-  width: 100vw;
-  /* color: white; */
-  max-width: 100%;
 `;
-
-export const footerLinkContainerStyles = css`
-  display: flex;
-  flex-direction: column;
+export const footerExpandedStyles = css`
+  background-color: black;
+  justify-content: space-around;
+  height: 100%;
   color: white;
-  margin-left: 5%;
 
-  a {
-    color: white;
+  div {
+    display: flex;
+    flex-direction: column;
+    a {
+      color: white;
+    }
+    h2 {
+      margin-bottom: 10px;
+      text-align: center;
+    }
   }
 
-  h2 {
-    margin-bottom: 10px;
+  .footer-link-container {
+    margin-left: 5%;
   }
-`;
-export const footerInfoContainerStyles = css`
-  display: flex;
-  flex-direction: column;
-  color: white;
-  h2 {
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  a {
-    color: white;
+  .footer-logo-container {
+    margin-right: -15%;
   }
 `;
 
-export const footerLogoStyles = css`
-  margin-right: -15%;
-`;
-export const footerAddressStyles = css`
-  display: flex;
-  flex-direction: column;
-  color: white;
-`;
+/* index.js */
 
 export const indexStyles = css`
   background-image: url('/home_background.jpg');
@@ -261,24 +226,25 @@ export const indexStyles = css`
       left: 52vw;
       font-size: 1.5em;
       padding: 5px;
+      width: auto;
     }
   }
 `;
+
+/* products/index.js */
 
 export const productsIndexStyles = css`
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
-  padding: 20px;
-  padding-left: 80px;
+  padding: 20px 20px 20px 80px;
 
   .product-tile {
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
     width: 160px;
-    margin-top: 20px;
-    margin-right: 20px;
+    margin: 20px 20px 0 0;
     border: ${blackBorder};
     overflow: hidden;
     &:hover {
@@ -287,32 +253,32 @@ export const productsIndexStyles = css`
     }
 
     .product-name-container {
-      margin-left: 3px;
-      margin-top: 5px;
+      margin: 5px 0 0 3px;
       font-weight: bold;
       text-align: center;
     }
   }
 `;
 
+/* products/[productId].js */
+
 export const productIdStyles = css`
   display: flex;
   justify-content: flex-start;
   overflow-y: scroll;
 
-  .productId-image-container {
-    img {
-      width: 400px;
-      margin: 30px;
-    }
+  img {
+    width: 400px;
+    margin: 30px;
   }
+
   .productId-text-container {
-    margin-top: 5vh;
     width: 25vw;
     height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 5vh;
     border-left: ${blackBorder};
     padding-left: 30px;
 
@@ -324,7 +290,7 @@ export const productIdStyles = css`
       margin-top: auto;
       height: 18%;
       flex-direction: column;
-      align-items: start;
+      align-items: flex-start;
       .amount-container {
         justify-content: flex-start;
         width: 250px;
@@ -333,12 +299,11 @@ export const productIdStyles = css`
           input {
             width: 60px;
             height: 30px;
-            font-size: 1em;
-            margin-left: 20px;
-            margin-right: 10px;
+            margin: 0 10px 0 20px;
           }
         }
       }
+
       p {
         margin-top: auto;
         span {
@@ -346,8 +311,8 @@ export const productIdStyles = css`
         }
       }
     }
+
     button {
-      width: 100%;
       height: 50px;
       font-size: 2em;
       margin-top: 5%;
@@ -356,6 +321,7 @@ export const productIdStyles = css`
 `;
 
 /* cart.js */
+
 export const cartStyles = css`
   display: flex;
   overflow-y: scroll;
@@ -388,25 +354,24 @@ export const cartStyles = css`
     .cart-single-image-container {
       border: ${blackBorder};
       border-bottom: solid black 1.5px;
-
       &:nth-last-child(2) {
         border-bottom: ${blackBorder};
       }
+
       .cart-single-image-image-container {
         width: 40%;
         img {
           height: 100px;
         }
       }
+
       .cart-single-image-text-container {
         flex-direction: column;
         align-items: flex-start;
         width: 40%;
         text-align: left;
-
         .cart-single-image-text-amount-container {
           justify-content: flex-start;
-
           input {
             width: 35%;
             font-size: 1em;
@@ -417,22 +382,21 @@ export const cartStyles = css`
           }
         }
       }
+
       .cart-single-image-delete-button-container {
         margin-right: 10px;
         button {
           width: 40px;
           height: 40px;
           margin-right: 10%;
-          background-image: url('/red_x.jpg');
+          background: url('/red_x.jpg') center;
           background-size: cover;
-          background-position: center;
           &:hover {
             border: ${blackBorder};
-            padding: 3px;
-            margin-left: calc(10%-20px);
           }
         }
       }
+
       .cart-single-image-price-container {
         margin-right: 10px;
         font-weight: bold;
@@ -446,12 +410,12 @@ export const cartStyles = css`
     a {
       width: 100%;
       button {
-        width: 100%;
         height: 50px;
         font-size: 2em;
       }
     }
   }
+
   .total-amount-container {
     flex-direction: column;
     justify-content: flex-start;
@@ -461,7 +425,6 @@ export const cartStyles = css`
     text-align: center;
     border: ${blackBorder};
     padding: 10px;
-
     .total-amount-text-container {
       justify-content: space-between;
     }
@@ -473,10 +436,9 @@ export const cartStyles = css`
     }
   }
 `;
-/* cart.js */
+/* (cart.js) */
 export const redirectionToCheckoutStyles = css`
   flex-direction: column;
-  background-color: ${buttonBlueOpaque};
 
   .redirection-to-checkout-text-container {
     width: 80%;
@@ -486,6 +448,7 @@ export const redirectionToCheckoutStyles = css`
       margin-right: 30px;
     }
   }
+
   .redirection-to-checkout-buffer-container {
     margin-top: -200px;
     height: 100px;
@@ -493,6 +456,7 @@ export const redirectionToCheckoutStyles = css`
 `;
 
 /* login.js */
+
 export const loginStyles = css`
   align-items: flex-start;
 
@@ -503,24 +467,19 @@ export const loginStyles = css`
     flex-direction: column;
     justify-content: space-around;
     border: ${blackBorder};
-
     input {
       height: 30px;
-      font-size: 1em;
       width: 70%;
     }
 
     .sign-up-container {
       width: 70%;
       justify-content: space-between;
-
       a {
         width: 35%;
-        button {
-          width: 100%;
-        }
       }
     }
+
     .invalid-input-text {
       font-size: 14px;
       color: red;
@@ -528,15 +487,15 @@ export const loginStyles = css`
       font-weight: bold;
     }
 
-    button {
+    .login-button {
       width: 70%;
       height: 30px;
-      font-size: 1em;
     }
   }
 `;
 
 /* login.js */
+
 export const redirectionFromCartStyles = css`
   display: flex;
   background-color: ${backgroundGray};
@@ -544,7 +503,7 @@ export const redirectionFromCartStyles = css`
   .redirection-from-cart-text-container {
     width: 20vw;
     height: 20vh;
-    background-color: ${buttonBlueOpaque};
+    background-color: ${blueOpaque};
     border-radius: 10px;
   }
 `;
@@ -570,7 +529,6 @@ export const signUpStyles = css`
       grid-template-rows: repeat(4, 10% 3%) 24% 24%;
       grid-gap: 3%;
       margin-top: 30px;
-
       .validation-error-container {
         color: red;
       }
@@ -579,22 +537,18 @@ export const signUpStyles = css`
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
-
       .validation-error-container-email {
         grid-column: 2/3;
         grid-row: 2/3;
       }
-
       .label-firstName {
         grid-column: 1 / 2;
         grid-row: 3/ 4;
       }
-
       .validation-error-container-firstName {
         grid-column: 2/3;
         grid-row: 4/5;
       }
-
       .label-lastName {
         grid-column: 1 / 2;
         grid-row: 5 / 6;
@@ -603,32 +557,26 @@ export const signUpStyles = css`
         grid-column: 2/3;
         grid-row: 6/7;
       }
-
       .label-password {
         grid-column: 1 / 2;
         grid-row: 7/ 8;
       }
-
       .validation-error-container-password {
         grid-column: 2/3;
         grid-row: 8/9;
       }
-
       .label-newsletter {
         grid-column: 1 / 2;
         grid-row: 9/ 10;
       }
-
       #email {
         grid-column: 2/ 3;
         grid-row: 1/ 2;
       }
-
       #firstName {
         grid-column: 2 / 3;
         grid-row: 3/ 4;
       }
-
       #lastName {
         grid-column: 2 / 3;
         grid-row: 5 / 6;
@@ -637,46 +585,42 @@ export const signUpStyles = css`
         grid-column: 2/ 3;
         grid-row: 7/ 8;
       }
-
       #newsletter {
         grid-column: 2 / 3;
         grid-row: 9 / 10;
         width: 40px;
         align-self: center;
       }
-
       .sign-up-button {
         grid-column: 1/3;
         grid-row: 10/11;
         justify-self: center;
       }
     }
+
     input {
       height: 30px;
-      font-size: 1em;
-      width: 100%;
     }
 
     button {
       width: 70%;
       height: 30px;
-      font-size: 1em;
     }
   }
 `;
-
 export const redirectionFromSignupContainerStyles = css`
   background-color: ${backgroundGray};
 
   .redirection-from-signup-text-container {
     width: 20vw;
     height: 20vh;
-    background-color: ${buttonBlueOpaque};
+    background-color: ${blueOpaque};
     border-radius: 10px;
   }
 `;
 
 /* success.js */
+
 export const successStyles = css`
   background-image: url('/success_background.jpg');
   flex-direction: column;
@@ -698,13 +642,14 @@ export const successStyles = css`
     margin: 1% 10vw 0 0;
     width: 30%;
     button {
-      width: 100%;
       color: white;
       height: 40px;
       font-size: 1.5em;
     }
   }
 `;
+
+/* account.js */
 
 export const accountStyles = css`
   align-items: flex-start;
@@ -726,7 +671,6 @@ export const accountStyles = css`
       grid-template-rows: repeat(4, 4vh 2vh) 5vh 5vh 5vh;
       grid-gap: 3%;
       margin-top: 30px;
-
       .validation-error-container {
         color: red;
       }
@@ -735,22 +679,18 @@ export const accountStyles = css`
         grid-column: 1 / 2;
         grid-row: 1 / 2;
       }
-
       .validation-error-container-email {
         grid-column: 2/3;
         grid-row: 2/3;
       }
-
       .label-firstName {
         grid-column: 1 / 2;
         grid-row: 3/ 4;
       }
-
       .validation-error-container-firstName {
         grid-column: 2/3;
         grid-row: 4/5;
       }
-
       .label-lastName {
         grid-column: 1 / 2;
         grid-row: 5 / 6;
@@ -759,32 +699,26 @@ export const accountStyles = css`
         grid-column: 2/3;
         grid-row: 6/7;
       }
-
       .label-password {
         grid-column: 1 / 2;
         grid-row: 7/ 8;
       }
-
       .validation-error-container-password {
         grid-column: 2/3;
         grid-row: 8/9;
       }
-
       .label-newsletter {
         grid-column: 1 / 2;
         grid-row: 9/ 10;
       }
-
       #email {
         grid-column: 2/ 3;
         grid-row: 1/ 2;
       }
-
       #firstName {
         grid-column: 2 / 3;
         grid-row: 3/ 4;
       }
-
       #lastName {
         grid-column: 2 / 3;
         grid-row: 5 / 6;
@@ -793,34 +727,28 @@ export const accountStyles = css`
         grid-column: 2/ 3;
         grid-row: 7/ 8;
       }
-
       #newsletter {
         grid-column: 2 / 3;
         grid-row: 9 / 10;
         width: 40px;
         align-self: center;
       }
-
       .save-button {
         grid-column: 1/3;
         grid-row: 10/11;
-        width: 100%;
         justify-self: center;
         height: 30px;
-        font-size: 1em;
       }
     }
 
     input {
       height: 30px;
-      font-size: 1em;
       width: 100%;
     }
 
     .delete-account-button {
       width: 60%;
       height: 30px;
-      font-size: 1em;
     }
   }
 `;

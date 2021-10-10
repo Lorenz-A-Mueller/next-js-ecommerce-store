@@ -3,6 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
 import { cartStyles, redirectionToCheckoutStyles } from '../components/styles';
@@ -13,6 +14,7 @@ import { setCookies } from '../utils/cookies';
 export default function Cart(props) {
   const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
   const [redirectingToLogin, setRedirectingToLogin] = useState(false);
+  const router = useRouter();
   console.log('redirectingToLoginCART', redirectingToLogin);
 
   console.log(props.cart);
@@ -49,7 +51,7 @@ export default function Cart(props) {
     if (!props.loggedInUser.id) {
       setRedirectingToLogin(true);
       setCookies('redirectingToLogin', true);
-      window.location.href = '/login';
+      router.push('/login');
       return;
     }
 
@@ -78,7 +80,7 @@ export default function Cart(props) {
       <Head>
         <title>Sprouts Cart</title>
       </Head>
-      <div css={cartStyles} className="fill-middle-area">
+      <div css={cartStyles} className="fill-middle-area background-image-cover">
         <div className="cart-images-container">
           <h1>Your Cart</h1>
           <div
@@ -148,7 +150,6 @@ export default function Cart(props) {
               () => handleBuyClick()
               // redirectToCheckout(props.quantity, props.mode, props.productKeys)
             }
-            className="button-blue"
           >
             Buy Now!
           </button>

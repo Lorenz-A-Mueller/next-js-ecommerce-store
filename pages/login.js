@@ -127,7 +127,7 @@ export default function Login(props) {
           <p className="invalid-input-text">
             {showErrorMessage ? 'Invalid username/password' : ''}
           </p>
-          <button className="login-button button-blue" onClick={handleClick}>
+          <button className="login-button" onClick={handleClick}>
             Log In
           </button>
           <div className="sign-up-container flex-container-center-content">

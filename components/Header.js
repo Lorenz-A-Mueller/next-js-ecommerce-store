@@ -15,14 +15,13 @@ const dropDownMenuTransitionStyles = (height) => css`
   overflow: hidden;
   position: absolute;
   top: 15vh;
-  /* background-color: green; */
 `;
 // *****
 
 export default function Header(props) {
   const [startAnimation, setStartAnimation] = useState(false);
   const [height, setHeight] = useState(0);
-  const router = useRouter;
+  const router = useRouter();
 
   console.log('props.loggedInUser', props.loggedInUser);
   console.log('props.loggedInUser.firstName', props.loggedInUser.firstName);
@@ -33,16 +32,16 @@ export default function Header(props) {
   }
 
   function handleFocus() {
-    if (window.location.href !== window.location.origin + '/products') {
+    if (router.pathname !== '/products') {
       // redirect user to the products page if they type in a search elsewhere
-      window.location.href = '/products';
+      router.push('/products');
     }
   }
 
   useEffect(() => {
     if (
-      window.location.href !== window.location.origin + '/products/' &&
-      window.location.href !== window.location.origin + '/login/'
+      window.location.href !== window.location.origin + '/products' &&
+      window.location.href !== window.location.origin + '/login'
     ) {
       // don't start the animation when being on /products or /login (unnecessary bouncing)
       setStartAnimation(true);
@@ -53,7 +52,7 @@ export default function Header(props) {
   }, [props.cart]);
 
   function handleMouseOver() {
-    setHeight(130);
+    setHeight(180);
   }
 
   function handleMouseOut() {
@@ -87,8 +86,6 @@ export default function Header(props) {
   // *****
 
   return (
-    // <>
-
     <div css={headerStyles}>
       <div className="logo-container">
         <Link href="/products">
@@ -156,6 +153,5 @@ export default function Header(props) {
         </div>
       </div>
     </div>
-    // </>
   );
 }

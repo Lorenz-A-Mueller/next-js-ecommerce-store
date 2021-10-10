@@ -78,7 +78,7 @@ export default function Cart(props) {
   return (
     <>
       <Head>
-        <title>Sprouts Cart</title>
+        <title>Sprouts Farmer's Market - Cart</title>
       </Head>
       <div css={cartStyles} className="fill-middle-area background-image-cover">
         <div className="cart-images-container">

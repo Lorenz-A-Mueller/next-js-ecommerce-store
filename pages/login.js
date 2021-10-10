@@ -1,4 +1,5 @@
 import { css, keyframes } from '@emotion/react';
+import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
@@ -98,59 +99,64 @@ export default function Login(props) {
   }
 
   return (
-    <div
-      css={loginStyles}
-      className="fill-middle-area flex-container-center-content"
-    >
+    <>
+      <Head>
+        <title>Sprouts Farmer's Market - Log In</title>
+      </Head>
       <div
-        css={css`
-          animation-name: ${startAnimation ? shake : null};
-          animation-duration: 0.3s;
-          animation-timing-function: ease;
-          animation-iteration-count: 1;
-        `}
+        css={loginStyles}
+        className="fill-middle-area flex-container-center-content"
       >
-        <div className="login-box flex-container-center-content">
-          <h1>Login</h1>
-          <input
-            placeholder="user_name"
-            onChange={(e) => handleNameChange(e)}
-            value={userName}
-          />
-          <input
-            placeholder="password"
-            onChange={(e) => handlePasswordChange(e)}
-            value={userPassword}
-            type="password"
-          />
+        <div
+          css={css`
+            animation-name: ${startAnimation ? shake : null};
+            animation-duration: 0.3s;
+            animation-timing-function: ease;
+            animation-iteration-count: 1;
+          `}
+        >
+          <div className="login-box flex-container-center-content">
+            <h1>Login</h1>
+            <input
+              placeholder="user_name"
+              onChange={(e) => handleNameChange(e)}
+              value={userName}
+            />
+            <input
+              placeholder="password"
+              onChange={(e) => handlePasswordChange(e)}
+              value={userPassword}
+              type="password"
+            />
 
-          <p className="invalid-input-text">
-            {showErrorMessage ? 'Invalid username/password' : ''}
-          </p>
-          <button className="login-button" onClick={handleClick}>
-            Log In
-          </button>
-          <div className="sign-up-container flex-container-center-content">
-            <p>No account yet? </p>
-            <Link href="/signup">
-              <a>
-                <button className="button-red">Sign Up</button>
-              </a>
-            </Link>
+            <p className="invalid-input-text">
+              {showErrorMessage ? 'Invalid username/password' : ''}
+            </p>
+            <button className="login-button" onClick={handleClick}>
+              Log In
+            </button>
+            <div className="sign-up-container flex-container-center-content">
+              <p>No account yet? </p>
+              <Link href="/signup">
+                <a>
+                  <button className="button-red">Sign Up</button>
+                </a>
+              </Link>
+            </div>
+            <p>Forgot Password?</p>
           </div>
-          <p>Forgot Password?</p>
+        </div>
+        <div
+          css={redirectionFromCartStyles}
+          style={{ display: showInfo ? 'flex' : 'none' }}
+          className="fill-middle-area redirection-fill-screen"
+        >
+          <div className="redirection-from-cart-text-container flex-container-center-content">
+            <h2>Please Log In!</h2>
+          </div>
         </div>
       </div>
-      <div
-        css={redirectionFromCartStyles}
-        style={{ display: showInfo ? 'flex' : 'none' }}
-        className="fill-middle-area redirection-fill-screen"
-      >
-        <div className="redirection-from-cart-text-container flex-container-center-content">
-          <h2>Please Log In!</h2>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

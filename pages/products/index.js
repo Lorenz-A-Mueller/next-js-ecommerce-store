@@ -7,7 +7,7 @@ export default function Home(props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer Market Homepage</title>
+        <title>Sprouts Farmer's Market Products</title>
       </Head>
       <div css={productsIndexStyles} className="fill-middle-area">
         {props.products.map((product) => (

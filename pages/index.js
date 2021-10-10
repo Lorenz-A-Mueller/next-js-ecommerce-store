@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -34,25 +35,30 @@ export default function Home() {
   }, []);
 
   return (
-    <div
-      css={indexStyles}
-      className="flex-container-center-content fill-middle-area background-image-cover"
-    >
-      <div className="hero flex-container-center-content">
-        <h1>Welcome to Sprouts!</h1>
-        <div className="hero-image-link-text-container">
-          <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
-            <Image src={logo} width="400px" height="300px" />
+    <>
+      <Head>
+        <title>Sprouts Farmer's Market - Homepage</title>
+      </Head>
+      <div
+        css={indexStyles}
+        className="flex-container-center-content fill-middle-area background-image-cover"
+      >
+        <div className="hero flex-container-center-content">
+          <h1>Welcome to Sprouts!</h1>
+          <div className="hero-image-link-text-container">
+            <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
+              <Image src={logo} width="400px" height="300px" />
+            </div>
+            <Link href="/products">
+              <a>
+                <button style={{ display: showText ? 'block' : 'none' }}>
+                  Enter Shop
+                </button>
+              </a>
+            </Link>
           </div>
-          <Link href="/products">
-            <a>
-              <button style={{ display: showText ? 'block' : 'none' }}>
-                Enter Shop
-              </button>
-            </a>
-          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 }

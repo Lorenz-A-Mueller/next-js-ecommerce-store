@@ -40,7 +40,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Global styles={globalStyles} />
       <Head>
-        <title>Sprouts Farmer Market</title>
+        <title>Sprouts Farmer's Market</title>
       </Head>
       <Layout
         handleSearchInput={handleSearchInput}

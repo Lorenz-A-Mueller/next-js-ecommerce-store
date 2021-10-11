@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { updateAmountInCart } from '../utils/math';
 
 export default function CartSingleImage(props) {
   const [changedAmount, setChangedAmount] = useState(0);
@@ -15,28 +16,34 @@ export default function CartSingleImage(props) {
     }
     if (enteredValue > 9) {
       setChangedAmount(9);
-      props.updateAmountInCart(props.chosenProduct.id, 9);
+      props.setCart(updateAmountInCart(props.cart, props.chosenProduct.id, 9));
     } else if (enteredValue < 0) {
       setChangedAmount(1);
-      props.updateAmountInCart(props.chosenProduct.id, 1);
+
+      props.setCart(updateAmountInCart(props.cart, props.chosenProduct.id, 1));
 
       // if dec. point is entered, round the number down immediately
     } else if (enteredValue.length > 1) {
       setChangedAmount(Math.floor(enteredValue));
-      props.updateAmountInCart(
-        props.chosenProduct.id,
-        Math.floor(enteredValue),
+      props.setCart(
+        updateAmountInCart(
+          props.cart,
+          props.chosenProduct.id,
+          Math.floor(enteredValue),
+        ),
       );
     } else {
       setChangedAmount(enteredValue);
-      props.updateAmountInCart(props.chosenProduct.id, enteredValue);
+      props.setCart(
+        updateAmountInCart(props.cart, props.chosenProduct.id, enteredValue),
+      );
     }
   }
 
   function handleLostFocus(e) {
     if (e.currentTarget.value === '0' || e.currentTarget.value === '') {
       setChangedAmount(1);
-      props.updateAmountInCart(props.chosenProduct.id, 1);
+      props.setCart(updateAmountInCart(props.cart, props.chosenProduct.id, 1));
     }
   }
 

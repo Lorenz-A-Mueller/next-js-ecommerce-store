@@ -1,16 +1,11 @@
-import Cookies from 'js-cookie';
-
-export function getCookies(key) {
-  try {
-    return JSON.parse(Cookies.get(key));
-  } catch (err) {
-    return undefined;
-  }
-}
-
-export function setCookies(key, value) {
-  Cookies.set(key, JSON.stringify(value));
-  return;
+export function getTotalCartValue(cart, products) {
+  return (
+    cart.reduce((accumulator, cookieProduct) => {
+      return (accumulator =
+        accumulator +
+        cookieProduct.amount * products[cookieProduct.id - 1].productPrice);
+    }, 0) / 100
+  ).toFixed(2);
 }
 
 export function updateAmountInCart(cart, idOfProduct, amountOfProduct) {

@@ -9,13 +9,16 @@ import CartSingleImage from '../components/CartSingleImage';
 import { cartStyles, redirectionToCheckoutStyles } from '../components/styles';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
-import { setCookies } from '../utils/cookies';
+import { getCookies, setCookies } from '../utils/cookies.js';
+import { getTotalCartValue } from '../utils/math';
 
 export default function Cart(props) {
   const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
   const [redirectingToLogin, setRedirectingToLogin] = useState(false);
   const router = useRouter();
   console.log('redirectingToLoginCART', redirectingToLogin);
+  console.log('PRODUCTS', props.products);
+  console.log('CART', props.cart);
 
   console.log(props.cart);
   function handleDeleteItemClick(orderId) {
@@ -32,18 +35,18 @@ export default function Cart(props) {
     props.setCart([]);
   }
 
-  function updateAmountInCart(idOfProduct, amountOfProduct) {
-    props.setCart(
-      props.cart.map((product) => {
-        if (product.id !== idOfProduct) {
-          return product;
-        } else {
-          return { id: product.id, amount: amountOfProduct };
-        }
-      }),
-    );
-    console.log('props.cart', props.cart);
-  }
+  // function updateAmountInCart(idOfProduct, amountOfProduct) {
+  //   props.setCart(
+  //     props.cart.map((product) => {
+  //       if (product.id !== idOfProduct) {
+  //         return product;
+  //       } else {
+  //         return { id: product.id, amount: amountOfProduct };
+  //       }
+  //     }),
+  //   );
+  //   console.log('props.cart', props.cart);
+  // }
 
   const stripeLoader = loadStripe(props.pk);
 
@@ -98,7 +101,8 @@ export default function Cart(props) {
               chosenProduct={chosenProduct}
               handleDeleteItemClick={handleDeleteItemClick}
               index={index}
-              updateAmountInCart={updateAmountInCart}
+              cart={props.cart}
+              setCart={props.setCart}
             />
           ))}
 
@@ -133,17 +137,7 @@ export default function Cart(props) {
         >
           <div className="total-amount-text-container flex-container-center-content">
             <h2>Total Sum: </h2>
-            <h2>
-              {(
-                props.cart.reduce((accumulator, cookieProduct) => {
-                  return (accumulator =
-                    accumulator +
-                    cookieProduct.amount *
-                      props.products[cookieProduct.id - 1].productPrice);
-                }, 0) / 100
-              ).toFixed(2)}
-              €
-            </h2>
+            <h2>{getTotalCartValue(props.cart, props.products)}€</h2>
           </div>
           <button
             onClick={

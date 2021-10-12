@@ -51,7 +51,10 @@ export default function Home() {
             </div>
             <Link href="/products">
               <a>
-                <button style={{ display: showText ? 'block' : 'none' }}>
+                <button
+                  style={{ display: showText ? 'block' : 'none' }}
+                  data-cy="homepage-link-to-products"
+                >
                   Enter Shop
                 </button>
               </a>

@@ -97,6 +97,7 @@ export default function Cart(props) {
           {props.cart.map((chosenProduct, index) => (
             <CartSingleImage
               key={`cart-single-image-container-${chosenProduct.id}`}
+              data-cy={`cart-single-image-container-${chosenProduct.id}`}
               products={props.products}
               chosenProduct={chosenProduct}
               handleDeleteItemClick={handleDeleteItemClick}
@@ -139,12 +140,7 @@ export default function Cart(props) {
             <h2>Total Sum: </h2>
             <h2>{getTotalCartValue(props.cart, props.products)}€</h2>
           </div>
-          <button
-            onClick={
-              () => handleBuyClick()
-              // redirectToCheckout(props.quantity, props.mode, props.productKeys)
-            }
-          >
+          <button onClick={() => handleBuyClick()} data-cy="link-to-checkout">
             Buy Now!
           </button>
         </div>

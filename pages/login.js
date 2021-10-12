@@ -121,18 +121,24 @@ export default function Login(props) {
               placeholder="user_name"
               onChange={(e) => handleNameChange(e)}
               value={userName}
+              data-cy="user-name-input"
             />
             <input
               placeholder="password"
               onChange={(e) => handlePasswordChange(e)}
               value={userPassword}
               type="password"
+              data-cy="user-password-input"
             />
 
             <p className="invalid-input-text">
               {showErrorMessage ? 'Invalid username/password' : ''}
             </p>
-            <button className="login-button" onClick={handleClick}>
+            <button
+              className="login-button"
+              onClick={handleClick}
+              data-cy="log-in-button"
+            >
               Log In
             </button>
             <div className="sign-up-container flex-container-center-content">

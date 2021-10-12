@@ -25,4 +25,5 @@ export default async function handler(req, res) {
   res.send({
     sessionId: session.id,
   });
+  console.log('res.statusCode', res.statusCode);
 }

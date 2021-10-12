@@ -90,7 +90,7 @@ export default function Header(props) {
       <div className="logo-container">
         <Link href="/products">
           <a>
-            <Image src={logo} />
+            <Image src={logo} data-cy="logo-link" />
           </a>
         </Link>
       </div>
@@ -110,7 +110,7 @@ export default function Header(props) {
         onBlur={handleMouseOut}
       >
         <Link href={props.loggedInUser.id ? '/account' : '/login'}>
-          <a>
+          <a data-cy="link-to-login">
             <Image src={login} />
           </a>
         </Link>
@@ -142,7 +142,7 @@ export default function Header(props) {
         >
           <Link href="/cart">
             <a>
-              <Image src={cart} />
+              <Image src={cart} data-cy="link-to-cart" />
             </a>
           </Link>
         </div>

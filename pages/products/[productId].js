@@ -115,6 +115,7 @@ export default function Product(props) {
             onClick={() =>
               handleOnClick(props.currentProduct.productId, amount)
             }
+            data-cy="buy-product-button"
           >
             Add to Cart!
           </button>

@@ -15,7 +15,10 @@ export default function Home(props) {
             href={`/products/${product.productId}`}
             key={`product-id${product.productId}`}
           >
-            <a className="link-no-decoration">
+            <a
+              className="link-no-decoration"
+              data-cy={`product-${product.productId}`}
+            >
               <div
                 className="product-tile"
                 key={`product-id${product.productId}`}

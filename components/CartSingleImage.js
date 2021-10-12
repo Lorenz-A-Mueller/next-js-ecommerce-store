@@ -74,6 +74,7 @@ export default function CartSingleImage(props) {
             max="9"
             step="1"
             onBlur={(e) => handleLostFocus(e)}
+            data-cy={`cart-input-field-${props.chosenProduct.id}`}
           />
           <p>
             {props.products[props.chosenProduct.id - 1].productSize}
@@ -99,6 +100,7 @@ export default function CartSingleImage(props) {
           title="Delete this product from your cart"
           onClick={() => props.handleDeleteItemClick(props.index)}
           className="button-red"
+          data-cy={`cart-delete-field-${props.chosenProduct.id}`}
         />
       </div>
     </div>

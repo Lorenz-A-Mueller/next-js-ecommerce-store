@@ -1,7 +1,22 @@
 import Link from 'next/link';
 import { dropDownMenuStyles } from './styles';
 
-export default function DropDownMenu(props) {
+type Props = {
+  handleMouseOver: () => void;
+  handleMouseOut: () => void;
+  handleLogOutClick: () => void;
+  loggedInUser:
+    | {}
+    | {
+        id: number;
+        userName: string;
+        userPassword: string;
+        firstName: string;
+        lastName: string;
+      };
+};
+
+export default function DropDownMenu(props: Props) {
   return (
     <div
       css={dropDownMenuStyles}
@@ -11,10 +26,10 @@ export default function DropDownMenu(props) {
       onBlur={props.handleMouseOut}
     >
       <div className="dropdown-link-button">
-        <Link href={props.loggedInUser.id ? '/account' : '/login'}>
+        <Link href={'id' in props.loggedInUser ? '/account' : '/login'}>
           <a className="flex-container-center-content">
             <button onClick={props.handleMouseOut}>
-              {props.loggedInUser.id ? 'Account' : 'Log In'}
+              {'id' in props.loggedInUser ? 'Account' : 'Log In'}
             </button>
           </a>
         </Link>
@@ -22,7 +37,7 @@ export default function DropDownMenu(props) {
       <div className="dropdown-link-button">
         <Link href="/signup">
           <a
-            style={{ display: props.loggedInUser.id ? 'none' : 'flex' }}
+            style={{ display: 'id' in props.loggedInUser ? 'none' : 'flex' }}
             className="flex-container-center-content"
           >
             <button onClick={props.handleMouseOut}>Sign Up</button>

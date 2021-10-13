@@ -1,14 +1,32 @@
-import { useState } from 'react';
+import React, { FocusEvent, useState } from 'react';
 import { updateAmountInCart } from '../utils/math';
 
-export default function CartSingleImage(props) {
+type Props = {
+  cart: { id: number; amount: number }[] | [];
+  setCart: (arg: { id: number; amount: number }[] | []) => void;
+  chosenProduct: { id: number; amount: number };
+  products: {
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productSize: string;
+    productDesc: string;
+  }[];
+  index: number;
+  handleDeleteItemClick: (arg: number) => void;
+};
+
+export default function CartSingleImage(props: Props) {
   const [changedAmount, setChangedAmount] = useState(0);
 
-  function handleChange(event, initialAmount) {
-    console.log('changedAmount in sinlge cart', changedAmount);
-    const enteredValue = event.currentTarget.value;
-    console.log('entered value', enteredValue);
-    console.log('CHOSENPRODUCT.id', props.chosenProduct.id);
+  function handleChange(
+    event: React.FormEvent<HTMLInputElement>,
+    initialAmount: number,
+  ) {
+    // console.log('changedAmount in single cart', changedAmount);
+    const enteredValue = Number(event.currentTarget.value);
+    // console.log('entered value', enteredValue);
+    // console.log('CHOSENPRODUCT.id', props.chosenProduct.id);
 
     // when first changed, set to the initial amount, then to the user input
     if (changedAmount === 0) {
@@ -23,7 +41,7 @@ export default function CartSingleImage(props) {
       props.setCart(updateAmountInCart(props.cart, props.chosenProduct.id, 1));
 
       // if dec. point is entered, round the number down immediately
-    } else if (enteredValue.length > 1) {
+    } else if (enteredValue.toString().length > 1) {
       setChangedAmount(Math.floor(enteredValue));
       props.setCart(
         updateAmountInCart(
@@ -40,7 +58,7 @@ export default function CartSingleImage(props) {
     }
   }
 
-  function handleLostFocus(e) {
+  function handleLostFocus(e: FocusEvent<HTMLInputElement>) {
     if (e.currentTarget.value === '0' || e.currentTarget.value === '') {
       setChangedAmount(1);
       props.setCart(updateAmountInCart(props.cart, props.chosenProduct.id, 1));

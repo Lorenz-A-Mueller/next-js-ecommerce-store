@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { footerBaseStyles, footerExpandedStyles } from './styles.js';
 
-const showExpandedFooterStyles = (height) => css`
+const showExpandedFooterStyles = (height: number) => css`
   height: ${height + 'px'};
   transition: all 1s ease-out;
   overflow: hidden;

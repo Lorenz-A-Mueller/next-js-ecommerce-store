@@ -2,14 +2,40 @@ import { css, keyframes } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cart from '../public/cart.png';
 import login from '../public/login.png';
 import logo from '../public/logo.png';
 import DropDownMenu from './DropDownMenu';
 import { headerStyles } from './styles.js';
 
-const dropDownMenuTransitionStyles = (height) => css`
+type Props = {
+  // handleSearchInput: Function;
+  handleSearchInput: (arg: string) => void;
+  cart: { id: number; amount: number }[] | [];
+  loggedInUser:
+    | {}
+    | {
+        id: number;
+        userName: string;
+        userPassword: string;
+        firstName: string;
+        lastName: string;
+      };
+  setLoggedInUser: (
+    arg:
+      | {}
+      | {
+          id: number;
+          userName: string;
+          userPassword: string;
+          firstName: string;
+          lastName: string;
+        },
+  ) => void;
+};
+
+const dropDownMenuTransitionStyles = (height: number) => css`
   height: ${height + 'px'};
   transition: all 0.5s ease-out;
   overflow: hidden;
@@ -18,15 +44,12 @@ const dropDownMenuTransitionStyles = (height) => css`
 `;
 // *****
 
-export default function Header(props) {
+export default function Header(props: Props) {
   const [startAnimation, setStartAnimation] = useState(false);
   const [height, setHeight] = useState(0);
   const router = useRouter();
 
-  console.log('props.loggedInUser', props.loggedInUser);
-  console.log('props.loggedInUser.firstName', props.loggedInUser.firstName);
-
-  function handleChange(e) {
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const input = e.currentTarget.value;
     props.handleSearchInput(input);
   }
@@ -109,24 +132,31 @@ export default function Header(props) {
         onMouseOut={handleMouseOut}
         onBlur={handleMouseOut}
       >
-        <Link href={props.loggedInUser.id ? '/account' : '/login'}>
+        <Link
+          href={
+            'props.loggedInUser.id' in props.loggedInUser
+              ? '/account'
+              : '/login'
+          }
+        >
           <a data-cy="link-to-login">
             <Image src={login} />
           </a>
         </Link>
-        {props.loggedInUser.id && (
+        {'id' in props.loggedInUser && (
           <p style={{ color: 'white' }}>
             Hello, {props.loggedInUser.firstName}
           </p>
         )}
-        {!props.loggedInUser.id && <p style={{ color: 'white' }}>Log in</p>}
+        {!('id' in props.loggedInUser) && (
+          <p style={{ color: 'white' }}>Log in</p>
+        )}
         <div css={dropDownMenuTransitionStyles(height)}>
           <DropDownMenu
             handleMouseOut={handleMouseOut}
             handleMouseOver={handleMouseOver}
             handleLogOutClick={handleLogOutClick}
             loggedInUser={props.loggedInUser}
-            setLoggedInUser={props.setLoggedInUser}
           />
         </div>
       </div>

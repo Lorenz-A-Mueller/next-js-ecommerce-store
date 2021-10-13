@@ -6,8 +6,8 @@ import React, { useEffect, useState } from 'react';
 import cart from '../public/cart.png';
 import login from '../public/login.png';
 import logo from '../public/logo.png';
+import { headerStyles } from '../utils/styles';
 import DropDownMenu from './DropDownMenu';
-import { headerStyles } from './styles.js';
 
 type Props = {
   // handleSearchInput: Function;

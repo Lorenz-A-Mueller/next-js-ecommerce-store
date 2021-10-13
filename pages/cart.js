@@ -6,19 +6,16 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
-import { cartStyles, redirectionToCheckoutStyles } from '../components/styles';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
 import { getCookies, setCookies } from '../utils/cookies.js';
 import { getTotalCartValue } from '../utils/math';
+import { cartStyles, redirectionToCheckoutStyles } from '../utils/styles';
 
 export default function Cart(props) {
   const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
   const [redirectingToLogin, setRedirectingToLogin] = useState(false);
   const router = useRouter();
-  console.log('redirectingToLoginCART', redirectingToLogin);
-  console.log('PRODUCTS', props.products);
-  console.log('CART', props.cart);
 
   console.log(props.cart);
   function handleDeleteItemClick(orderId) {

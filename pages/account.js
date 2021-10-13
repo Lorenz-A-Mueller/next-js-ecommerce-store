@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 // import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { accountStyles } from '../components/styles';
+import { accountStyles } from '../utils/styles';
 
 // ******
 

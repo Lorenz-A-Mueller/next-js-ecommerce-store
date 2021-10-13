@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { successStyles } from '../components/styles';
 import { setCookies } from '../utils/cookies';
+import { successStyles } from '../utils/styles';
 
 setCookies('cart', []);
 

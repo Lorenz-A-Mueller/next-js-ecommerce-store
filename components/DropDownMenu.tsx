@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { dropDownMenuStyles } from './styles';
+import { dropDownMenuStyles } from '../utils/styles';
 
 type Props = {
   handleMouseOver: () => void;

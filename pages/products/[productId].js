@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { productIdStyles } from '../../components/styles';
+import { productIdStyles } from '../../utils/styles';
 
 export default function Product(props) {
   const [amount, setAmount] = useState(1);

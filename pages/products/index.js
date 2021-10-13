@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { productsIndexStyles } from '../../components/styles';
+import { productsIndexStyles } from '../../utils/styles';
 
 export default function Home(props) {
   return (

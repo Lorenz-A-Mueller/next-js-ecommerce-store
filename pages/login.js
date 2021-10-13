@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
-import { loginStyles, redirectionFromCartStyles } from '../components/styles';
 import { getCookies, setCookies } from '../utils/cookies';
+import { loginStyles, redirectionFromCartStyles } from '../utils/styles';
 
 // ******
 

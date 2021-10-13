@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import {
   redirectionFromSignupContainerStyles,
   signUpStyles,
-} from '../components/styles';
+} from '../utils/styles';
 
 // ******
 

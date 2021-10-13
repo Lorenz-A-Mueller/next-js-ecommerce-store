@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { footerBaseStyles, footerExpandedStyles } from './styles.js';
+import { footerBaseStyles, footerExpandedStyles } from '../utils/styles';
 
 const showExpandedFooterStyles = (height: number) => css`
   height: ${height + 'px'};

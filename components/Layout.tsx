@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
+import { layoutStyles } from '../utils/styles';
 import Footer from './Footer';
 import Header from './Header';
-import { layoutStyles } from './styles';
 
 type Props = {
   handleSearchInput: (arg: string) => void;

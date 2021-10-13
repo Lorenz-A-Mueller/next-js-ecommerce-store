@@ -1,11 +1,12 @@
 import { Global } from '@emotion/react';
+import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
-import { globalStyles } from '../components/styles';
 import { getCookies, setCookies } from '../utils/cookies';
+import { globalStyles } from '../utils/styles';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps) {
   const [search, setSearch] = useState('');
   const [cart, setCart] = useState([]);
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -32,7 +33,7 @@ function MyApp({ Component, pageProps }) {
 
   // *******
 
-  function handleSearchInput(input) {
+  function handleSearchInput(input: string) {
     setSearch(input);
   }
 
@@ -45,7 +46,6 @@ function MyApp({ Component, pageProps }) {
       <Layout
         handleSearchInput={handleSearchInput}
         cart={cart}
-        setCart={setCart}
         loggedInUser={loggedInUser}
         setLoggedInUser={setLoggedInUser}
       >
@@ -63,15 +63,15 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export async function getServerSideProps() {
-  const { users } = await import('../utils/database');
+// export async function getServerSideProps() {
+//   const { users } = await import('../utils/database');
 
-  return {
-    props: {
-      users,
-    },
-  };
-}
+//   return {
+//     props: {
+//       users,
+//     },
+//   };
+// }
 
 export default MyApp;
 

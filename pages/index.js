@@ -3,8 +3,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { indexStyles } from '../components/styles';
 import logo from '../public/logo.png';
+import { indexStyles } from '../utils/styles';
 
 const imageAnimationStyles = (width, marginLeft, marginBottom) => css`
   width: ${width + 'px'};

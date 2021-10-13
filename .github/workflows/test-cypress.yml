@@ -31,6 +31,32 @@ jobs:
           PGDATABASE: ${{ secrets.PGDATABASE }}
           PGUSERNAME: ${{ secrets.PGUSERNAME }}
           PGPASSWORD: ${{ secrets.PGPASSWORD }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}}
+          STRIPE_SECRET_KEY: ${{secrets.STRIPE_SECRET_KEY}}
+          PRICE1: ${{secrets.PRICE1}}
+          PRICE2: ${{secrets.PRICE2}}
+          PRICE3: ${{secrets.PRICE3}}
+          PRICE4: ${{secrets.PRICE4}}
+          PRICE5: ${{secrets.PRICE5}}
+          PRICE6: ${{secrets.PRICE6}}
+          PRICE7: ${{secrets.PRICE7}}
+          PRICE8: ${{secrets.PRICE8}}
+          PRICE9: ${{secrets.PRICE9}}
+          PRICE10: ${{secrets.PRICE10}}
+          PRICE11: ${{secrets.PRICE11}}
+          PRICE12: ${{secrets.PRICE12}}
+          PRICE13: ${{secrets.PRICE13}}
+          PRICE14: ${{secrets.PRICE14}}
+          PRICE15: ${{secrets.PRICE15}}
+          PRICE16: ${{secrets.PRICE16}}
+          PRICE17: ${{secrets.PRICE17}}
+          PRICE18: ${{secrets.PRICE18}}
+          PRICE19: ${{secrets.PRICE19}}
+          PRICE20: ${{secrets.PRICE20}}
+          PRICE21: ${{secrets.PRICE21}}
+          PRICE22: ${{secrets.PRICE22}}
+          PRICE23: ${{secrets.PRICE23}}
+          PRICE24: ${{secrets.PRICE24}}
       # Store any Cypress screenshots on test failure
       - uses: actions/upload-artifact@v2
         if: failure()

@@ -6,7 +6,11 @@ import { useEffect, useState } from 'react';
 import logo from '../public/logo.png';
 import { indexStyles } from '../utils/styles';
 
-const imageAnimationStyles = (width, marginLeft, marginBottom) => css`
+const imageAnimationStyles = (
+  width: number,
+  marginLeft: number,
+  marginBottom: number,
+) => css`
   width: ${width + 'px'};
   transition: all 2s ease-out;
   overflow: hidden;

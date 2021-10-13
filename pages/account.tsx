@@ -1,26 +1,36 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 // import { useState } from 'react';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  redirectionFromSignupContainerStyles,
-  signUpStyles,
-} from '../utils/styles';
+import { accountStyles } from '../utils/styles';
 
-// ******
+type Props = {
+  loggedInUser:
+    | {
+        id: number;
+        userName: string;
+        userPassword: string;
+        firstName: string;
+        lastName: string;
+      }
+    | {};
+  setLoggedInUser: (
+    arg:
+      | {}
+      | {
+          id: number;
+          userName: string;
+          userPassword: string;
+          firstName: string;
+          lastName: string;
+        },
+  ) => void;
+};
 
 // ****
 
-export default function Signup() {
-  const [showSuccess, setShowSuccess] = useState(false);
+export default function Account(props: Props) {
   const router = useRouter();
-
-  // const [newFirstName, setNewFirstName] = useState('');
-  // const [newLastName, setNewLastName] = useState('');
-  // const [newPassword, setNewPassword] = useState('');
-  // const [newEmail, setNewEmail] = useState('');
-  // const [newsletter, setNewsletter] = useState(true);
 
   const {
     register,
@@ -28,49 +38,46 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  // function handleEmailChange(e) {
-  //   setNewEmail(e.currentTarget.value);
-  // }
-
-  // function handleFirstNameChange(e) {
-  //   setNewFirstName(e.currentTarget.value);
-  // }
-  // function handleLastNameChange(e) {
-  //   setNewLastName(e.currentTarget.value);
-  // }
-  // function handlePasswordChange(e) {
-  //   setNewPassword(e.currentTarget.value);
-  // }
-  // function handleNewsletterChange() {
-  //   setNewsletter((previous) => !previous);
-  // }
-
-  const onSubmit = (formData) => {
-    // alert(JSON.stringify(formData));
-    // alert(JSON.stringify(formData.email));
-
-    fetch('http://localhost:3000/api/users', {
-      method: 'POST',
+  const onSubmit = (formData: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }) => {
+    if (!('id' in props.loggedInUser)) return;
+    fetch(`http://localhost:3000/api/users/${props.loggedInUser.id}`, {
+      method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        newUser: [
+        updatedUser: [
+          props.loggedInUser.id,
           formData.email,
           formData.password,
           formData.firstName,
           formData.lastName,
         ],
       }),
-    }).then(() => {
-      setShowSuccess(true);
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
     });
+    setTimeout(() => {
+      window.location.href = '/products';
+    }, 1000);
   };
+
+  function handleDeleteAccountClick(userId: number | null) {
+    if (userId === null) return;
+    fetch(`http://localhost:3000/api/users/${userId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userId),
+    }).then(props.setLoggedInUser({}));
+    setTimeout(() => {
+      router.push('/');
+    }, 1000);
+  }
 
   // custom validation rule for password: must contain one digit and one uppercase letter
 
-  const validPasswordType = (password) => {
+  const validPasswordType = (password: string) => {
     if (!password) return true;
     if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return true;
     return false;
@@ -79,14 +86,15 @@ export default function Signup() {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Log In</title>
+        <title>Sprouts Farmer's Market - Account</title>
       </Head>
       <div
-        css={signUpStyles}
+        css={accountStyles}
         className="fill-middle-area flex-container-center-content"
       >
-        <div className="sign-up-box flex-container-center-content">
-          <h1>Sign up</h1>
+        <div className="account-box flex-container-center-content">
+          <h1>Your Account</h1>
+          <h2>Change account details: </h2>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="email" className="label-email">
               E-mail:
@@ -98,7 +106,9 @@ export default function Signup() {
               })}
               name="email"
               id="email"
-              placeholder="e-mail"
+              placeholder={
+                'id' in props.loggedInUser ? props.loggedInUser.userName : ''
+              }
               // onChange={(e) => handleEmailChange(e)}
               // value={newEmail}
               type="email"
@@ -118,7 +128,9 @@ export default function Signup() {
               {...register('firstName', { required: true, maxLength: 20 })}
               name="firstName"
               id="firstName"
-              placeholder="first name"
+              placeholder={
+                'id' in props.loggedInUser ? props.loggedInUser.firstName : ''
+              }
               // onChange={(e) => handleFirstNameChange(e)}
               // value={newFirstName}
             />
@@ -137,7 +149,9 @@ export default function Signup() {
               {...register('lastName', { required: true, maxLength: 20 })}
               name="lastName"
               id="lastName"
-              placeholder="last Name"
+              placeholder={
+                'id' in props.loggedInUser ? props.loggedInUser.lastName : ''
+              }
               // onChange={(e) => handleLastNameChange(e)}
               // value={newLastName}
             />
@@ -196,17 +210,18 @@ export default function Signup() {
               type="checkbox"
             />
 
-            <button className="sign-up-button">Sign Up!</button>
+            <button className="save-button button-blue">Save</button>
           </form>
-        </div>
-        <div
-          css={redirectionFromSignupContainerStyles}
-          style={{ display: showSuccess ? 'flex' : 'none' }}
-          className="flex-container-center-content redirection-fill-screen"
-        >
-          <div className="redirection-from-signup-text-container flex-container-center-content">
-            <h2>Your account has been created. Please log in!</h2>
-          </div>
+          <button
+            className="delete-account-button button-red"
+            onClick={() =>
+              handleDeleteAccountClick(
+                'id' in props.loggedInUser ? props.loggedInUser.id : null,
+              )
+            }
+          >
+            Delete your account
+          </button>
         </div>
       </div>
     </>

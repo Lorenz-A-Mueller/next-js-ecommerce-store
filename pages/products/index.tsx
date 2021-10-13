@@ -3,7 +3,18 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { productsIndexStyles } from '../../utils/styles';
 
-export default function Home(props) {
+type Props = {
+  products: {
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productSize: string;
+    productDesc: string;
+  }[];
+  search: string;
+};
+
+export default function Home(props: Props) {
   return (
     <>
       <Head>

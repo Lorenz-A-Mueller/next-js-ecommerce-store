@@ -1,28 +1,46 @@
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import React, { FocusEvent, useState } from 'react';
 import { productIdStyles } from '../../utils/styles';
 
-export default function Product(props) {
+type Cart = { id: number; amount: number }[];
+
+type Props = {
+  cart: { id: number; amount: number }[] | [];
+  setCart: (arg: { id: number; amount: number }[] | []) => void;
+  currentProduct: {
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productSize: string;
+    productDesc: string;
+  };
+};
+
+export default function Product(props: Props) {
   const [amount, setAmount] = useState(1);
 
-  function handleChange(e) {
-    if (e.currentTarget.value > 9) {
+  function handleChange(e: React.FormEvent<HTMLInputElement>) {
+    if (Number(e.currentTarget.value) > 9) {
       setAmount(9);
-    } else if (e.currentTarget.value < 0) {
+    } else if (Number(e.currentTarget.value) < 0) {
       setAmount(1);
     } else {
       if (
         // if dec. point is entered, round the number down immediately
         e.currentTarget.value.length > 2
       ) {
-        setAmount(Math.floor(e.currentTarget.value));
+        setAmount(Math.floor(Number(e.currentTarget.value)));
       } else {
-        setAmount(e.currentTarget.value);
+        setAmount(Number(e.currentTarget.value));
       }
     }
   }
 
-  function handleOnClick(currentProductId, currentProductAmount) {
+  function handleOnClick(
+    currentProductId: number,
+    currentProductAmount: number,
+  ) {
     // test whether product with same id is already in cart
     // if so, replace it with a new object with the combined amounts (and restrict it to 9)
     const oldProduct = props.cart.find((productAlreadyInCart) => {
@@ -33,8 +51,7 @@ export default function Product(props) {
         return productAlreadyInCart.id === currentProductId;
       });
       const copyOfCart = [...props.cart];
-      let newAmount =
-        parseFloat(oldProduct.amount) + parseFloat(currentProductAmount);
+      let newAmount = oldProduct.amount + currentProductAmount;
       if (newAmount > 9) newAmount = 9;
       copyOfCart.splice(oldProductIndex, 1, {
         id: currentProductId,
@@ -42,7 +59,7 @@ export default function Product(props) {
       });
       props.setCart(copyOfCart);
     } else {
-      props.setCart((previous) => {
+      props.setCart((previous: Cart) => {
         return previous.concat({
           id: currentProductId,
           amount: currentProductAmount,
@@ -53,7 +70,7 @@ export default function Product(props) {
       window.location.href = '/products';
     }, 700);
   }
-  function handleLostFocus(e) {
+  function handleLostFocus(e: FocusEvent<HTMLInputElement>) {
     if (e.currentTarget.value === '0' || e.currentTarget.value === '') {
       setAmount(1);
     }
@@ -125,13 +142,13 @@ export default function Product(props) {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const { getProduct } = await import('../../utils/database');
 
   // const idFromUrl = context.query.productId;
   // const currentProduct = products.find((product) => idFromUrl === product.id);
 
-  const currentProduct = await getProduct(context.query.productId);
+  const currentProduct = await getProduct(Number(context.query.productId));
 
   return {
     props: {

@@ -2,9 +2,22 @@ import { css, keyframes } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import Router from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getCookies, setCookies } from '../utils/cookies';
 import { loginStyles, redirectionFromCartStyles } from '../utils/styles';
+
+type User = {
+  id: number;
+  userName: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
+
+type Props = {
+  users: User[];
+  setLoggedInUser: (arg: User) => void;
+};
 
 // ******
 
@@ -25,7 +38,7 @@ const shake = keyframes`
 
 // ****
 
-export default function Login(props) {
+export default function Login(props: Props) {
   const [userName, setUserName] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [validInput, setValidInput] = useState(false);
@@ -44,10 +57,10 @@ export default function Login(props) {
     }
   }, [props]);
 
-  function handleNameChange(e) {
+  function handleNameChange(e: React.FormEvent<HTMLInputElement>) {
     setUserName(e.currentTarget.value);
   }
-  function handlePasswordChange(e) {
+  function handlePasswordChange(e: React.FormEvent<HTMLInputElement>) {
     setUserPassword(e.currentTarget.value);
   }
 

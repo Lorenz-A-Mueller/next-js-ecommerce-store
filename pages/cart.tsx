@@ -8,48 +8,60 @@ import { useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
-import { getCookies, setCookies } from '../utils/cookies.js';
+import { setCookies } from '../utils/cookies.js';
 import { getTotalCartValue } from '../utils/math';
 import { cartStyles, redirectionToCheckoutStyles } from '../utils/styles';
 
-export default function Cart(props) {
+type Cart = {
+  id: number;
+  amount: number;
+}[];
+
+type Props = {
+  cart: Cart | [];
+  loggedInUser:
+    | {}
+    | {
+        id: number;
+        userName: string;
+        userPassword: string;
+        firstName: string;
+        lastName: string;
+      };
+  setCart: (arg: { id: number; amount: number }[] | []) => void;
+  pk: string;
+  priceArray: string[];
+  products: {
+    productId: number;
+    productName: string;
+    productPrice: number;
+    productSize: string;
+    productDesc: string;
+  }[];
+};
+
+export default function ProductCart(props: Props) {
   const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
-  const [redirectingToLogin, setRedirectingToLogin] = useState(false);
   const router = useRouter();
 
   console.log(props.cart);
-  function handleDeleteItemClick(orderId) {
-    props.setCart((previous) => {
+  function handleDeleteItemClick(orderId: number) {
+    props.setCart((previous: Cart) => {
       return previous.filter((element, index) => {
         return index !== orderId;
       });
     });
   }
 
-  // empty the state var when all are deleted
-
   function handleDeleteAllClick() {
     props.setCart([]);
   }
 
-  // function updateAmountInCart(idOfProduct, amountOfProduct) {
-  //   props.setCart(
-  //     props.cart.map((product) => {
-  //       if (product.id !== idOfProduct) {
-  //         return product;
-  //       } else {
-  //         return { id: product.id, amount: amountOfProduct };
-  //       }
-  //     }),
-  //   );
-  //   console.log('props.cart', props.cart);
-  // }
-
   const stripeLoader = loadStripe(props.pk);
 
   const handleBuyClick = async () => {
-    if (!props.loggedInUser.id) {
-      setRedirectingToLogin(true);
+    if (!('id' in props.loggedInUser)) {
+      // setRedirectingToLogin(true);
       setCookies('redirectingToLogin', true);
       router.push('/login');
       return;
@@ -72,7 +84,7 @@ export default function Cart(props) {
         }),
       }),
     }).then((res) => res.json());
-    stripeClient.redirectToCheckout({ sessionId });
+    stripeClient!.redirectToCheckout({ sessionId });
   };
 
   return (

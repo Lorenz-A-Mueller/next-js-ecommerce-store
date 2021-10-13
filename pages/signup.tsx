@@ -1,15 +1,26 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 // import { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { accountStyles } from '../utils/styles';
+import {
+  redirectionFromSignupContainerStyles,
+  signUpStyles,
+} from '../utils/styles';
 
 // ******
 
 // ****
 
-export default function Account(props) {
+export default function Signup() {
+  const [showSuccess, setShowSuccess] = useState(false);
   const router = useRouter();
+
+  // const [newFirstName, setNewFirstName] = useState('');
+  // const [newLastName, setNewLastName] = useState('');
+  // const [newPassword, setNewPassword] = useState('');
+  // const [newEmail, setNewEmail] = useState('');
+  // const [newsletter, setNewsletter] = useState(true);
 
   const {
     register,
@@ -17,42 +28,51 @@ export default function Account(props) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (formData) => {
-    // alert(JSON.stringify(formData));
-    // alert(JSON.stringify(formData.email));
+  // function handleEmailChange(e) {
+  //   setNewEmail(e.currentTarget.value);
+  // }
 
-    fetch(`http://localhost:3000/api/users/${props.loggedInUser.id}`, {
-      method: 'PATCH',
+  // function handleFirstNameChange(e) {
+  //   setNewFirstName(e.currentTarget.value);
+  // }
+  // function handleLastNameChange(e) {
+  //   setNewLastName(e.currentTarget.value);
+  // }
+  // function handlePasswordChange(e) {
+  //   setNewPassword(e.currentTarget.value);
+  // }
+  // function handleNewsletterChange() {
+  //   setNewsletter((previous) => !previous);
+  // }
+
+  const onSubmit = (formData: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }) => {
+    fetch('http://localhost:3000/api/users', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        updatedUser: [
-          props.loggedInUser.id,
+        newUser: [
           formData.email,
           formData.password,
           formData.firstName,
           formData.lastName,
         ],
       }),
+    }).then(() => {
+      setShowSuccess(true);
+      setTimeout(() => {
+        router.push('/login');
+      }, 2000);
     });
-    setTimeout(() => {
-      window.location.href = '/products';
-    }, 1000);
   };
-
-  function handleDeleteAccountClick(userId) {
-    fetch(`http://localhost:3000/api/users/${userId}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userId),
-    }).then(props.setLoggedInUser({}));
-    setTimeout(() => {
-      router.push('/');
-    }, 1000);
-  }
 
   // custom validation rule for password: must contain one digit and one uppercase letter
 
-  const validPasswordType = (password) => {
+  const validPasswordType = (password: string) => {
     if (!password) return true;
     if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return true;
     return false;
@@ -61,15 +81,14 @@ export default function Account(props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Account</title>
+        <title>Sprouts Farmer's Market - Log In</title>
       </Head>
       <div
-        css={accountStyles}
+        css={signUpStyles}
         className="fill-middle-area flex-container-center-content"
       >
-        <div className="account-box flex-container-center-content">
-          <h1>Your Account</h1>
-          <h2>Change account details: </h2>
+        <div className="sign-up-box flex-container-center-content">
+          <h1>Sign up</h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="email" className="label-email">
               E-mail:
@@ -81,7 +100,7 @@ export default function Account(props) {
               })}
               name="email"
               id="email"
-              placeholder={props.loggedInUser.userName}
+              placeholder="e-mail"
               // onChange={(e) => handleEmailChange(e)}
               // value={newEmail}
               type="email"
@@ -101,7 +120,7 @@ export default function Account(props) {
               {...register('firstName', { required: true, maxLength: 20 })}
               name="firstName"
               id="firstName"
-              placeholder={props.loggedInUser.firstName}
+              placeholder="first name"
               // onChange={(e) => handleFirstNameChange(e)}
               // value={newFirstName}
             />
@@ -120,7 +139,7 @@ export default function Account(props) {
               {...register('lastName', { required: true, maxLength: 20 })}
               name="lastName"
               id="lastName"
-              placeholder={props.loggedInUser.lastName}
+              placeholder="last Name"
               // onChange={(e) => handleLastNameChange(e)}
               // value={newLastName}
             />
@@ -179,14 +198,17 @@ export default function Account(props) {
               type="checkbox"
             />
 
-            <button className="save-button button-blue">Save</button>
+            <button className="sign-up-button">Sign Up!</button>
           </form>
-          <button
-            className="delete-account-button button-red"
-            onClick={() => handleDeleteAccountClick(props.loggedInUser.id)}
-          >
-            Delete your account
-          </button>
+        </div>
+        <div
+          css={redirectionFromSignupContainerStyles}
+          style={{ display: showSuccess ? 'flex' : 'none' }}
+          className="flex-container-center-content redirection-fill-screen"
+        >
+          <div className="redirection-from-signup-text-container flex-container-center-content">
+            <h2>Your account has been created. Please log in!</h2>
+          </div>
         </div>
       </div>
     </>

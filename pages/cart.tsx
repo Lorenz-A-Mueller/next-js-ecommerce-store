@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
@@ -12,13 +12,15 @@ import { setCookies } from '../utils/cookies.js';
 import { getTotalCartValue } from '../utils/math';
 import { cartStyles, redirectionToCheckoutStyles } from '../utils/styles';
 
-type Cart = {
-  id: number;
-  amount: number;
-}[];
+type Cart =
+  | {
+      id: number;
+      amount: number;
+    }[]
+  | [];
 
 type Props = {
-  cart: Cart | [];
+  cart: Cart;
   loggedInUser:
     | {}
     | {
@@ -28,7 +30,7 @@ type Props = {
         firstName: string;
         lastName: string;
       };
-  setCart: (arg: { id: number; amount: number }[] | []) => void;
+  setCart: Dispatch<SetStateAction<Cart>>;
   pk: string;
   priceArray: string[];
   products: {
@@ -44,9 +46,8 @@ export default function ProductCart(props: Props) {
   const [redirectingToCheckout, setRedirectingToCheckout] = useState(false);
   const router = useRouter();
 
-  console.log(props.cart);
   function handleDeleteItemClick(orderId: number) {
-    props.setCart((previous: Cart) => {
+    props.setCart((previous) => {
       return previous.filter((element, index) => {
         return index !== orderId;
       });

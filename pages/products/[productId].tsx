@@ -1,13 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import React, { FocusEvent, useState } from 'react';
+import React, { Dispatch, FocusEvent, SetStateAction, useState } from 'react';
 import { productIdStyles } from '../../utils/styles';
 
 type Cart = { id: number; amount: number }[];
 
 type Props = {
-  cart: { id: number; amount: number }[] | [];
-  setCart: (arg: { id: number; amount: number }[] | []) => void;
+  cart: Cart;
+  setCart: Dispatch<SetStateAction<Cart>>;
   currentProduct: {
     productId: number;
     productName: string;

@@ -8,8 +8,17 @@ import { globalStyles } from '../utils/styles';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [search, setSearch] = useState('');
-  const [cart, setCart] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [cart, setCart] = useState<{ id: number; amount: number }[]>([]);
+  const [loggedInUser, setLoggedInUser] = useState<
+    | {
+        id: number;
+        userName: string;
+        userPassword: string;
+        firstName: string;
+        lastName: string;
+      }
+    | {}
+  >({});
 
   // cookies won't exist when node reads the file (reads it first), so don't setCart then. Only when the file is read for the client-side.
 

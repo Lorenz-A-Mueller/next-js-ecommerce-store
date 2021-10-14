@@ -69,7 +69,7 @@ export default function Account(props: Props) {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userId),
-    }).then(props.setLoggedInUser({}));
+    }).then(() => props.setLoggedInUser({}));
     setTimeout(() => {
       router.push('/');
     }, 1000);

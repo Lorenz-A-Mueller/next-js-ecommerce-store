@@ -30,7 +30,15 @@ const products = [
   { name: 'Tomatoes', price: 197, size: 'package', desc: ' ' },
 ];
 
-exports.up = async function up(sql) {
+exports.up = async function up(
+  sql: (
+    arg: TemplateStringsArray,
+    arg2: string,
+    arg3: number,
+    arg4: string,
+    arg5: string,
+  ) => Promise<string[]>,
+) {
   console.log('Adding products to the products table...');
 
   for (const product of products) {
@@ -45,7 +53,15 @@ exports.up = async function up(sql) {
 
 // (there is also a shortcut available (instead of looping) at the postgres documentation
 
-exports.down = async function down(sql) {
+export async function down(
+  sql: (
+    arg: TemplateStringsArray,
+    arg2: string,
+    arg3: number,
+    arg4: string,
+    arg5: string,
+  ) => Promise<string[]>,
+) {
   console.log('Deleting products from the products table');
   for (const product of products) {
     await sql`
@@ -54,4 +70,4 @@ exports.down = async function down(sql) {
 		product_name = ${product.name} AND product_price = ${product.price} AND product_size = ${product.size} AND product_desc = ${product.desc};
 `;
   }
-};
+}

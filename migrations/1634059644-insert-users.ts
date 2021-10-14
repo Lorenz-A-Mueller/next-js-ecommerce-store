@@ -1,4 +1,6 @@
-exports.up = async function up(sql) {
+export async function up(
+  sql: (arg: TemplateStringsArray) => Promise<string[]>,
+) {
   console.log('Adding users to the users table...');
 
   await sql`
@@ -7,13 +9,15 @@ exports.up = async function up(sql) {
 		VALUES
 		('test.test@gmail.com', 'MyTestPassword1', 'test', 'test');
 `;
-};
+}
 
-exports.down = async function down(sql) {
+export async function down(
+  sql: (arg: TemplateStringsArray) => Promise<string[]>,
+) {
   console.log('Deleting users from the users table');
   await sql`
 		DELETE FROM users
 		WHERE
 		user_name = 'test.test@gmail.com'
 `;
-};
+}

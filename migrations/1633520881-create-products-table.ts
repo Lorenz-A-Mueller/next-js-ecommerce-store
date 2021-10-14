@@ -1,4 +1,6 @@
-exports.up = async function up(sql) {
+export async function up(
+  sql: (arg: TemplateStringsArray) => Promise<string[]>,
+) {
   console.log('Creating products table...');
   await sql`
 
@@ -10,13 +12,15 @@ product_size varchar(10) NOT NULL,
 product_desc varchar(1000) NOT NULL
 );
 	`;
-};
+}
 
-exports.down = async function down(sql) {
+export async function down(
+  sql: (arg: TemplateStringsArray) => Promise<string[]>,
+) {
   console.log('Dropping products table');
   await sql`
 
 	DROP TABLE products;
 
 	`;
-};
+}

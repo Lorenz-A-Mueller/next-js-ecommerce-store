@@ -1,3 +1,4 @@
+import { expect } from '@jest/globals';
 import { getTotalCartValue, updateAmountInCart } from '../math.js';
 
 const testCart = [

@@ -1,12 +1,12 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { createUser } from '../../../utils/database';
 
-export default async function handler(req, res) {
-  const domainURL = 'http://localhost:3000';
-
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method === 'POST') {
-    console.log('POSSSSSSST');
     const body = req.body;
-    console.log('BODY', body);
     const createdUser = await createUser(body.newUser);
     return res.status(200).json(createdUser);
   } else {

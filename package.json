@@ -17,6 +17,7 @@
     "@types/bootstrap": "^5.1.6",
     "@types/cors": "^2.8.12",
     "@types/dotenv-safe": "^8.1.2",
+    "@types/jest": "^27.0.2",
     "@types/js-cookie": "^2.2.7",
     "axios": "^0.22.0",
     "bootstrap": "^5.0.0-beta3",

@@ -1,17 +1,17 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import { deleteUser, patchUser } from '../../../utils/database';
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method === 'DELETE') {
-    console.log('DELEEEETE');
     const body = req.body;
-    console.log('BODY', body);
     const deletedUser = await deleteUser(body);
     return res.status(200).json(deletedUser);
   }
   if (req.method === 'PATCH') {
-    console.log('PATCH');
     const body = req.body;
-    console.log('BODY', body);
     const patchedUser = await patchUser(
       body.updatedUser[0],
       body.updatedUser[1],

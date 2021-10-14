@@ -16,8 +16,7 @@ type Cart =
   | {
       id: number;
       amount: number;
-    }[]
-  | [];
+    }[];
 
 type Props = {
   cart: Cart;

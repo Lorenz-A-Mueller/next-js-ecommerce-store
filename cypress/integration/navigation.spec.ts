@@ -1,3 +1,5 @@
+export {};
+
 describe('Navigation', () => {
   const randomProductId = Math.ceil(Math.random() * 23);
   it('should navigate through the pages', () => {

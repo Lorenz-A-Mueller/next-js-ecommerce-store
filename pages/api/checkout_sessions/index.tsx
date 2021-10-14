@@ -1,8 +1,14 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2020-08-27',
+});
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   if (req.method !== 'POST') {
     return res.send({
       error: 'Method needs to be POST',
@@ -12,9 +18,8 @@ export default async function handler(req, res) {
 
   const { lineItems } = req.body;
 
-  const pmTypes = ['card'];
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: pmTypes,
+    payment_method_types: ['card'],
     mode: 'payment',
     locale: 'en',
     line_items: lineItems,

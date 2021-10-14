@@ -1,5 +1,4 @@
-import { expect } from '@jest/globals';
-import { getTotalCartValue, updateAmountInCart } from '../math.js';
+import { getTotalCartValue, updateAmountInCart } from '../math';
 
 const testCart = [
   { id: 1, amount: 1 },

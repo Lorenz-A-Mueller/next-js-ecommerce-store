@@ -3,7 +3,7 @@
  */
 
 import Cookies from 'js-cookie';
-import { getCookies, setCookies } from '../cookies.js';
+import { getCookies, setCookies } from '../cookies';
 
 test('Set cookies (setCookies helper-function)', () => {
   setCookies('test', 'abc');

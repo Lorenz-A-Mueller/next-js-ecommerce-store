@@ -8,7 +8,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import CartSingleImage from '../components/CartSingleImage';
 import buffering from '../public/buffering.gif';
 import stripe_logo from '../public/stripe_logo.png';
-import { setCookies } from '../utils/cookies.js';
+import { setCookies } from '../utils/cookies';
 import { getTotalCartValue } from '../utils/math';
 import { cartStyles, redirectionToCheckoutStyles } from '../utils/styles';
 

@@ -92,7 +92,7 @@ export default function ProductCart(props: Props) {
       <Head>
         <title>Sprouts Farmer's Market - Cart</title>
       </Head>
-      <div css={cartStyles} className="fill-middle-area background-image-cover">
+      <div css={cartStyles} className="background-image-cover">
         <div className="cart-images-container">
           <h1>Your Cart</h1>
           <div
@@ -148,7 +148,7 @@ export default function ProductCart(props: Props) {
       </div>
       <div
         css={redirectionToCheckoutStyles}
-        className="fill-middle-area redirection-fill-screen"
+        className="redirection-fill-screen"
         style={{ display: redirectingToCheckout ? 'flex' : 'none' }}
       >
         <div className="redirection-to-checkout-text-container">

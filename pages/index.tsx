@@ -46,7 +46,7 @@ export default function Home() {
       <main>
         <div
           css={indexStyles}
-          className="flex-container-center-content fill-middle-area background-image-cover"
+          className="flex-container-center-content background-image-cover"
         >
           <div className="hero flex-container-center-content">
             <h1>Welcome to Sprouts!</h1>

@@ -21,7 +21,7 @@ export default function Home(props: Props) {
         <title>Sprouts Farmer's Market Products</title>
       </Head>
       <main>
-        <div css={productsIndexStyles} className="fill-middle-area">
+        <div css={productsIndexStyles}>
           {props.products.map((product) => (
             <Link
               href={`/products/${product.productId}`}

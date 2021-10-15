@@ -26,6 +26,12 @@ export const globalStyles = css`
     top: 0;
   }
 
+  main {
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
+  }
+
   button,
   .button-like-link {
     border: 0;
@@ -53,12 +59,6 @@ export const globalStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .fill-middle-area {
-    width: 100vw;
-    height: 80vh;
-    overflow: hidden;
   }
 
   .background-image-cover {
@@ -238,6 +238,7 @@ export const productsIndexStyles = css`
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
+  height: 100%;
   padding: 20px 20px 20px 80px;
 
   .product-tile {
@@ -324,6 +325,7 @@ export const productIdStyles = css`
 /* cart.js */
 
 export const cartStyles = css`
+  height: 100%;
   display: flex;
   overflow-y: scroll;
   background-image: linear-gradient(

@@ -14,7 +14,7 @@ export default function Success() {
       <main>
         <div
           css={successStyles}
-          className="fill-middle-area flex-container-center-content background-image-cover"
+          className="flex-container-center-content background-image-cover"
         >
           <div className="success-text">
             <h1>Success!</h1>

@@ -82,7 +82,7 @@ export default function Product(props: Props) {
         <title>Sprouts Product - {props.currentProduct.productName}</title>
       </Head>
       <main>
-        <div css={productIdStyles} className="fill-middle-area">
+        <div css={productIdStyles}>
           <div className="productId-image-container">
             <img
               src={`/product_images/${props.currentProduct.productId}.jpeg`}

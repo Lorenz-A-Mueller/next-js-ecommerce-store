@@ -84,10 +84,7 @@ export default function Signup() {
         <title>Sprouts Farmer's Market - Log In</title>
       </Head>
       <main>
-        <div
-          css={signUpStyles}
-          className="fill-middle-area flex-container-center-content"
-        >
+        <div css={signUpStyles} className="flex-container-center-content">
           <div className="sign-up-box flex-container-center-content">
             <h1>Sign up</h1>
             <form onSubmit={handleSubmit(onSubmit)}>

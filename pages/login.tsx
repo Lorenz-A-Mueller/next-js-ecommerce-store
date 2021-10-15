@@ -117,10 +117,7 @@ export default function Login(props: Props) {
         <title>Sprouts Farmer's Market - Log In</title>
       </Head>
       <main>
-        <div
-          css={loginStyles}
-          className="fill-middle-area flex-container-center-content"
-        >
+        <div css={loginStyles} className="flex-container-center-content">
           <div
             css={css`
               animation-name: ${startAnimation ? shake : null};
@@ -170,7 +167,7 @@ export default function Login(props: Props) {
           <div
             css={redirectionFromCartStyles}
             style={{ display: showInfo ? 'flex' : 'none' }}
-            className="fill-middle-area redirection-fill-screen"
+            className="redirection-fill-screen"
           >
             <div className="redirection-from-cart-text-container flex-container-center-content">
               <h2>Please Log In!</h2>

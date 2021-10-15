@@ -15,7 +15,7 @@ export default function Footer() {
   const [height, setHeight] = useState(0);
 
   function handleMouseOver() {
-    setHeight(250);
+    setHeight(200); // expanded Footer height
   }
 
   function handleMouseOut() {

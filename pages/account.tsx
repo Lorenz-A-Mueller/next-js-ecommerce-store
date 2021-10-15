@@ -89,10 +89,7 @@ export default function Account(props: Props) {
         <title>Sprouts Farmer's Market - Account</title>
       </Head>
       <main>
-        <div
-          css={accountStyles}
-          className="fill-middle-area flex-container-center-content"
-        >
+        <div css={accountStyles} className="flex-container-center-content">
           <div className="account-box flex-container-center-content">
             <h1>Your Account</h1>
             <h2>Change account details: </h2>

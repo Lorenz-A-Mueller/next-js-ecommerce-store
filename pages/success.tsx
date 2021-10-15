@@ -8,9 +8,9 @@ setCookies('cart', []);
 export default function Success() {
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>Sprouts Farmer's Market - Thanks for buying</title>
-      </Head>
+      </Head> */}
       <div
         css={successStyles}
         className="fill-middle-area flex-container-center-content background-image-cover"

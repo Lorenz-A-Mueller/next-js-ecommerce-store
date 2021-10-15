@@ -117,7 +117,7 @@ export default function ProductCart(props: Props) {
           ))}
 
           <div className="delete-all-button-container flex-container-center-content">
-            <Link href={!props.cart.length ? '/products' : '/cart'}>
+            <Link href={!props.cart.length ? '/products' : '/cart'} passHref>
               <a>
                 <button
                   onClick={() => handleDeleteAllClick()}

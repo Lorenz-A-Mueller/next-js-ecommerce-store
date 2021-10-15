@@ -131,14 +131,17 @@ export default function Login(props: Props) {
           >
             <div className="login-box flex-container-center-content">
               <h1>Login</h1>
+              <label htmlFor="user_name">e-mail:</label>
               <input
-                placeholder="user_name"
+                placeholder="my.address@gmail.com"
+                id="user_name"
                 onChange={(e) => handleNameChange(e)}
                 value={userName}
                 data-cy="user-name-input"
               />
+              <label htmlFor="password">password:</label>
               <input
-                placeholder="password"
+                id="password"
                 onChange={(e) => handlePasswordChange(e)}
                 value={userPassword}
                 type="password"
@@ -157,10 +160,8 @@ export default function Login(props: Props) {
               </button>
               <div className="sign-up-container flex-container-center-content">
                 <p>No account yet? </p>
-                <Link href="/signup">
-                  <a>
-                    <button className="button-red">Sign Up</button>
-                  </a>
+                <Link href="/signup" passHref>
+                  <a className="button-like-link button-red">Sign Up</a>
                 </Link>
               </div>
               <p>Forgot Password?</p>

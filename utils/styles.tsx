@@ -463,7 +463,7 @@ export const loginStyles = css`
 
   .login-box {
     width: 20vw;
-    height: 40vh;
+    height: 50vh;
     margin-top: 20vh;
     flex-direction: column;
     justify-content: space-around;
@@ -478,6 +478,9 @@ export const loginStyles = css`
       justify-content: space-between;
       a {
         width: 35%;
+        text-decoration: none;
+        color: black;
+        text-align: center;
       }
     }
 

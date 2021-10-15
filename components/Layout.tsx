@@ -34,16 +34,20 @@ type Props = {
 export default function Layout(props: Props) {
   return (
     <div css={layoutStyles}>
-      <Header
-        handleSearchInput={props.handleSearchInput}
-        cart={props.cart}
-        loggedInUser={props.loggedInUser}
-        setLoggedInUser={props.setLoggedInUser}
-        // firstLetterOfSearch={props.firstLetterOfSearch}
-        // setFirstLetterOfSearch={props.setFirstLetterOfSearch}
-      />
-      {props.children}
-      <Footer />
+      <header>
+        <Header
+          handleSearchInput={props.handleSearchInput}
+          cart={props.cart}
+          loggedInUser={props.loggedInUser}
+          setLoggedInUser={props.setLoggedInUser}
+          // firstLetterOfSearch={props.firstLetterOfSearch}
+          // setFirstLetterOfSearch={props.setFirstLetterOfSearch}
+        />
+      </header>
+      <main>{props.children}</main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function Layout(props: Props) {
           // setFirstLetterOfSearch={props.setFirstLetterOfSearch}
         />
       </header>
-      <main>{props.children}</main>
+      {props.children}
       <footer>
         <Footer />
       </footer>

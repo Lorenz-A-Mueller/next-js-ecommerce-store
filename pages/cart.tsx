@@ -113,6 +113,9 @@ export default function ProductCart(props: Props) {
               index={index}
               cart={props.cart}
               setCart={props.setCart}
+              ariaLabelDelete={`delete ${
+                props.products[chosenProduct.id - 1].productName
+              }`}
             />
           ))}
 

@@ -8,7 +8,6 @@ const showExpandedFooterStyles = (height: number) => css`
   height: ${height + 'px'};
   transition: all 1s ease-out;
   overflow: hidden;
-  z-index: 1;
 `;
 
 export default function Footer() {
@@ -80,7 +79,12 @@ export default function Footer() {
             </Link>
           </div>
           <div className="footer-logo-container">
-            <Image src="/logo.png" width="100px" height="75px" />
+            <Image
+              src="/logo.png"
+              width="100px"
+              height="75px"
+              alt="Sprouts logo"
+            />
           </div>
           <div className="footer-address-container">
             <h3>Sprouts Farmer's Market</h3>

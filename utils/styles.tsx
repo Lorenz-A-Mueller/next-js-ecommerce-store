@@ -32,6 +32,10 @@ export const globalStyles = css`
     overflow: hidden;
   }
 
+  footer {
+    z-index: 1;
+  }
+
   button,
   .button-like-link {
     border: 0;
@@ -168,12 +172,11 @@ export const dropDownMenuStyles = css`
   div {
     margin-top: 10px;
   }
-  button {
-    width: 80%;
-    color: white;
-  }
+
   a {
     text-decoration: none;
+    width: 100%;
+    color: white;
   }
 `;
 
@@ -215,6 +218,7 @@ export const indexStyles = css`
   background-image: url('/home_background.jpg');
   align-items: flex-start;
   font-size: 2em;
+  height: 100%;
 
   .hero {
     margin-top: 33vh;
@@ -416,6 +420,9 @@ export const cartStyles = css`
       height: 50px;
       font-size: 2em;
       text-decoration: none;
+    }
+    a {
+      color: white;
     }
   }
 

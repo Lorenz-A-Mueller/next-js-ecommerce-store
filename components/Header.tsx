@@ -111,9 +111,9 @@ export default function Header(props: Props) {
   return (
     <div css={headerStyles}>
       <div className="logo-container">
-        <Link href="/products">
-          <a>
-            <Image src={logo} data-cy="logo-link" />
+        <Link href="/products" passHref>
+          <a aria-label="link to products page">
+            <Image src={logo} data-cy="logo-link" alt="the Sprouts logo" />
           </a>
         </Link>
       </div>
@@ -138,9 +138,17 @@ export default function Header(props: Props) {
               ? '/account'
               : '/login'
           }
+          passHref
         >
-          <a data-cy="link-to-login">
-            <Image src={login} />
+          <a
+            data-cy="link-to-login"
+            aria-label={
+              'props.loggedInUser.id' in props.loggedInUser
+                ? 'link to your account'
+                : 'link to log in'
+            }
+          >
+            <Image src={login} alt="icon showing a user avatar" />
           </a>
         </Link>
         {'id' in props.loggedInUser && (
@@ -170,9 +178,13 @@ export default function Header(props: Props) {
             animation-iteration-count: infinite;
           `}
         >
-          <Link href="/cart">
-            <a>
-              <Image src={cart} data-cy="link-to-cart" />
+          <Link href="/cart" passHref>
+            <a aria-label="go the cart">
+              <Image
+                src={cart}
+                data-cy="link-to-cart"
+                alt="icon of an orange cart"
+              />
             </a>
           </Link>
         </div>

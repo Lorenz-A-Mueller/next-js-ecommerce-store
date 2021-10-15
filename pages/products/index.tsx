@@ -26,10 +26,12 @@ export default function Home(props: Props) {
             <Link
               href={`/products/${product.productId}`}
               key={`product-id${product.productId}`}
+              passHref
             >
               <a
                 className="link-no-decoration"
                 data-cy={`product-${product.productId}`}
+                aria-label={`link to product ${product.productName}`}
               >
                 <div
                   className="product-tile"

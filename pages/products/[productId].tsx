@@ -86,7 +86,7 @@ export default function Product(props: Props) {
           <div className="productId-image-container">
             <img
               src={`/product_images/${props.currentProduct.productId}.jpeg`}
-              alt={props.currentProduct.productName}
+              alt={`product ${props.currentProduct.productName}`}
             />
           </div>
           <div className="productId-text-container">
@@ -134,6 +134,12 @@ export default function Product(props: Props) {
                 handleOnClick(props.currentProduct.productId, amount)
               }
               data-cy="buy-product-button"
+              aria-label={`add ${amount} pieces of  ${
+                props.currentProduct.productName
+              } to the cart. That amounts to ${(
+                (amount * props.currentProduct.productPrice) /
+                100
+              ).toFixed(2)} Euros `}
             >
               Add to Cart!
             </button>

@@ -26,7 +26,8 @@ export const globalStyles = css`
     top: 0;
   }
 
-  button {
+  button,
+  .button-like-link {
     border: 0;
     border-radius: 10px;
     font-size: 1em;
@@ -407,12 +408,12 @@ export const cartStyles = css`
   .delete-all-button-container {
     height: 50px;
     margin-top: 5%;
-    a {
+    a,
+    button {
       width: 100%;
-      button {
-        height: 50px;
-        font-size: 2em;
-      }
+      height: 50px;
+      font-size: 2em;
+      text-decoration: none;
     }
   }
 
@@ -641,11 +642,11 @@ export const successStyles = css`
   a {
     margin: 1% 10vw 0 0;
     width: 30%;
-    button {
-      color: white;
-      height: 40px;
-      font-size: 1.5em;
-    }
+    color: white;
+    text-decoration: none;
+    height: 40px;
+    font-size: 1.5em;
+    text-align: center;
   }
 `;
 

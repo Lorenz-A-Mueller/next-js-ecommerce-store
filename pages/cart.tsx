@@ -117,26 +117,18 @@ export default function ProductCart(props: Props) {
           ))}
 
           <div className="delete-all-button-container flex-container-center-content">
-            <Link href={!props.cart.length ? '/products' : '/cart'} passHref>
-              <a>
-                <button
-                  onClick={() => handleDeleteAllClick()}
-                  css={css`
-                    background-color: ${props.cart.length
-                      ? 'rgba(255, 0, 0, 0.7)'
-                      : 'rgba(0, 0, 255, 0.7)'};
-
-                    &:hover {
-                      background-color: ${props.cart.length
-                        ? 'rgba(255, 0, 0, 1)'
-                        : 'rgba(0, 0, 255, 1)'};
-                    }
-                  `}
-                >
-                  {props.cart.length ? 'Delete all' : 'Back to the shop'}
-                </button>
-              </a>
-            </Link>
+            {props.cart.length ? (
+              <button
+                onClick={() => handleDeleteAllClick()}
+                className="button-red"
+              >
+                Delete all
+              </button>
+            ) : (
+              <Link href="/cart" passHref>
+                <a className="button-like-link button-blue">Back to the shop</a>
+              </Link>
+            )}
           </div>
         </div>
         <div

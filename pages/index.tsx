@@ -43,29 +43,31 @@ export default function Home() {
       <Head>
         <title>Sprouts Farmer's Market - Homepage</title>
       </Head>
-      <div
-        css={indexStyles}
-        className="flex-container-center-content fill-middle-area background-image-cover"
-      >
-        <div className="hero flex-container-center-content">
-          <h1>Welcome to Sprouts!</h1>
-          <div className="hero-image-link-text-container">
-            <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
-              <Image src={logo} width="400px" height="300px" />
+      <main>
+        <div
+          css={indexStyles}
+          className="flex-container-center-content background-image-cover"
+        >
+          <div className="hero flex-container-center-content">
+            <h1>Welcome to Sprouts!</h1>
+            <div className="hero-image-link-text-container">
+              <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
+                <Image src={logo} width="400px" height="300px" />
+              </div>
+              <Link href="/products">
+                <a>
+                  <button
+                    style={{ display: showText ? 'block' : 'none' }}
+                    data-cy="homepage-link-to-products"
+                  >
+                    Enter Shop
+                  </button>
+                </a>
+              </Link>
             </div>
-            <Link href="/products">
-              <a>
-                <button
-                  style={{ display: showText ? 'block' : 'none' }}
-                  data-cy="homepage-link-to-products"
-                >
-                  Enter Shop
-                </button>
-              </a>
-            </Link>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

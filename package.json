@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@axe-core/react": "^4.3.1",
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/react": "^11.4.1",
     "@stripe/stripe-js": "^1.19.1",
@@ -28,7 +29,7 @@
     "next": "11.1.2",
     "postgres": "2.0.0-beta.10",
     "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react-dom": "^17.0.2",
     "react-hook-form": "^7.17.1",
     "stripe": "^8.178.0",
     "ts-node": "^10.3.0"

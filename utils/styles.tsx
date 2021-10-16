@@ -26,7 +26,18 @@ export const globalStyles = css`
     top: 0;
   }
 
-  button {
+  main {
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
+  }
+
+  footer {
+    z-index: 1;
+  }
+
+  button,
+  .button-like-link {
     border: 0;
     border-radius: 10px;
     font-size: 1em;
@@ -52,12 +63,6 @@ export const globalStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .fill-middle-area {
-    width: 100vw;
-    height: 80vh;
-    overflow: hidden;
   }
 
   .background-image-cover {
@@ -167,12 +172,11 @@ export const dropDownMenuStyles = css`
   div {
     margin-top: 10px;
   }
-  button {
-    width: 80%;
-    color: white;
-  }
+
   a {
     text-decoration: none;
+    width: 100%;
+    color: white;
   }
 `;
 
@@ -214,6 +218,7 @@ export const indexStyles = css`
   background-image: url('/home_background.jpg');
   align-items: flex-start;
   font-size: 2em;
+  height: 100%;
 
   .hero {
     margin-top: 33vh;
@@ -237,6 +242,7 @@ export const productsIndexStyles = css`
   display: flex;
   flex-wrap: wrap;
   overflow-y: scroll;
+  height: 100%;
   padding: 20px 20px 20px 80px;
 
   .product-tile {
@@ -323,6 +329,7 @@ export const productIdStyles = css`
 /* cart.js */
 
 export const cartStyles = css`
+  height: 100%;
   display: flex;
   overflow-y: scroll;
   background-image: linear-gradient(
@@ -407,12 +414,15 @@ export const cartStyles = css`
   .delete-all-button-container {
     height: 50px;
     margin-top: 5%;
-    a {
+    a,
+    button {
       width: 100%;
-      button {
-        height: 50px;
-        font-size: 2em;
-      }
+      height: 50px;
+      font-size: 2em;
+      text-decoration: none;
+    }
+    a {
+      color: white;
     }
   }
 
@@ -462,7 +472,7 @@ export const loginStyles = css`
 
   .login-box {
     width: 20vw;
-    height: 40vh;
+    height: 50vh;
     margin-top: 20vh;
     flex-direction: column;
     justify-content: space-around;
@@ -477,6 +487,9 @@ export const loginStyles = css`
       justify-content: space-between;
       a {
         width: 35%;
+        text-decoration: none;
+        color: black;
+        text-align: center;
       }
     }
 
@@ -641,11 +654,11 @@ export const successStyles = css`
   a {
     margin: 1% 10vw 0 0;
     width: 30%;
-    button {
-      color: white;
-      height: 40px;
-      font-size: 1.5em;
-    }
+    color: white;
+    text-decoration: none;
+    height: 40px;
+    font-size: 1.5em;
+    text-align: center;
   }
 `;
 

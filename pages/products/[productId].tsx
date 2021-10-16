@@ -81,63 +81,71 @@ export default function Product(props: Props) {
       <Head>
         <title>Sprouts Product - {props.currentProduct.productName}</title>
       </Head>
-      <div css={productIdStyles} className="fill-middle-area">
-        <div className="productId-image-container">
-          <img
-            src={`/product_images/${props.currentProduct.productId}.jpeg`}
-            alt={props.currentProduct.productName}
-          />
-        </div>
-        <div className="productId-text-container">
-          <h1>{props.currentProduct.productName}</h1>
-          <p>
-            {props.currentProduct.productDesc
-              ? props.currentProduct.productDesc
-              : ''}
-          </p>
-          <div className="productId-text-priceinfo-container flex-container-center-content">
-            <h2>
-              €{(props.currentProduct.productPrice / 100).toFixed(2)}/
-              {props.currentProduct.productSize}
-            </h2>
-            <div className="amount-container flex-container-center-content">
-              <p>Select Amount:</p>
-              <div className="select-amount-container flex-container-center-content">
-                <input
-                  type="number"
-                  onChange={(e) => handleChange(e)}
-                  value={amount}
-                  max="9"
-                  min="0"
-                  step="1"
-                  onBlur={(e) => handleLostFocus(e)}
-                />
-                <p>
-                  {props.currentProduct.productSize}
-                  {amount > 1 ? 's' : ''}
-                </p>
-              </div>
-            </div>
-            <p>
-              Amounts to:
-              <span>
-                €
-                {((amount * props.currentProduct.productPrice) / 100).toFixed(
-                  2,
-                )}
-              </span>
-            </p>
+      <main>
+        <div css={productIdStyles}>
+          <div className="productId-image-container">
+            <img
+              src={`/product_images/${props.currentProduct.productId}.jpeg`}
+              alt={`product ${props.currentProduct.productName}`}
+            />
           </div>
-          <button
-            onClick={() =>
-              handleOnClick(props.currentProduct.productId, amount)
-            }
-            data-cy="buy-product-button"
-          >
-            Add to Cart!
-          </button>
+          <div className="productId-text-container">
+            <h1>{props.currentProduct.productName}</h1>
+            <p>
+              {props.currentProduct.productDesc
+                ? props.currentProduct.productDesc
+                : ''}
+            </p>
+            <div className="productId-text-priceinfo-container flex-container-center-content">
+              <h2>
+                €{(props.currentProduct.productPrice / 100).toFixed(2)}/
+                {props.currentProduct.productSize}
+              </h2>
+              <div className="amount-container flex-container-center-content">
+                <p>Select Amount:</p>
+                <div className="select-amount-container flex-container-center-content">
+                  <input
+                    type="number"
+                    onChange={(e) => handleChange(e)}
+                    value={amount}
+                    max="9"
+                    min="0"
+                    step="1"
+                    onBlur={(e) => handleLostFocus(e)}
+                  />
+                  <p>
+                    {props.currentProduct.productSize}
+                    {amount > 1 ? 's' : ''}
+                  </p>
+                </div>
+              </div>
+              <p>
+                Amounts to:
+                <span>
+                  €
+                  {((amount * props.currentProduct.productPrice) / 100).toFixed(
+                    2,
+                  )}
+                </span>
+              </p>
+            </div>
+            <button
+              onClick={() =>
+                handleOnClick(props.currentProduct.productId, amount)
+              }
+              data-cy="buy-product-button"
+              aria-label={`add ${amount} pieces of  ${
+                props.currentProduct.productName
+              } to the cart. That amounts to ${(
+                (amount * props.currentProduct.productPrice) /
+                100
+              ).toFixed(2)} Euros `}
+            >
+              Add to Cart!
+            </button>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

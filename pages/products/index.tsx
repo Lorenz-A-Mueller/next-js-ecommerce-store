@@ -20,40 +20,44 @@ export default function Home(props: Props) {
       <Head>
         <title>Sprouts Farmer's Market Products</title>
       </Head>
-      <div css={productsIndexStyles} className="fill-middle-area">
-        {props.products.map((product) => (
-          <Link
-            href={`/products/${product.productId}`}
-            key={`product-id${product.productId}`}
-          >
-            <a
-              className="link-no-decoration"
-              data-cy={`product-${product.productId}`}
+      <main>
+        <div css={productsIndexStyles}>
+          {props.products.map((product) => (
+            <Link
+              href={`/products/${product.productId}`}
+              key={`product-id${product.productId}`}
+              passHref
             >
-              <div
-                className="product-tile"
-                key={`product-id${product.productId}`}
-                css={css`
-                  display: ${product.productName
-                    .toLowerCase()
-                    .startsWith(props.search.toLowerCase()) || !props.search
-                    ? 'flex'
-                    : 'none'};
-                `}
+              <a
+                className="link-no-decoration"
+                data-cy={`product-${product.productId}`}
+                aria-label={`link to product ${product.productName}`}
               >
-                <div className="product-name-container">
-                  {product.productName}
-                </div>
+                <div
+                  className="product-tile"
+                  key={`product-id${product.productId}`}
+                  css={css`
+                    display: ${product.productName
+                      .toLowerCase()
+                      .startsWith(props.search.toLowerCase()) || !props.search
+                      ? 'flex'
+                      : 'none'};
+                  `}
+                >
+                  <div className="product-name-container">
+                    {product.productName}
+                  </div>
 
-                <img
-                  src={`/product_images/${product.productId}.jpeg`}
-                  alt={product.productName}
-                />
-              </div>
-            </a>
-          </Link>
-        ))}
-      </div>
+                  <img
+                    src={`/product_images/${product.productId}.jpeg`}
+                    alt={product.productName}
+                  />
+                </div>
+              </a>
+            </Link>
+          ))}
+        </div>
+      </main>
     </>
   );
 }

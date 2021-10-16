@@ -14,6 +14,7 @@ type Props = {
   }[];
   index: number;
   handleDeleteItemClick: (arg: number) => void;
+  ariaLabelDelete: string;
 };
 
 export default function CartSingleImage(props: Props) {
@@ -116,6 +117,7 @@ export default function CartSingleImage(props: Props) {
       <div className="cart-single-image-delete-button-container background-image-cover">
         <button
           title="Delete this product from your cart"
+          aria-label={props.ariaLabelDelete}
           onClick={() => props.handleDeleteItemClick(props.index)}
           className="button-red"
           data-cy={`cart-delete-field-${props.chosenProduct.id}`}

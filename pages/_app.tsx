@@ -1,11 +1,16 @@
 import { Global } from '@emotion/react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { getCookies, setCookies } from '../utils/cookies';
 import { globalStyles } from '../utils/styles';
 
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'production') {
+  const reactDom = require('react-dom');
+  const axe = require('@axe-core/react');
+  axe(React, reactDom, 1000);
+}
 function MyApp({ Component, pageProps }: AppProps) {
   const [search, setSearch] = useState('');
   const [cart, setCart] = useState<{ id: number; amount: number }[]>([]);

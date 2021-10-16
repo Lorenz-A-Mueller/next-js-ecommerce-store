@@ -92,7 +92,7 @@ export default function ProductCart(props: Props) {
       <Head>
         <title>Sprouts Farmer's Market - Cart</title>
       </Head>
-      <div css={cartStyles} className="fill-middle-area background-image-cover">
+      <div css={cartStyles} className="background-image-cover">
         <div className="cart-images-container">
           <h1>Your Cart</h1>
           <div
@@ -113,30 +113,25 @@ export default function ProductCart(props: Props) {
               index={index}
               cart={props.cart}
               setCart={props.setCart}
+              ariaLabelDelete={`delete ${
+                props.products[chosenProduct.id - 1].productName
+              }`}
             />
           ))}
 
           <div className="delete-all-button-container flex-container-center-content">
-            <Link href={!props.cart.length ? '/products' : '/cart'} passHref>
-              <a>
-                <button
-                  onClick={() => handleDeleteAllClick()}
-                  css={css`
-                    background-color: ${props.cart.length
-                      ? 'rgba(255, 0, 0, 0.7)'
-                      : 'rgba(0, 0, 255, 0.7)'};
-
-                    &:hover {
-                      background-color: ${props.cart.length
-                        ? 'rgba(255, 0, 0, 1)'
-                        : 'rgba(0, 0, 255, 1)'};
-                    }
-                  `}
-                >
-                  {props.cart.length ? 'Delete all' : 'Back to the shop'}
-                </button>
-              </a>
-            </Link>
+            {props.cart.length ? (
+              <button
+                onClick={() => handleDeleteAllClick()}
+                className="button-red"
+              >
+                Delete all
+              </button>
+            ) : (
+              <Link href="/cart" passHref>
+                <a className="button-like-link button-blue">Back to the shop</a>
+              </Link>
+            )}
           </div>
         </div>
         <div
@@ -156,7 +151,7 @@ export default function ProductCart(props: Props) {
       </div>
       <div
         css={redirectionToCheckoutStyles}
-        className="fill-middle-area redirection-fill-screen"
+        className="redirection-fill-screen"
         style={{ display: redirectingToCheckout ? 'flex' : 'none' }}
       >
         <div className="redirection-to-checkout-text-container">

@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Homepage</title>
+        <title>Taste of Health - Homepage</title>
       </Head>
       <main>
         <div
@@ -49,7 +49,7 @@ export default function Home() {
           className="flex-container-center-content background-image-cover"
         >
           <div className="hero flex-container-center-content">
-            <h1>Welcome to Sprouts!</h1>
+            <h1>Welcome to Taste of Health!</h1>
             <div className="hero-image-link-text-container">
               <div css={imageAnimationStyles(width, marginLeft, marginBottom)}>
                 <Image src={logo} width="400px" height="300px" />

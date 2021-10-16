@@ -86,7 +86,7 @@ export default function Account(props: Props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Account</title>
+        <title>Taste of Health - Your Account</title>
       </Head>
       <main>
         <div css={accountStyles} className="flex-container-center-content">

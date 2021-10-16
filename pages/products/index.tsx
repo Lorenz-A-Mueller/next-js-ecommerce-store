@@ -18,7 +18,7 @@ export default function Home(props: Props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market Products</title>
+        <title>Taste of Health - Products</title>
       </Head>
       <main>
         <div css={productsIndexStyles}>

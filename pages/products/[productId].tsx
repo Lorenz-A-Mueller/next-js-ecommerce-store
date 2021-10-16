@@ -79,7 +79,7 @@ export default function Product(props: Props) {
   return (
     <>
       <Head>
-        <title>Sprouts Product - {props.currentProduct.productName}</title>
+        <title>Taste of Health - {props.currentProduct.productName}</title>
       </Head>
       <main>
         <div css={productIdStyles}>

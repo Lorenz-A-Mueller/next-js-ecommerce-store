@@ -108,7 +108,8 @@ export const headerStyles = css`
   width: 100vw;
 
   .logo-container {
-    width: 14vw;
+    width: 7vw;
+    margin-left: 2vw;
   }
   .searchbar-container {
     width: 40vw;

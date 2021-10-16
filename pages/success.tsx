@@ -9,7 +9,7 @@ export default function Success() {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Thanks for buying</title>
+        <title>Taste of Health - Thanks for buying</title>
       </Head>
       <main>
         <div

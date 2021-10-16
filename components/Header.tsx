@@ -113,7 +113,7 @@ export default function Header(props: Props) {
       <div className="logo-container">
         <Link href="/products" passHref>
           <a aria-label="link to products page">
-            <Image src={logo} data-cy="logo-link" alt="the Sprouts logo" />
+            <Image src={logo} data-cy="logo-link" alt="logo" />
           </a>
         </Link>
       </div>

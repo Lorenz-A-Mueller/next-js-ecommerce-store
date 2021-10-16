@@ -90,7 +90,7 @@ export default function ProductCart(props: Props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Cart</title>
+        <title>Taste of Health - Cart</title>
       </Head>
       <div css={cartStyles} className="background-image-cover">
         <div className="cart-images-container">

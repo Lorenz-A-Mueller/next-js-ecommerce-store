@@ -81,7 +81,7 @@ export default function Signup() {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Log In</title>
+        <title>Taste of Health - Sign Up</title>
       </Head>
       <main>
         <div css={signUpStyles} className="flex-container-center-content">

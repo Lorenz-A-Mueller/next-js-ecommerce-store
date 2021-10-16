@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Global styles={globalStyles} />
       <Head>
-        <title>Sprouts Farmer's Market</title>
+        <title>Taste of Health</title>
       </Head>
       <Layout
         handleSearchInput={handleSearchInput}

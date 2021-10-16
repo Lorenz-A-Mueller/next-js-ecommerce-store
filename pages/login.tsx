@@ -114,7 +114,7 @@ export default function Login(props: Props) {
   return (
     <>
       <Head>
-        <title>Sprouts Farmer's Market - Log In</title>
+        <title>Taste of Health - Log In</title>
       </Head>
       <main>
         <div css={loginStyles} className="flex-container-center-content">

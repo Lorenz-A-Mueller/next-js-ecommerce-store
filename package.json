@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "migrate": "dotenv ley -- --require ts-node/register",
-    "test": "jest"
+    "test": "jest",
+    "heroku-postbuild": "yarn migrate up && yarn build"
   },
   "dependencies": {
     "@axe-core/react": "^4.3.1",
@@ -70,5 +71,8 @@
     "testPathIgnorePatterns": [
       "next-js-ecommerce-store/cypress/"
     ]
-  }
+  },
+  "cacheDirectories": [
+    ".next/cache"
+  ]
 }

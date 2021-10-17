@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Stripe from 'stripe';
 
+let domainURL;
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2020-08-27',
 });
@@ -14,7 +16,11 @@ export default async function handler(
       error: 'Method needs to be POST',
     });
   }
-  const domainURL = 'http://localhost:3000';
+  if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
+    domainURL = 'http://localhost:3000';
+  } else {
+    domainURL = 'https://e-commerce-store-healthy-taste.herokuapp.com';
+  }
 
   const { lineItems } = req.body;
 

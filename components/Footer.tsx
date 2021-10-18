@@ -59,7 +59,7 @@ export default function Footer() {
             <h2>About:</h2>
             <Link href="/about">
               <a>
-                <p>Learn more about Sprouts</p>
+                <p>Learn more about us</p>
               </a>
             </Link>
             <Link href="/covid">
@@ -69,7 +69,7 @@ export default function Footer() {
             </Link>
             <Link href="/career">
               <a>
-                <p>Get a job at sprouts!</p>
+                <p>Get a job at ToH!</p>
               </a>
             </Link>
             <Link href="/eco">
@@ -87,7 +87,7 @@ export default function Footer() {
             />
           </div>
           <div className="footer-address-container">
-            <h3>Sprouts Farmer's Market</h3>
+            <h3>Taste of Health</h3>
             <p>Some interesting street 101</p>
             <p>101010, some interesting town</p>
             <p>East Virginia, USA</p>

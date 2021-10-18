@@ -639,6 +639,7 @@ export const successStyles = css`
   background-image: url('/success_background.jpg');
   flex-direction: column;
   justify-content: flex-start;
+  height: 100%;
 
   .success-text {
     flex-direction: column;

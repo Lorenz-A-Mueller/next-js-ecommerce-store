@@ -16,7 +16,7 @@ export default async function handler(
       error: 'Method needs to be POST',
     });
   }
-  if (process.env.NODE_ENV !== 'production' && typeof window !== 'undefined') {
+  if (process.env.NODE_ENV !== 'production') {
     domainURL = 'http://localhost:3000';
   } else {
     domainURL = 'https://e-commerce-store-healthy-taste.herokuapp.com';

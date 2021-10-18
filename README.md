@@ -56,3 +56,10 @@ E-commerce (web shop) project done in next-js using TypeScript, including a Post
 - Start the server (yarn dev). Runs on localhost:3000 by default.
 
 ### Deploy page
+
+To deploy this page on Heroku, follow these steps:
+
+- Connect your cloned repository to Heroku
+- Configure Heroku Postgres as an add-on
+- Set up secrets (Stripe API key and prices
+- Deploy!
